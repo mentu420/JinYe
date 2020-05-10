@@ -1,7 +1,10 @@
 import React from 'react';
 import { HashRouter as Router, Link, Route, Switch, Redirect } from 'react-router-dom';
-import './App.css';
 import routes from './routes'
+
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 
 
 function App() {
