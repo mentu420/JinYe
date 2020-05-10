@@ -1,9 +1,16 @@
-import Home from "@/pages/home"
+import Home from "../pages/home"
+import PageNotFound from "../pages/pageNotFound"
 
 
-export default [
+const routes = [
     {
-        path:'/',
-        component:Home
+        path: '/home',
+        component: Home
+    },
+    {
+        path: '/404',
+        component: PageNotFound
     }
 ]
+
+export default routes
