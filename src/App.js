@@ -1,24 +1,31 @@
 import React from 'react';
-import { HashRouter as Router, Link, Route, Switch, Redirect } from 'react-router-dom';
+import Header from './components/common/header'
+import Footer from './components/common/footer'
+import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import routes from './routes'
 
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
+
+import './App.scss';
 
 
 function App() {
     return (
-        <Router>
-            <Switch>
-                {
-                    routes.map(route => {
-                        return (<Route key={route.path} {...route} />)
-                    })
-                }
-                <Redirect to="/404" />
-            </Switch>
-        </Router>
+        <div>
+            <Header></Header>
+            <Router>
+                <Switch>
+                    {
+                        routes.map(route => {
+                            return (<Route exact key={route.path} {...route} />)
+                        })
+                    }
+                    {/* <Redirect to="/404" /> */}
+                </Switch>
+                <Redirect path="/" to="/home" />
+            </Router>
+            {/* <Footer></Footer> */}
+        </div>
     );
 }
 

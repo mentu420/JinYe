@@ -1,3 +1,4 @@
+import App from "../App"
 import Home from "../pages/home"
 import PageNotFound from "../pages/pageNotFound"
 import About from "../pages/about"
@@ -9,10 +10,15 @@ import NewDetail from "../pages/newDetail"
 import Contact from "../pages/contact"
 
 
+
 const routes = [
     {
-        path: '/home',
-        component: Home
+        path: '/',
+        component: App,
+    },
+    {
+        path: '/Home',
+        component: Home,
     },
     {
         path: '/404',
