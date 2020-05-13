@@ -77,24 +77,21 @@ export default class Header extends Component {
         return (
             <Navbar expand="lg" fixed="top" variant="light" bsPrefix="navbar">
                 <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav variant="pills" activeKey={navIndex} defaultActiveKey="/home" onSelect={this.handleSelect}>
-                        {
-                            navList.map(item => {
-                                return (
-                                    <Nav.Item key={item.href}>
-                                        <Nav.Link bsPrefix="nav-link" {...item}>{item.label}</Nav.Link>
-                                    </Nav.Item>
-                                )
-                            })
-                        }
-                    </Nav>
-                    <Form inline>
-                        {/* <FormControl type="text" placeholder="Search" className="mr-sm-2" /> */}
-                        <Button variant="outline-success">Search</Button>
-                    </Form>
-                </Navbar.Collapse>
+                <Nav justify variant="pills" activeKey={navIndex} defaultActiveKey="/home" onSelect={this.handleSelect} className="mr-auto">
+                    {
+                        navList.map(item => {
+                            return (
+                                <Nav.Item key={item.href}>
+                                    <Nav.Link bsPrefix="nav-link" {...item}>{item.label}</Nav.Link>
+                                </Nav.Item>
+                            )
+                        })
+                    }
+                </Nav>
+                <Form inline>
+                    <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+                    <Button variant="outline-info">Search</Button>
+                </Form>
             </Navbar>
         )
     }
