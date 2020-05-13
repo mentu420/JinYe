@@ -1,4 +1,4 @@
-import { $axios } from '@/utils/nework/creatAxios'
-import urls from '@/constants/urls'
+import { $axios } from 'Utils/nework/creatAxios'
+import urls from 'Constants/urls'
 
 

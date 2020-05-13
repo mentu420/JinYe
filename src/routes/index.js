@@ -1,13 +1,13 @@
-import App from "../App"
-import Home from "../pages/home"
-import PageNotFound from "../pages/pageNotFound"
-import About from "../pages/about"
-import ProductList from "../pages/productList"
-import ProductDetail from "../pages/productDetail"
-import Advantage from "../pages/advantage"
-import NewList from "../pages/newList"
-import NewDetail from "../pages/newDetail"
-import Contact from "../pages/contact"
+import App from "../App";
+import Home from "Components/layout/home/";
+import PageNotFound from "Components/layout/pageNotFound/";
+import About from "Components/layout/about/";
+import ProductList from "Components/layout/productList/";
+import ProductDetail from "Components/layout/productDetail/";
+import Advantage from "Components/layout/advantage/";
+import NewList from "Components/layout/newList/";
+import NewDetail from "Components/layout/newDetail/";
+import Contact from "Components/layout/contact/";
 
 
 
@@ -54,4 +54,4 @@ const routes = [
     },
 ]
 
-export default routes
+export  { routes }

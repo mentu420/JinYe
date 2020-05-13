@@ -1,9 +1,9 @@
 import React from 'react';
-import Header from 'components/common/header'
-import Footer from 'components/common/footer'
+import Header from 'Components/common/header'
+import Footer from 'Components/common/footer'
+import Home from 'Components/layout/home'
 import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import routes from 'routes'
-import Home from 'pages/home'
+import { routes } from 'Routes/'
 
 
 
@@ -16,7 +16,7 @@ function App() {
             <Header></Header>
             <Router>
                 <Switch>
-                    <Route path="/" exact component={Home}/>
+                    <Route path="/" exact component={Home} />
                     {
                         routes.map(route => {
                             return (<Route exact key={route.path} {...route} />)

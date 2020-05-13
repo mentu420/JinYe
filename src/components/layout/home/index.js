@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import Header from '../../components/common/header'
 import { Container, Row, Col, Carousel, Image } from 'react-bootstrap'
-import defaultImage from '../../assets/images/img-load.jpg'
-import CarImage from '../../components/common/cardImage'
+
+import Header from 'Components/common/header'
+import CarImage from 'Components/common/cardImage'
 
 import './index.scss'
 
