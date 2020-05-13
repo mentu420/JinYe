@@ -1,13 +1,13 @@
 import App from "../App";
-import Home from "Components/layout/home/";
-import PageNotFound from "Components/layout/pageNotFound/";
-import About from "Components/layout/about/";
-import ProductList from "Components/layout/productList/";
-import ProductDetail from "Components/layout/productDetail/";
-import Advantage from "Components/layout/advantage/";
-import NewList from "Components/layout/newList/";
-import NewDetail from "Components/layout/newDetail/";
-import Contact from "Components/layout/contact/";
+import Home from "Components/Layout/Home/";
+import PageNotFound from "Components/Layout/PageNotFound/";
+import About from "Components/Layout/About/";
+import ProductList from "Components/Layout/ProductList/";
+import ProductDetail from "Components/Layout/ProductDetail/";
+import Advantage from "Components/Layout/Advantage/";
+import NewList from "Components/Layout/NewList/";
+import NewDetail from "Components/Layout/NewDetail/";
+import Contact from "Components/Layout/Contact/";
 
 
 

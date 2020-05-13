@@ -1,7 +1,7 @@
 import React from 'react';
-import Header from 'Components/common/header'
-import Footer from 'Components/common/footer'
-import Home from 'Components/layout/home'
+import Header from 'Components/Common/Header'
+import Footer from 'Components/Common/Footer'
+import Home from 'Components/Layout/home'
 import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { routes } from 'Routes/'
 
