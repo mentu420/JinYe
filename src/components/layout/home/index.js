@@ -56,6 +56,47 @@ export default class Home extends Component {
                         </Row>
                     </Container>
                 </div>
+                <div class="home-item" >
+                    <div>
+                        <p>PRODUCT USE</p>
+                        <p>产品用途</p>
+                    </div>
+                    <div></div>
+                </div>
+                <div class="home-item" >
+                    <Container fluid>
+                        <Row>
+                            <Col>
+                                <div>文案</div>
+                            </Col>
+                            <Col>
+                                <div>图片</div>
+                            </Col>
+                        </Row>
+                    </Container>
+                </div>
+                <div class="home-item" >
+                    <div>背景图</div>
+                    <div>恒于心 专与质</div>
+                </div>
+                <div class="home-item" >
+                    <div>
+                        <p>NEWS INFORMATION</p>
+                        <p>新闻动态</p>
+                    </div>
+                    <div>
+                    <Container>
+                        <Row>
+                            <Col>
+                                <div>文案</div>
+                            </Col>
+                            <Col>
+                                <div>图片</div>
+                            </Col>
+                        </Row>
+                    </Container>
+                    </div>
+                </div>
             </div>
         )
     }

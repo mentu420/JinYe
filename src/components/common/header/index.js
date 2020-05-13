@@ -75,7 +75,7 @@ export default class Header extends Component {
     render() {
         let { navList, navIndex } = this.state
         return (
-            <Navbar bg="light" expand="xl" fixed="top" variant="light" bsPrefix="navbar">
+            <Navbar expand="xl" fixed="top" variant="light" bsPrefix="navbar">
                 <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
