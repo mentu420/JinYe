@@ -1,6 +1,44 @@
-.footer{
-    width: 100vw;
-    height: 780px;
-    padding:100px 0;
+.footer {
+    width           : 100vw;
+    min-height      : 780px;
+    padding         : 6rem 0;
     background-color: #f4f4f4;
+}
+
+#footer-nav {
+    margin-bottom: 2.5rem;
+}
+
+.footer-nav__link {
+    padding: .5rem 1rem !important;
+    color  : #363636;
+
+    &.active {
+        color: green;
+    }
+
+    &:link,
+    &:visited {
+        text-decoration: none;
+    }
+}
+
+.footer-contact__item {
+    height     : 2.5rem;
+    line-height: 2.5rem;
+
+    &.tel {
+        height     : 3rem;
+        line-height: 3rem;
+        font-size  : 24px;
+        font-weight: 600;
+    }
+
+    a {
+        color: #363636;
+    }
+}
+
+.footer-qcode {
+    padding: 2.5rem 0;
 }

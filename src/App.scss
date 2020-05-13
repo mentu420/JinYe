@@ -1,7 +1,7 @@
 @charset "utf-8";
 
 /* make the customizations */
-$theme-colors: ("primary": #28a745,
+$theme-colors: ("primary": green,
     "secondary":teal);
 
 /* import bootstrap to set changes */
@@ -34,7 +34,6 @@ body {
     font-family: Helvetica, Arial, sans-serif;
 
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-
 
     background: transparent;
 
@@ -78,8 +77,9 @@ menu,
 nav,
 section,
 * {
-    margin : 0;
-    padding: 0;
+    margin    : 0;
+    padding   : 0;
+    word-break: break-all;
 }
 
 h1,
