@@ -6,24 +6,12 @@
 
 .home-item {
     min-height: 780px;
-    padding:2rem 0;
+    padding   : 2rem 0;
 }
 
 .banner {
     width : 100vw;
     height: 780px;
-}
-
-.home-nav__down {
-    width           : 100vw;
-    position        : fixed;
-    bottom          : 0;
-    text-align      : center;
-    background-color: rgba($color: #fff, $alpha: .5);
-
-    &>.iconfont {
-        font-size: 1.4rem;
-    }
 }
 
 //产品分类
@@ -58,7 +46,7 @@
 }
 
 .item-product__list {
-    padding-top:2rem;
+    padding-top    : 2rem;
     display        : flex;
     justify-content: space-around;
 
@@ -73,20 +61,54 @@
     &>li>div {
         height: 186px;
     }
-    &>li>.product-item__title{
-        line-height: 186px;
-        text-align: center;
+
+    &>li>.product-item__title {
+        line-height     : 186px;
+        text-align      : center;
         background-color: $lightGray;
     }
 }
-.item-product__btn{
-    padding:25px;
-    &>h3{
-        color:$white;
-        margin-bottom:1rem;
+
+.item-product__btn {
+    padding: 1.5rem;
+
+    .produt-right__title {
+        color        : $white;
+        margin-bottom: 1rem;
+        position: relative;
+        &>h3::before{
+            content: "";
+            position: absolute;
+            left:-1.5rem;
+            top:0;
+            bottom:0;
+            margin: auto;
+            height: 4px;
+            width: 1rem;
+            background-color: $white;
+        }
     }
 }
-.item-product__bg{
-    width: 100%;
+
+.item-product__bg {
+    width : 100%;
     height: 434px;
+}
+
+.home-nav__down {
+    width           : 100vw;
+    position        : fixed;
+    bottom          : 0;
+    text-align      : center;
+    background-color: rgba($color: #fff, $alpha: .5);
+
+    &>.iconfont {
+        font-size: 1.4rem;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .home-nav__down{
+        display: none;
+    }
 }
