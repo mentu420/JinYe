@@ -1,12 +1,91 @@
-.home-content{
-    width: 100vw;
+.home-content {
+    width      : 100vw;
     // height: 100vh;
     // overflow: hidden;
 }
-.home-item{
-    height: 100%;
-}
-.banner{
-    width: 100vw;
+
+.home-item {
     height: 780px;
+}
+
+.banner {
+    width : 100vw;
+    height: 780px;
+}
+
+.home-nav__down {
+    width           : 100vw;
+    position        : fixed;
+    bottom          : 0;
+    text-align      : center;
+    background-color: rgba($color: #fff, $alpha: .5);
+
+    &>.iconfont {
+        font-size: 1.4rem;
+    }
+}
+
+//产品分类
+.item-product__title>p {
+
+    position    : relative;
+    padding-left: 1rem;
+    font-size   : 1.5rem;
+    line-height : 1.5rem;
+
+    &::before {
+        content         : "";
+        position        : absolute;
+        left            : .2rem;
+        top             : 0;
+        bottom          : 0;
+        margin          : auto;
+        width           : 2px;
+        background-color: teal;
+    }
+}
+
+.item-product__title>h1 {
+    color  : $color-text__placeholder;
+    padding: 35px 0;
+}
+
+.item-product__btn {
+    width           : 100%;
+    background-color: $color;
+    height          : 142px;
+}
+
+.item-product__list {
+    padding-top:2rem;
+    display        : flex;
+    justify-content: space-around;
+
+    &>li:nth-of-type(1) {
+        padding-right: 1rem;
+    }
+
+    &>li:nth-of-type(2) {
+        padding-left: 1rem;
+    }
+
+    &>li>div {
+        height: 186px;
+    }
+    &>li>.product-item__title{
+        line-height: 186px;
+        text-align: center;
+        background-color: $lightGray;
+    }
+}
+.item-product__btn{
+    padding:25px;
+    &>h3{
+        color:$white;
+        margin-bottom:1rem;
+    }
+}
+.item-product__bg{
+    width: 100%;
+    height: 434px;
 }

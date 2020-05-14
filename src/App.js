@@ -1,13 +1,11 @@
 import React from 'react';
-import Header from 'Components/Common/Header'
-import Footer from 'Components/Common/Footer'
-import Home from 'Components/Layout/Home'
+import Header from 'components/common/header'
+import Footer from 'components/common/footer'
+import Home from 'components/layout/home'
 import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import { routes } from 'Routes/'
+import { routes } from 'routes/'
 
-
-
-
+import  'assets/iconfont/iconfont.scss'
 import './App.scss';
 
 

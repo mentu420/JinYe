@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
-import defaultImage from 'Assets/images/img-load.jpg'
+import defaultImage from 'assets/images/img-load.jpg'
 
 import './index.scss'
 

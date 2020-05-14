@@ -1,0 +1,98 @@
+$hd: 2; // 基本单位
+
+//主题颜色变量
+$color           : #00b450; //主题颜色
+$color-light     : #02b557; //浅主题色
+$color-heavy     : #0a783b; //深主题色
+$color-cold      : #2bcdff; //冷色
+$color-warm      : #f56464; //暖色
+$color-disable   : #e5e5e5; //禁止色
+$color-gray-light: #999; //轻灰色
+$color-gray-heavy: #333; //重灰色
+$color-line : #211b17; //线条灰色
+$color-bg        : #160d10; //背景色
+
+// 常用颜色
+$red      : #FF0000;
+$orange   : #FFA500;
+$yellow   : #FFFF00;
+$green    : #00FF00;
+$cyan     : #00FFFF;
+$blue     : #0000FF;
+$purple   : #800080;
+$black    : #000;
+$white    : #FFF;
+$gray     : #808080;
+$drakGray : #A9A9A9;
+$lightGray: #eee;
+$tomato   : #FF6347;
+$PeachPuff: #FFDAB9;
+$clear    : transparent;
+
+//透明度
+$transparent-light: rgba(0, 0, 0, 0.2);
+$transparent-base : rgba(0, 0, 0, 0.5);
+$transparent-heavy: rgba(0, 0, 0, 0.7);
+
+/* Text Color */
+$color-text__base        : #363636; // 文字的基本色
+$color-text__base-inverse: #FFF; // 反色
+$color-text__secondary   : #09BB07; // 辅助色
+$color-text__placeholder : #C9C9C9; //占位色
+$color-text__disabled    : #CCC; //禁用色
+$color-text__title       : #2C405A; // 文章标题
+$color-text__paragraph   : #3F536E; // 文章段落
+
+/* Font */
+$font-size__xs  : .18rem; // 非常用字号，用于标签
+$font-size__sm  : .2rem; // 用于辅助信息
+$font-size__base: .26rem; // 常用字号
+$font-size__lg  : .3rem; // 常规标题
+$font-size__xl  : .4rem; // 大标题
+$font-size__xxl : 1rem; // 用于大号的数字
+$font-size__max : 2rem; // 用于大号的数字
+
+ /* Iconfont */
+$iconfont-min : 20px * $hd ;
+$iconfont-base: 30px * $hd ;
+$iconfont-max : 60px * $hd ;
+
+/* Line Height */
+// $line-height-base: 1; // 单行
+// $line-height-en  : 1.3; // 英文多行
+// $line-height-zh  : 1.5; // 中文多行
+
+/* 水平间距 */
+$spacing-h__xs: .05rem * $hd ;
+$spacing-h__sm: .1rem * $hd ;
+$spacing-h__md: .2rem * $hd ;
+$spacing-h__lg: .3rem * $hd ;
+$spacing-h__xl: .4rem * $hd ;
+
+ /* 垂直间距 */
+$spacing-v__sm: .1rem * $hd ;
+$spacing-v__md: .2rem * $hd ;
+$spacing-v__lg: .3rem * $hd ;
+$spacing-v__xl: .4rem * $hd ;
+
+/* 图标尺寸 */
+$icon-size__sm: 18px * $hd ;
+$icon-size__md: 22px * $hd ;
+$icon-size__lg: 36px * $hd ;
+
+/* z-index */
+$zindex-divider     : 100;
+$zindex-steps       : 500;
+$zindex-tab         : 600;
+$zindex-form        : 700;
+$zindex-nav         : 800;
+$zindex-search-bar  : 800;
+$zindex-indexes     : 805;
+$zindex-flot-layout : 810;
+$zindex-drawer      : 900;
+$zindex-modal       : 1000;
+$zindex-action-sheet: 1010;
+$zindex-picker      : 1010;
+$zindex-curtain     : 1080;
+$zindex-message     : 1090;
+$zindex-toast       : 1090;

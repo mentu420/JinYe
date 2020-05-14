@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { Container, Row, Col, Nav } from 'react-bootstrap'
 
 import './index.scss'
-import logo from 'Assets/images/logo-normal.png'
-import QCode from 'Assets/images/WechatIMG4.jpeg'
-import CardImage from 'Components/Common/CardImage'
+import logo from 'assets/images/logo-normal.png'
+import QCode from 'assets/images/WechatIMG4.jpeg'
+import CardImage from 'components/common/cardImage'
 
 const NAV_LIST = [
     [

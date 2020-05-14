@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { Container, Row, Col, Carousel, Image } from 'react-bootstrap'
+import { Container, Row, Col, Carousel, Image, Button } from 'react-bootstrap'
 
-import CarImage from 'Components/Common/CardImage'
-import Footer from 'Components/Common/Footer'
+import CarImage from 'components/common/cardImage'
+import Footer from 'components/common/footer'
 
 import './index.scss'
 
@@ -19,6 +19,9 @@ export default class Home extends Component {
             clientHeight: document.body.clientHeight
         })
 
+    }
+    onDownClick = () => {
+        console.log(1231646)
     }
     render() {
         let { clientHeight } = this.state
@@ -37,21 +40,35 @@ export default class Home extends Component {
                 <div class="home-item" >
                     <Container fluid>
                         <Row>
-                            <Col>
-                                <div>这里放标题</div>
+                            <Col lg={{ span: 5, offset: 1 }} md={12}>
+                                <div class="item-product__title">
+                                    <p>BEST SELLER</p>
+                                    <h1>BEST SELLING LIST</h1>
+                                </div>
+                                <h3 class="list-product__title">畅销榜单</h3>
+                                <ul class="item-product__list">
+                                    <li>
+                                        <div class="product-item__img">
+                                            <CarImage />
+                                        </div>
+                                        <div class="product-item__title"><span>+</span><label>电热元件</label></div>
+                                    </li>
+                                    <li>
+                                        <div class="product-item__title"><span>+</span><label>陶瓷配件</label></div>
+                                        <div class="product-item__img">
+                                            <CarImage />
+                                        </div>
+                                    </li>
+                                </ul>
                             </Col>
                             <Col>
-                                <div>这里放按钮</div>
-                            </Col>
-                        </Row>
-                    </Container>
-                    <Container >
-                        <Row>
-                            <Col>
-                                <div>这里放产品分类</div>
-                            </Col>
-                            <Col>
-                                <div>这里放图片</div>
+                                <div class="item-product__btn">
+                                    <h3>熔喷布加热器</h3>
+                                    <Button variant="light">了解详情</Button>
+                                </div>
+                                <div class="item-product__bg">
+                                    <CarImage />
+                                </div>
                             </Col>
                         </Row>
                     </Container>
@@ -85,17 +102,20 @@ export default class Home extends Component {
                         <p>新闻动态</p>
                     </div>
                     <div>
-                    <Container>
-                        <Row>
-                            <Col>
-                                <div>文案</div>
-                            </Col>
-                            <Col>
-                                <div>图片</div>
-                            </Col>
-                        </Row>
-                    </Container>
+                        <Container>
+                            <Row>
+                                <Col>
+                                    <div>文案</div>
+                                </Col>
+                                <Col>
+                                    <div>图片</div>
+                                </Col>
+                            </Row>
+                        </Container>
                     </div>
+                </div>
+                <div class="home-nav__down" onClick={this.onDownClick}>
+                    <span class="iconfont icon-down"></span>
                 </div>
             </div>
         )
