@@ -45,7 +45,7 @@ export default class Home extends Component {
                                     <p>BEST SELLER</p>
                                     <h1>BEST SELLING LIST</h1>
                                 </div>
-                                <h3 class="list-product__title">畅销榜单</h3>
+                                <h3 >畅销榜单</h3>
                                 <ul class="item-product__list">
                                     <li>
                                         <div class="product-item__img">
