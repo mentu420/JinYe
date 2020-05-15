@@ -10,8 +10,7 @@ $theme-colors: ("primary": green,
 
 /*******重置属性*********/
 * {
-    -webkit-box-sizing: border-box;
-    box-sizing        : border-box;
+    box-sizing: border-box;
 }
 
 /**禁止文本缩放 字体设置  取消touch高亮效果**/
@@ -142,4 +141,9 @@ button,
 input,
 textarea * {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.app{
+    width: 100vw;
+    overflow: hidden;
 }

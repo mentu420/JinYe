@@ -11,7 +11,7 @@ import './App.scss';
 
 function App() {
     return (
-        <div>
+        <div class="app">
             <Header></Header>
             <Router>
                 <Switch>

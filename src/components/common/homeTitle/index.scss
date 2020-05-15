@@ -1,0 +1,41 @@
+.home-title__wrapper{
+    display: flex;
+    min-height: 76px;
+    margin:0;
+}
+
+.home-title{
+    margin: auto;
+    text-align: center;
+}
+
+.title-capital__letter{
+    font-size: 2rem;
+}
+
+.title-text{
+    font-size: 1.2rem;
+    position: relative;
+    &::before{
+        content: "";
+        position: absolute;
+        top:0;
+        bottom: 0;
+        margin:auto;
+        left:0;
+        height: 1px;
+        width: 25%;
+        background: $color-text__placeholder;
+    }
+    &::after{
+        content: "";
+        position: absolute;
+        top:0;
+        bottom: 0;
+        margin:auto;
+        right:0;
+        height: 1px;
+        width: 25%;
+        background: $color-text__placeholder;
+    }
+}
