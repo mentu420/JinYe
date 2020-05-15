@@ -3,6 +3,8 @@ import { Container, Row, Col, Carousel, Image, Button } from 'react-bootstrap'
 
 import CarImage from 'components/common/cardImage'
 import ItemTitle from 'components/common/homeTitle'
+import HomeSlide from 'components/common/homeSlide'
+
 
 import './index.scss'
 
@@ -12,14 +14,15 @@ export default class Home extends Component {
         super(props)
         this.state = {
             clientHeight: 814,
+            useList:[1,2,3,4]
         }
     }
     componentDidMount() {
         this.setState({
             clientHeight: document.body.clientHeight
         })
-
     }
+    
     scrollToAnchor = (e) => {
         // 找到锚点
         let anchorElement = document.querySelectorAll('.home-item');
@@ -43,7 +46,7 @@ export default class Home extends Component {
 
     }
     render() {
-        let { clientHeight } = this.state
+        let { clientHeight, useList } = this.state
         console.log(clientHeight)
 
         return (
@@ -100,34 +103,7 @@ export default class Home extends Component {
                 <div class="home-item flex bg-cover" style={{ minHeight: clientHeight }}>
                     <div class="item-flex__center">
                         <ItemTitle />
-                        <Container >
-                            <Row>
-                                <Col>
-                                    <div class="slide-wrapper">
-                                        <ul class="slide-list">
-                                            <li class="slide-item">
-                                                <div class="slide-item__img">
-                                                    <CarImage />
-                                                </div>
-                                                <label>标题</label>
-                                            </li>
-                                            <li class="slide-item">
-                                                <div class="slide-item__img">
-                                                    <CarImage />
-                                                </div>
-                                                <label>标题</label>
-                                            </li>
-                                            <li class="slide-item">
-                                                <div class="slide-item__img">
-                                                    <CarImage />
-                                                </div>
-                                                <label>标题</label>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </Col>
-                            </Row>
-                        </Container>
+                        <HomeSlide />
                     </div>
                 </div>
                 <div class="home-item flex" style={{ minHeight: clientHeight }}>

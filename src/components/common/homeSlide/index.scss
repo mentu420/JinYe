@@ -1,0 +1,50 @@
+.home-slide{
+    position: relative;
+    &>.iconfont{
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        top:0;
+        bottom:0;
+        margin:auto;
+        font-size: 30px;
+        color:$white;
+    }
+    &>.icon-left-circle-fill{
+        left:10px;
+    }
+    &>.icon-right-circle-fill{
+        right: 10px;
+    }
+}
+
+
+
+.slide-wrapper {
+    width: 100vw;
+    padding         : 3rem 0;
+    overflow        : hidden;
+    background-color: red;
+    display: flex;
+    margin:0;
+}
+
+.slide-list {
+    margin:auto;
+    display: flex;
+    justify-content: center;
+    &>.slide-item {
+        text-align: center;
+        margin    : 1rem;
+
+        &>.slide-item__img {
+            width : 286px;
+            height: 420px;
+        }
+
+        &>label {
+            font-size: 1rem;
+        }
+    }
+}

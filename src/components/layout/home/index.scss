@@ -118,28 +118,7 @@
     }
 }
 
-//产品用途
-.slide-wrapper {
-    padding:3rem 0;
-    max-width: 954px;
-    overflow: hidden;
-}
 
-.slide-list {
-    display: flex;
-
-    &>.slide-item {
-        text-align: center;
-        margin          : 1rem;
-        &>.slide-item__img {
-            width : 286px;
-            height: 420px;
-        }
-        &>label{
-            font-size: 1rem;
-        }
-    }
-}
 
 @media screen and (max-width: 992px) {
     .item-product__bg {
