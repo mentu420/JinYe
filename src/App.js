@@ -5,13 +5,13 @@ import Home from 'components/layout/home'
 import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { routes } from 'routes/'
 
-import  'assets/iconfont/iconfont.scss'
+import 'assets/iconfont/iconfont.scss'
 import './App.scss';
 
 
 function App() {
     return (
-        <div class="app">
+        <div id="app">
             <Header></Header>
             <Router>
                 <Switch>

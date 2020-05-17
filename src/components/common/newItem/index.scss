@@ -1,0 +1,25 @@
+.new-item__date {
+    width           : 64px;
+    height          : 64px;
+    background-color: $lightGray;
+    margin-right    : 1rem;
+    text-align      : center;
+
+    &>h4 {
+        margin: 4px 0;
+    }
+
+    &>time {
+        font-size: 12px;
+    }
+}
+
+.new-item__label {
+    display           : -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    font-size         : 1rem;
+    overflow: hidden;
+    line-height: 1.2;
+    color:$color-text__secondary;
+}

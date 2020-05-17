@@ -1,20 +1,24 @@
-.home-slide{
+.home-slide {
+    // width: 100vw;
     position: relative;
-    &>.iconfont{
-        display: inline-block;
-        width: 30px;
-        height: 30px;
-        position: absolute;
-        top:0;
-        bottom:0;
-        margin:auto;
+
+    &>.iconfont {
+        display  : none;
+        width    : 30px;
+        height   : 30px;
+        position : absolute;
+        top      : 0;
+        bottom   : 0;
+        margin   : auto;
         font-size: 30px;
-        color:$white;
+        color    : $white;
     }
-    &>.icon-left-circle-fill{
-        left:10px;
+
+    &>.icon-left-circle-fill {
+        left: 10px;
     }
-    &>.icon-right-circle-fill{
+
+    &>.icon-right-circle-fill {
         right: 10px;
     }
 }
@@ -22,29 +26,39 @@
 
 
 .slide-wrapper {
-    width: 100vw;
-    padding         : 3rem 0;
+    width           : 100vw;
     overflow        : hidden;
-    background-color: red;
-    display: flex;
-    margin:0;
+    display         : flex;
+    margin          : 3rem 0;
 }
 
 .slide-list {
-    margin:auto;
-    display: flex;
+    margin         : auto;
+    display        : flex;
     justify-content: center;
+
     &>.slide-item {
         text-align: center;
         margin    : 1rem;
 
         &>.slide-item__img {
             width : 286px;
-            height: 420px;
+            height: 380px;
         }
 
         &>label {
             font-size: 1rem;
         }
+    }
+}
+
+@media screen and (min-width: 1120px) {
+    .home-slide>.iconfont {
+        display: inline-block;
+    }
+
+    .slide-wrapper {
+        width : 80vw;
+        margin: auto;
     }
 }
