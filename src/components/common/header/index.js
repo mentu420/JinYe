@@ -9,9 +9,9 @@ import {
     FormControl,
     Button
 } from 'react-bootstrap'
-
+import CardImg from 'components/common/cardImage/'
 import './index.scss'
-
+import logoIcon from 'assets/images/logo-normal.png'
 
 const NAV_LIST = [
     {
@@ -77,7 +77,11 @@ export default class Header extends Component {
         return (
             <div class="header">
                 <Navbar expand="xl" fixed="top" variant="light" bsPrefix="navbar">
-                    <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+                    <Navbar.Brand href="#home">
+                        <div class="brand-logo">
+                            <CardImg fit={'contain'} src={logoIcon} />
+                        </div>
+                    </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto" justify variant="pills" activeKey={navIndex} defaultActiveKey="/home" onSelect={this.handleSelect}>

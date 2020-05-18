@@ -8,23 +8,25 @@ export default class CardImage extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            
+
         }
     }
 
     render() {
-        let { src } = this.props
+        let { src, fit } = this.props
         return (
             <div class="crad-image">
-                <img class="crad-image__image" src={src} />
+                <img style={{ objectFit: fit }} class="crad-image__image" src={src} />
             </div>
         )
     }
 }
 
 CardImage.defaultProps = {
-    src: defaultImage
+    src: defaultImage,
+    fit: 'cover'
 }
 CardImage.propTypes = {
     src: PropTypes.string,
+    fit: PropTypes.string,
 };
