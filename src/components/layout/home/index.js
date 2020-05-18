@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Container, Row, Col, Carousel, Image, Button, Media } from 'react-bootstrap'
 
 import CarImage from 'components/common/cardImage'
-import ItemTitle from 'components/common/homeTitle'
+import ItemTitle from 'components/common/modeTitle'
 import HomeSlide from 'components/common/homeSlide'
 import NewItem from 'components/common/newItem'
 //图片

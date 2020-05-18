@@ -84,7 +84,7 @@ export default class Header extends Component {
         let { navList, navIndex } = this.state
         return (
             <div class="header">
-                <Navbar expand="xl" fixed="top" variant="light" bsPrefix="navbar">
+                <Navbar expand="xl" fixed="top" variant="light" bsPrefix="navbar" collapseOnSelect>
                     <Navbar.Brand href="#home">
                         <div class="brand-logo">
                             <CardImg fit={'contain'} src={logoIcon} />

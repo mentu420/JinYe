@@ -1,0 +1,11 @@
+.about-text{
+    padding:1rem;
+}
+.about-link{
+    display: flex;
+    justify-content: space-around;
+    &>li{
+        flex:1;
+        padding:1rem;
+    }
+}
