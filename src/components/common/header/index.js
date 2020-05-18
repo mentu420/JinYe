@@ -10,6 +10,8 @@ import {
     Button
 } from 'react-bootstrap'
 
+
+
 import './index.scss'
 
 
@@ -72,6 +74,13 @@ export default class Header extends Component {
         this.setState({ navIndex: index })
     }
 
+    searchSubmit = (event) => {
+        event.preventDefault();
+        
+        console.log(this.refs.input.value)
+        
+    }
+
     render() {
         let { navList, navIndex } = this.state
         return (
@@ -87,9 +96,12 @@ export default class Header extends Component {
                                 })
                             }
                         </Nav>
-                        <Form inline>
-                            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                            <Button variant="outline-success">Search</Button>
+                        <Form onSubmit={this.searchSubmit} inline>
+                            <FormControl ref="input" type="text" placeholder="Search" className="mr-sm-2" />
+                            <div class="nav-search__btn">
+                                <span class="iconfont icon-search"></span>
+                                <Button bsPrefix="search-btn" variant="outline-success" type="submit">search</Button>
+                            </div>
                         </Form>
                     </Navbar.Collapse>
                 </Navbar>
