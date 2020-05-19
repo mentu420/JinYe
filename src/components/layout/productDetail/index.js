@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
+import { Container, Row, Col, Image, Pagination } from 'react-bootstrap'
+
+import './index.scss'
+import banner from 'assets/images/product_banner.jpg'
 
 export default class index extends Component {
     render() {
         return (
             <div>
-                <h1>productdetail</h1>
+                <Image src={banner} fluid />
             </div>
         )
     }
