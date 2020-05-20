@@ -1,0 +1,35 @@
+.contact-tel{
+    text-align: center;
+}
+
+.contact-item{
+    border:1px solid $color-line;
+    border-radius: 10px;
+    display: flex;
+    padding:2rem .5rem;
+    &:hover{
+        background-color: $color-bg;
+    }
+    &>.contact-item__icon{
+        text-align: center;
+        flex-shrink: 0;
+        flex-basis: 30%;
+        .iconfont{
+            font-size: 2rem;
+            color:$color-text__placeholder;
+        }
+    }
+    &>.contact-item__text{
+        flex:1;
+        &>p{
+            margin:0;
+        }
+    }
+}
+.contact-message__box{
+    width: 100vw;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 600px;
+}
