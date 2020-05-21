@@ -1,35 +1,81 @@
-.contact-tel{
+.contact-tel {
     text-align: center;
 }
 
-.contact-item{
-    border:1px solid $color-line;
+.contact-item {
+    border       : 1px solid $color-line;
     border-radius: 10px;
-    display: flex;
-    padding:2rem .5rem;
-    &:hover{
+    display      : flex;
+    padding      : 2rem .5rem;
+
+    &:hover {
         background-color: $color-bg;
     }
-    &>.contact-item__icon{
-        text-align: center;
+
+    &>.contact-item__icon {
+        text-align : center;
         flex-shrink: 0;
-        flex-basis: 30%;
-        .iconfont{
+        flex-basis : 30%;
+
+        .iconfont {
             font-size: 2rem;
-            color:$color-text__placeholder;
+            color    : $color-text__placeholder;
         }
     }
-    &>.contact-item__text{
-        flex:1;
-        &>p{
-            margin:0;
+
+    &>.contact-item__text {
+        flex: 1;
+
+        &>p {
+            margin: 0;
         }
     }
 }
-.contact-message__box{
-    width: 100vw;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    min-height: 600px;
+
+.contact-message__box {
+    width                 : 100vw;
+    padding               : 2rem 0;
+    background-repeat     : no-repeat;
+    background-size       : cover;
+    background-position   : center;
+    // min-height         : 600px;
+    display               : flex;
+    margin                : 0;
+}
+
+.contact-message__container {
+    margin: auto;
+    height: auto !important;
+}
+
+
+.contact-message__title {
+    position    : relative;
+    padding-left: 1rem;
+
+    &::before {
+        content         : "";
+        position        : absolute;
+        top             : 0;
+        bottom          : 0;
+        margin          : auto;
+        left            : 0;
+        width           : 2px;
+        background-color: $color;
+    }
+
+    &>label {
+        margin: 0;
+        color : $color-text__placeholder;
+    }
+
+}
+
+.contact-message__tips {
+    padding: 2rem 0;
+    line-height: 2;
+}
+
+.my-modal__bg{
+    z-index: $zindex-flot-layout !important;
 }

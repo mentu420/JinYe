@@ -9,6 +9,7 @@
 
 .navbar {
     background-color: rgba(255, 255, 255, .7);
+    z-index: $zindex-nav !important;
 }
 
 .navbar-collapse {

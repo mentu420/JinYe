@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Row, Col, Carousel, Image, Button, Media, Form } from 'react-bootstrap'
+import { Container, Row, Col, Carousel, Image, Button, Media, Form, Modal } from 'react-bootstrap'
 import NewItem from 'components/common/newItem'
 import ModeTitle from 'components/common/modeTitle'
 import VerticalSpace from 'components/common/verticalSpace/'
@@ -9,7 +9,50 @@ import banner from 'assets/images/contact-banner.jpg'
 import banner2 from 'assets/images/contact-bg.jpg'
 
 export default class index extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            show: false,
+            tips: '请检查留言'
+        }
+    }
+    componentWillMount() {
+    }
+
+
+    modalVisible = () => {
+        let { show } = this.state
+        this.setState({ show: !show })
+    }
+
+    vaildForm = () => {
+        if (this.refs.name.value == '') {
+            this.setState({ tips: '请填写姓名' })
+            return false
+        }
+        if (this.refs.tel.value == '') {
+            this.setState({ tips: '请填写手机号码' })
+            return false
+        }
+        if (this.refs.message.value == '') {
+            this.setState({ tips: '请填写留言' })
+            return false
+        }
+        return true
+    }
+    submit = (e) => {
+        e.preventDefault(); 
+        if (!this.vaildForm()) {
+            this.modalVisible()
+            return
+        }
+        console.log('succ')
+        console.log(this.refs.name.value)
+        console.log(this.refs.tel.value)
+        console.log(this.refs.message.value)
+    }
     render() {
+        let { show, tips } = this.state
         return (
             <div>
                 <Image src={banner} fluid />
@@ -56,9 +99,9 @@ export default class index extends Component {
                         </Col>
                     </Row>
                 </Container>
-                <VerticalSpace height={'4rem'}/>
-                <div class="contact-message__box" style={{backgroundImage:'url('+ banner2 +')'}}>
-                    <Container>
+                <VerticalSpace height={'4rem'} />
+                <div class="contact-message__box" style={{ backgroundImage: 'url(' + banner2 + ')' }}>
+                    <Container id="contact-message__container">
                         <Row>
                             <Col md={6} xs={12}>
                                 <div class="contact-message__title">
@@ -71,24 +114,31 @@ export default class index extends Component {
                                 <Form>
                                     <Form.Group controlId="formBasicEmail">
                                         <Form.Label>姓名</Form.Label>
-                                        <Form.Control type="email" placeholder="Name" />
+                                        <Form.Control ref="name" type="text" placeholder="Name" />
                                     </Form.Group>
                                     <Form.Group controlId="formBasicNumber">
                                         <Form.Label>电话</Form.Label>
-                                        <Form.Control type="number" placeholder="Tel" />
+                                        <Form.Control ref="tel" type="number" placeholder="Tel" />
                                     </Form.Group>
                                     <Form.Group controlId="formBasicText">
                                         <Form.Label>留言</Form.Label>
-                                        <Form.Control as="textarea" type="text" placeholder="Message" />
+                                        <Form.Control ref="message" as="textarea" rows="6" placeholder="Message" />
                                     </Form.Group>
-                                    <Button variant="primary" type="submit">
-                                        Submit
-                                    </Button>
+                                    <Button variant="primary" type="submit" onClick={this.submit}>Submit</Button>
                                 </Form>
                             </Col>
                         </Row>
                     </Container>
                 </div>
+                <Modal show={show} onHide={this.modalVisible} centered backdropClassName="my-modal__bg">
+                    <Modal.Header closeButton>
+                        <Modal.Title>提示</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>{tips}</Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="primary" onClick={this.modalVisible}>确定</Button>
+                    </Modal.Footer>
+                </Modal>
             </div>
         )
     }

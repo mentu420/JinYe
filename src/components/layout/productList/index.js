@@ -21,11 +21,15 @@ export default class ProductList extends Component {
             productList: [1, 2, 3, 4, 5, 6],
             totalPage: 20,
             currPage: 1,
-            navIndex:0
+            navIndex: 0
         }
     }
     componentWillMount() {
 
+    }
+    goDetail = (item) => {
+        let { history } = this.props
+        history.push({ pathname: '/ProductDetail' })
     }
     goFirstPage = () => {
         this.setState({ currPage: 1 })
@@ -44,12 +48,12 @@ export default class ProductList extends Component {
         let { totalPage } = this.state
         this.setState({ currPage: totalPage })
     }
-    goCurrPage=(item)=> {
+    goCurrPage = (item) => {
         this.setState({ currPage: item })
     }
-    onNavClick=(item,index)=>{
+    onNavClick = (item, index) => {
         console.log(item)
-        this.setState({navIndex:index})
+        this.setState({ navIndex: index })
     }
     render() {
         let { navList, productList, totalPage, currPage, navIndex } = this.state
@@ -62,8 +66,8 @@ export default class ProductList extends Component {
                             <h4>产品分类</h4>
                             <ul class="nav-list">
                                 {
-                                    navList.map((item,index) => {
-                                        return (<li key={item.id} class={`nav-item ${navIndex==index&&'active'}`} onClick={()=>this.onNavClick(item,index)}>{item.lable}</li>)
+                                    navList.map((item, index) => {
+                                        return (<li key={item.id} class={`nav-item ${navIndex == index && 'active'}`} onClick={() => this.onNavClick(item, index)}>{item.lable}</li>)
                                     })
                                 }
                             </ul>
@@ -71,9 +75,9 @@ export default class ProductList extends Component {
                         <Col md={9} xs={12}>
                             <Row>
                                 {
-                                    productList.map(item => {
+                                    productList.map((item, index) => {
                                         return (<Col key={item.id} lg={4} xs={6}>
-                                            <div class="product-item">
+                                            <div class="product-item" onClick={() => this.goDetail(item, index)}>
                                                 <div class="product-item__img">
                                                     <CardImage />
                                                 </div>
@@ -99,7 +103,7 @@ export default class ProductList extends Component {
                                     }))
                                 }
                                 {
-                                    (totalPage >= 3 && totalPage - currPage >=4) && (<Pagination.Ellipsis />)
+                                    (totalPage >= 3 && totalPage - currPage >= 4) && (<Pagination.Ellipsis />)
                                 }
                                 {
                                     totalPage - currPage <= 3 && ([totalPage - 3, totalPage - 2, totalPage - 1, totalPage].map(item => {
