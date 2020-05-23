@@ -1,0 +1,36 @@
+.slide-card {
+    padding:2rem;
+    position: relative;
+
+    &>.iconfont {
+        width    : 30px;
+        height   : 30px;
+        position : absolute;
+        top      : 0;
+        bottom   : 0;
+        margin   : auto;
+        font-size: 30px;
+        color    : $gray;
+    }
+
+    &>.icon-left-circle-fill {
+        left: 0;
+    }
+
+    &>.icon-right-circle-fill {
+        right: 0;
+    }
+
+    .slide-card__wrapper {
+        overflow: hidden;
+    }
+
+    .slide-card__list {
+        margin : auto;
+        display: flex;
+
+        &>.slide-card__item {
+            text-align: center;
+        }
+    }
+}

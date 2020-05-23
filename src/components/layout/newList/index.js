@@ -3,6 +3,7 @@ import { Container, Row, Col, Carousel, Image, Button, Media } from 'react-boots
 import NewItem from 'components/common/newItem'
 import ModeTitle from 'components/common/modeTitle'
 import VerticalSpace from 'components/common/verticalSpace/'
+import PageinationBar from 'components/common/paginationBar/'
 
 import './index.scss'
 import banner from 'assets/images/new-banner.jpg'
@@ -11,6 +12,9 @@ export default class index extends Component {
 
     goDetail(){
         
+    }
+    onPageClick(page) {
+        console.log(page)
     }
     render() {
         return (
@@ -22,11 +26,16 @@ export default class index extends Component {
                 <Container>
                     <Row>
                         <Col>
-                            <ul class="new-list">
-                                <li class="new-item" onClick={()=>this.goDetail()}>
+                            <ul className="new-list">
+                                <li className="new-item" onClick={()=>this.goDetail()}>
                                     <NewItem />
                                 </li>
                             </ul>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md={{ span: 9, offset: 3 }} id="pageination">
+                            <PageinationBar currPage={1} totalPage={20} onPageClick={this.onPageClick} />
                         </Col>
                     </Row>
                 </Container>

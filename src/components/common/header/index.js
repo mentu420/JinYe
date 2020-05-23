@@ -76,17 +76,17 @@ export default class Header extends Component {
     searchSubmit = (event) => {
         event.preventDefault();
         
-        console.log(this.refs.input.value)
+        console.log(this.searchInput.value)
         
     }
 
     render() {
         let { navList, navIndex } = this.state
         return (
-            <div class="header">
+            <div className="header">
                 <Navbar expand="xl" fixed="top" variant="light" bsPrefix="navbar" collapseOnSelect>
                     <Navbar.Brand href="#home">
-                        <div class="brand-logo">
+                        <div className="brand-logo">
                             <CardImg fit={'contain'} src={logoIcon} />
                         </div>
                     </Navbar.Brand>
@@ -100,9 +100,9 @@ export default class Header extends Component {
                             }
                         </Nav>
                         <Form onSubmit={this.searchSubmit} inline>
-                            <FormControl ref="input" type="text" placeholder="Search" className="mr-sm-2" />
-                            <div class="nav-search__btn">
-                                <span class="iconfont icon-search"></span>
+                            <FormControl ref={el => this.searchInput = el}type="text" placeholder="Search" className="mr-sm-2" />
+                            <div className="nav-search__btn">
+                                <span className="iconfont icon-search"></span>
                                 <Button bsPrefix="search-btn" variant="outline-success" type="submit">search</Button>
                             </div>
                         </Form>

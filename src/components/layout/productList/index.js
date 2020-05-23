@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { Container, Row, Col, Image, Pagination } from 'react-bootstrap'
+import { Container, Row, Col, Image } from 'react-bootstrap'
 import CardImage from 'components/common/cardImage/'
-
+import PageinationBar from 'components/common/paginationBar/'
 import './index.scss'
 import banner from 'assets/images/product_banner.jpg'
 
@@ -31,25 +31,9 @@ export default class ProductList extends Component {
         let { history } = this.props
         history.push({ pathname: '/ProductDetail' })
     }
-    goFirstPage = () => {
-        this.setState({ currPage: 1 })
-    }
-    goPrevPage = () => {
-        let { currPage, totalPage } = this.state
-        if (currPage == 1) return
-        this.setState({ currPage: --currPage })
-    }
-    goNextPage = () => {
-        let { currPage, totalPage } = this.state
-        if (totalPage == currPage) return
-        this.setState({ currPage: ++currPage })
-    }
-    goLastPage = () => {
-        let { totalPage } = this.state
-        this.setState({ currPage: totalPage })
-    }
-    goCurrPage = (item) => {
-        this.setState({ currPage: item })
+
+    onPageClick(page){
+        console.log(page)
     }
     onNavClick = (item, index) => {
         console.log(item)
@@ -64,10 +48,10 @@ export default class ProductList extends Component {
                     <Row>
                         <Col md={3}>
                             <h4>产品分类</h4>
-                            <ul class="nav-list">
+                            <ul className="nav-list">
                                 {
                                     navList.map((item, index) => {
-                                        return (<li key={item.id} class={`nav-item ${navIndex == index && 'active'}`} onClick={() => this.onNavClick(item, index)}>{item.lable}</li>)
+                                        return (<li key={item.id} className={`nav-item ${navIndex == index && 'active'}`} onClick={() => this.onNavClick(item, index)}>{item.lable}</li>)
                                     })
                                 }
                             </ul>
@@ -76,12 +60,12 @@ export default class ProductList extends Component {
                             <Row>
                                 {
                                     productList.map((item, index) => {
-                                        return (<Col key={item.id} lg={4} xs={6}>
-                                            <div class="product-item" onClick={() => this.goDetail(item, index)}>
-                                                <div class="product-item__img">
+                                        return (<Col key={index} lg={4} xs={6}>
+                                            <div className="product-item" onClick={() => this.goDetail(item, index)}>
+                                                <div className="product-item__img">
                                                     <CardImage />
                                                 </div>
-                                                <p class="product-item__name">产品名称</p>
+                                                <p className="product-item__name">产品名称</p>
                                             </div>
                                         </Col>)
                                     })
@@ -91,28 +75,7 @@ export default class ProductList extends Component {
                     </Row>
                     <Row>
                         <Col md={{ span: 9, offset: 3 }} id="pageination">
-                            <Pagination>
-                                <Pagination.First onClick={this.goFirstPage} />
-                                <Pagination.Prev onClick={this.goPrevPage} />
-                                {
-                                    currPage >= 3 && (<Pagination.Ellipsis />)
-                                }
-                                {
-                                    totalPage - currPage > 3 && ([currPage, currPage + 1, currPage + 2].map(item => {
-                                        return (<Pagination.Item active={currPage == item} onClick={() => this.goCurrPage(item)}>{item}</Pagination.Item>)
-                                    }))
-                                }
-                                {
-                                    (totalPage >= 3 && totalPage - currPage >= 4) && (<Pagination.Ellipsis />)
-                                }
-                                {
-                                    totalPage - currPage <= 3 && ([totalPage - 3, totalPage - 2, totalPage - 1, totalPage].map(item => {
-                                        return (<Pagination.Item active={currPage == item} onClick={() => this.goCurrPage(item)}>{item}</Pagination.Item>)
-                                    }))
-                                }
-                                <Pagination.Next onClick={this.goNextPage} />
-                                <Pagination.Last onClick={this.goLastPage} />
-                            </Pagination>
+                            <PageinationBar currPage={1} totalPage={20} onPageClick={this.onPageClick} />
                         </Col>
                     </Row>
                 </Container>

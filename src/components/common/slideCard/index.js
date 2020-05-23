@@ -15,31 +15,34 @@ export default class HomeSlide extends Component {
     }
 
     componentDidMount() {
-        this.initBscroll()
+        setTimeout(() => {
+            this.initBscroll()
+        }, 1000);
     }
     getBscrollElement = () => {
-        const wrapper = document.querySelector('.slide-wrapper')
-        const listElement = document.querySelector('.slide-list')
-        let itemElement = document.querySelectorAll('.slide-item')
         return {
-            wrapper,
-            listElement,
-            itemElement
+            wrapper: this.refs.slideWrapper,
+            listElement: this.refs.slideList,
+            itemElement: this.refs.slideList.childNodes
         }
     }
     initBscroll = () => {
-        let { list, itemWidth } = this.props
-        let { wrapper, listElement } = this.getBscrollElement()
+        let { list, cols } = this.props
+        let { wrapper, listElement, itemElement } = this.getBscrollElement()
+        let wrapperStyles = window.getComputedStyle(wrapper)
         //选中DOM中定义的 .wrapper 进行初始化
         const bscroll = new BScroll(wrapper, {
             scrollX: true,  //开启横向滚动
             click: true,  // better-scroll 默认会阻止浏览器的原生 click 事件
             scrollY: true, //关闭竖向滚动
         })
-
+        console.log(wrapperStyles.width)
+        let itemWidth = parseInt(wrapperStyles.width) / cols
+        console.log('itemWidth', itemWidth)
         listElement.style.width = list.length * itemWidth + 'px'
+
         bscroll.refresh()
-        this.setState({ bscroll })
+        this.setState({ bscroll, itemWidth })
 
     }
     swriptLeft = () => {
@@ -57,16 +60,17 @@ export default class HomeSlide extends Component {
         console.log(index)
         console.log(itemElement[index])
 
-        bscroll.scrollToElement(itemElement[index], 300,true)
+        bscroll.scrollToElement(itemElement[index], 300)
 
     }
     swriptRight = () => {
         let { bscroll, itemWidth } = this.state
-        let { wrapper,listElement, itemElement } = this.getBscrollElement()
+        console.log(bscroll, itemWidth)
+        let { wrapper, listElement, itemElement } = this.getBscrollElement()
 
         let listRect = listElement.getBoundingClientRect()
-        let wrapperRect = wrapper.getBoundingClientRect()
 
+        let wrapperRect = wrapper.getBoundingClientRect()
 
         let slideCount = parseInt(wrapperRect.width / itemWidth)
 
@@ -74,30 +78,27 @@ export default class HomeSlide extends Component {
 
         if (index == itemElement.length) return
 
-        bscroll.scrollToElement(itemElement[index], 300, true)
+        bscroll.scrollToElement(itemElement[index], 300)
 
     }
 
     render() {
-        let { list } = this.props
+        let { list, cols, itemWidth } = this.props
         return (
-            <div class="home-slide">
-                <div class="slide-wrapper">
-                    <ul class="slide-list">
+            <div className="slide-card">
+                <div className="slide-card__wrapper" ref="slideWrapper">
+                    <ul className="slide-card__list" ref="slideList">
                         {
                             list.map(item => {
-                                return (<li key={item.id} class="slide-item">
-                                    <div class="slide-item__img">
-                                        <CarImage />
-                                    </div>
-                                    <label>标题</label>
+                                return (<li key={item.id} className="slide-card__item" style={{ width: itemWidth }}>
+                                    {this.props.children}
                                 </li>)
                             })
                         }
                     </ul>
                 </div>
-                <span class="iconfont icon-left-circle-fill" onClick={this.swriptLeft}></span>
-                <span class="iconfont icon-right-circle-fill" onClick={this.swriptRight}></span>
+                <span className="iconfont icon-left-circle-fill" onClick={this.swriptLeft}></span>
+                <span className="iconfont icon-right-circle-fill" onClick={this.swriptRight}></span>
             </div>
         )
     }
@@ -105,12 +106,13 @@ export default class HomeSlide extends Component {
 
 HomeSlide.defaultProps = {
     list: [
-        { id: 0, label: '标题' }, 
-        { id: 1, label: '标题' }, 
-        { id: 2, label: '标题' }, 
-        { id: 3, label: '标题' }, 
-        { id: 4, label: '标题' }, 
+        { id: 0, label: '标题' },
+        { id: 1, label: '标题' },
+        { id: 2, label: '标题' },
+        { id: 3, label: '标题' },
+        { id: 4, label: '标题' },
         { id: 5, label: '标题' },
-    ]
+    ],
+    cols: 3
 }
 

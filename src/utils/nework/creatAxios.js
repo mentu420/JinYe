@@ -1,13 +1,13 @@
+import Urls from 'constants/urls'
 import axios from 'axios'
 
-axios.defaults.baseURL = 'https://api.example.com';
+axios.defaults.baseURL = Urls.BaseUrl
 axios.defaults.timeout = 6000;
-
 
 const $axios = axios.create();
 
 // 添加请求拦截器
-axios.interceptors.request.use((config) => {
+$axios.interceptors.request.use((config) => {
     // 在发送请求之前做些什么
     return config;
 }, (error) => {
@@ -16,9 +16,10 @@ axios.interceptors.request.use((config) => {
 });
 
 // 添加响应拦截器
-axios.interceptors.response.use((response) => {
+$axios.interceptors.response.use((response) => {
+    console.log(response)
     // 对响应数据做点什么
-    return response;
+    return response.data;
 }, (error) => {
     // 对响应错误做点什么
     return Promise.reject(error);

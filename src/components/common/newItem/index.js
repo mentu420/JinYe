@@ -14,13 +14,13 @@ export default class NewItem extends Component {
         let {item} = this.props
         return (
             <Media>
-                <div class="new-item__date">
+                <div className="new-item__date">
                     <h4>{item.day}</h4>
                     <time>{item.date}</time>
                 </div>
                 <Media.Body>
                     <h5>{item.title}</h5>
-                    <p class="new-item__label">{item.label}</p>
+                    <p className="new-item__label">{item.label}</p>
                 </Media.Body>
             </Media>
         )

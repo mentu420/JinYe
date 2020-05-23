@@ -88,18 +88,18 @@ export default class index extends Component {
     render() {
         let { navList } = this.state
         return (
-            <div class="footer">
+            <div className="footer">
                 <Container>
                     <Row>
                         <Col xs={12} md={5} id="footer-nav">
                             <Row>
                                 {
-                                    navList.map(item => {
-                                        return (<Col xs={6} key={item.id}>
+                                    navList.map((item,index) => {
+                                        return (<Col  xs={6} key={index}>
                                             <Nav className="flex-column">
                                                 {
                                                     item.map(option => {
-                                                        return (<Nav.Link bsPrefix="footer-nav__link" {...option}>{option.label}</Nav.Link>)
+                                                        return (<Nav.Link key={option.label} bsPrefix="footer-nav__link" {...option}>{option.label}</Nav.Link>)
                                                     })
                                                 }
                                             </Nav>
@@ -111,20 +111,20 @@ export default class index extends Component {
                         <Col xs={12} md={7}>
                             <Row>
                                 <Col xs={8} sm={4}>
-                                    <div class="footer-logo">
+                                    <div className="footer-logo">
                                         <CardImage src={logo}/>
                                     </div>
-                                    <div class="footer-qcode">
+                                    <div className="footer-qcode">
                                         <CardImage src={QCode} />
                                     </div>
                                 </Col>
                                 <Col xs={12} sm={8}>
-                                    <p class="footer-contact__item">全国服务热线</p>
-                                    <p class="footer-contact__item tel"><a href="tel:076922409717 ">0769-22409717 </a></p>
+                                    <p className="footer-contact__item">全国服务热线</p>
+                                    <p className="footer-contact__item tel"><a href="tel:076922409717 ">0769-22409717 </a></p>
                                     <ul>
-                                        <li class="footer-contact__item"><a href="tel:13711995800 ">手机：137 1199 5800</a></li>
-                                        <li class="footer-contact__item"><a href="mailto:442717390@qq.com ">邮箱：442717390@qq.com</a></li>
-                                        <li class="footer-contact__item">地址：东莞市东城区温塘莞温中路488号</li>
+                                        <li className="footer-contact__item"><a href="tel:13711995800 ">手机：137 1199 5800</a></li>
+                                        <li className="footer-contact__item"><a href="mailto:442717390@qq.com ">邮箱：442717390@qq.com</a></li>
+                                        <li className="footer-contact__item">地址：东莞市东城区温塘莞温中路488号</li>
                                     </ul>
                                 </Col>
                             </Row>

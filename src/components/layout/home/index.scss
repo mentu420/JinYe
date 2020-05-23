@@ -63,6 +63,9 @@
     margin-bottom  : 2rem;
     display        : flex;
     justify-content: space-around;
+    &>li{
+        flex:1;
+    }
 
     &>li:nth-of-type(1) {
         padding-right: .5rem;
@@ -193,21 +196,23 @@
     padding-top: 4rem;
 }
 
+
 .home-new__list>li {
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
 }
 
 //滑动按钮
 .home-nav__down {
-    height: 2rem;
+    height          : 2rem;
     width           : 100vw;
     position        : fixed;
     bottom          : 0;
     text-align      : center;
     background-color: rgba($color: #fff, $alpha: .5);
     z-index         : $zindex-nav;
+
     &>.iconfont {
-        display: inline-block;
+        display  : inline-block;
         font-size: 1.4rem;
         animation: pulse 1.5s infinite;
     }
@@ -215,12 +220,12 @@
 
 @keyframes pulse {
     from {
-        opacity: .5;
+        opacity  : .5;
         transform: translateY(0);
     }
 
     to {
-        opacity: 1;
+        opacity  : 1;
         transform: translateY(-10px);
     }
 }
@@ -233,6 +238,12 @@
 
     .home-about__img {
         padding-right: 10vw;
+    }
+}
+
+@media screen and (min-width:992px) {
+    .home-new__img {
+        height: 512px;
     }
 }
 

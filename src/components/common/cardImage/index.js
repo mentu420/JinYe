@@ -15,8 +15,8 @@ export default class CardImage extends Component {
     render() {
         let { src, fit } = this.props
         return (
-            <div class="crad-image">
-                <img style={{ objectFit: fit }} class="crad-image__image" src={src} />
+            <div className="crad-image">
+                <img style={{ objectFit: fit }} className="crad-image__image" src={src} alt="图片"/>
             </div>
         )
     }

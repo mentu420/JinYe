@@ -122,10 +122,6 @@ ul {
     list-style: none;
 }
 
-/**禁止选中文本内容**/
-*:not(input, select, textArea) {
-    -webkit-user-select: none;
-}
 
 /**禁用长按页面时的弹出菜单(iOS下有效) ,img和a标签都要加**/
 

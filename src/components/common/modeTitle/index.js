@@ -12,10 +12,10 @@ export default class HomeTitle extends Component {
     render() {
         let { letter, title } = this.props
         return (
-            <div class="home-title__wrapper">
-                <div class="home-title">
-                    <p class="title-capital__letter">{letter}</p>
-                    <p class="title-text">{title}</p>
+            <div className="home-title__wrapper">
+                <div className="home-title">
+                    <p className="title-capital__letter">{letter}</p>
+                    <p className="title-text">{title}</p>
                 </div>
             </div>
         )

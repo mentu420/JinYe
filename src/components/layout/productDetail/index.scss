@@ -1,0 +1,21 @@
+
+.product-detail__slide{
+    position: relative;
+    padding:.2rem;
+    .detail-slide__list{
+        display: flex;
+        
+        &>li{
+            flex:1;
+        }
+    }
+}
+
+.product-thumbnail{
+    padding:0 .4rem;
+}
+.my-div{
+    width: 599px;
+    height: 10px;
+    background-color: red;
+}

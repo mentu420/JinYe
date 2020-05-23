@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import { Container, Row, Col, Carousel, Image, Button, Media } from 'react-bootstrap'
+import Jsonp from 'jsonp'
+import $ from 'jquery'
 
 import CarImage from 'components/common/cardImage'
 import ItemTitle from 'components/common/modeTitle'
-import HomeSlide from 'components/common/homeSlide'
+import CardSlide from 'components/common/CardSlide'
 import NewItem from 'components/common/newItem'
+import * as Api from 'api/'
 //图片
 import banner0 from 'assets/images/banner.jpg'
 import banner1 from 'assets/images/banner1.jpg'
@@ -43,6 +46,53 @@ export default class Home extends Component {
             clientHeight: document.body.clientHeight,
             clientWidth: document.body.clientWidth
         })
+        Api.getAbout().then(res=>{
+            console.log(res)
+        })
+        Api.getBanner().then(res=>{
+            console.log('banner',res)
+        })
+        // Jsonp('http://106.55.0.171:8083//tools/about.ashx?jsoncallback=', null, (err, data) => {
+        //     console.log(err, data)
+        // })
+        // $.ajax({
+        //     type: "get",
+        //     url: "http://106.55.0.171:8083/tools/banner.ashx",
+        //     dataType: 'jsonp',
+        //     jsonp: "jsoncallback",
+        //     jsonpCallback: "jsoncallback",
+        //     success: function (data) {
+        //         console.log(data);
+        //     }
+        // });
+        // $.ajax({
+        //     url: "http://106.55.0.171:8083/tools/banner.ashx?jsoncallback=?",
+        //     dataType: "jsonp",
+        //     beforeSend: function (XMLHttpRequest) {
+        //         $("#div_clear").html("正在获取，请稍候...");
+        //     },
+        //     success: function (data, textStatus) {
+        //         $("#div_clear").html("获取值：" + data.result);
+        //     },
+        //     error: function (XMLHttpRequest, textStatus, errorThrown) {
+        //         $("#div_clear").html("获取出错！");
+        //     }
+        // });
+        // $.ajax({
+        //     url: "http://106.55.0.171:8083/tools/about.ashx",
+        //     // dataType: "jsonp",
+        //     beforeSend: function (XMLHttpRequest) {
+        //         // $("#div_clear").html("正在获取，请稍候...");
+        //     },
+        //     success: function (data, textStatus) {
+        //         // $("#div_clear").html("获取值：" + data.result);
+        //         console.log(data)
+        //     },
+        //     error: function (XMLHttpRequest, textStatus, errorThrown) {
+        //         // $("#div_clear").html("获取出错！");
+        //     }
+        // });
+
     }
 
     scrollToAnchor = (e) => {
@@ -70,15 +120,15 @@ export default class Home extends Component {
     render() {
         let { clientHeight, useList, bannerList, clientWidth } = this.state
         console.log(clientHeight)
-        let n = clientWidth >= 750?0:1
+        let n = clientWidth >= 750 ? 0 : 1
         return (
-            <div class="home-content">
+            <div className="home-content">
                 <div>
                     <Carousel>
                         {
                             bannerList.map(item => {
-                                return (<Carousel.Item key={item.id}>
-                                    <div class="banner" style={{ height: clientHeight }}>
+                                return (<Carousel.Item key={item}>
+                                    <div className="banner" style={{ height: clientHeight }}>
                                         <CarImage src={item[n]} />
                                     </div>
                                 </Carousel.Item>)
@@ -86,39 +136,39 @@ export default class Home extends Component {
                         }
                     </Carousel>
                 </div>
-                <div class="home-item flex" style={{ minHeight: clientHeight }}>
-                    <div class="item-flex__center">
+                <div className="home-item flex" style={{ minHeight: clientHeight }}>
+                    <div className="item-flex__center">
                         <Container fluid>
                             <Row>
                                 <Col lg={{ span: 5, offset: 1 }} md={12}>
-                                    <div class="item-product__title">
+                                    <div className="item-product__title">
                                         <p>BEST SELLER</p>
                                         <h1>BEST SELLING LIST</h1>
                                     </div>
                                     <h3 >畅销榜单</h3>
-                                    <ul class="item-product__list">
+                                    <ul className="item-product__list">
                                         <li>
-                                            <div class="product-item__img">
+                                            <div className="product-item__img">
                                                 <CarImage src={productImg0} />
                                             </div>
-                                            <div class="product-item__title"><span>+</span><label>电热元件</label></div>
+                                            <div className="product-item__title"><span>+</span><label>电热元件</label></div>
                                         </li>
                                         <li>
-                                            <div class="product-item__title"><span>+</span><label>陶瓷配件</label></div>
-                                            <div class="product-item__img">
+                                            <div className="product-item__title"><span>+</span><label>陶瓷配件</label></div>
+                                            <div className="product-item__img">
                                                 <CarImage src={productImg1} />
                                             </div>
                                         </li>
                                     </ul>
                                 </Col>
                                 <Col>
-                                    <div class="item-product__btn">
-                                        <div class="produt-right__title">
+                                    <div className="item-product__btn">
+                                        <div className="produt-right__title">
                                             <h3>熔喷布加热器</h3>
                                         </div>
                                         <Button variant="light">了解详情</Button>
                                     </div>
-                                    <div class="item-product__bg">
+                                    <div className="item-product__bg">
                                         <CarImage src={productImg2} />
                                     </div>
                                 </Col>
@@ -126,28 +176,28 @@ export default class Home extends Component {
                         </Container>
                     </div>
                 </div>
-                <div class="home-item flex bg-cover" style={{ minHeight: clientHeight,backgroundImage:`url(${banner4})` }}>
-                    <div class="item-flex__center">
+                <div className="home-item flex bg-cover" style={{ minHeight: clientHeight, backgroundImage: `url(${banner4})` }}>
+                    <div className="item-flex__center">
                         <ItemTitle />
-                        <HomeSlide />
+                        <CardSlide />
                     </div>
                 </div>
-                <div class="home-item flex bg-cover" style={{ minHeight: clientHeight }}>
-                    <div class="item-flex__center">
+                <div className="home-item flex bg-cover" style={{ minHeight: clientHeight }}>
+                    <div className="item-flex__center">
                         <Container fluid>
                             <Row>
                                 <Col sm={12} md={7}>
-                                    <div class="home-about__title">
+                                    <div className="home-about__title">
                                         <h3>企业简介</h3>
                                         <h4>Company profile</h4>
                                     </div>
-                                    <div class="home-about__text">
+                                    <div className="home-about__text">
                                         <p>东莞市金烨电热材料有限公司成立于2012年，公司本着”人性化服务，顾客为先”的宗旨，”诚实待客，信誉为本”的理念,现代化的管理模式，团结向上的精神风貌，孜孜不倦的敬业精神，为广大客户提供优良的产品，完善的服务。严格的交期，完善的服务，与各地众多的客户建立了良好的业务关系，赢得了广大信任和赞许..........</p>
                                         <Button variant="success">了解详情</Button>
                                     </div>
                                 </Col>
                                 <Col>
-                                    <div class="home-about__img">
+                                    <div className="home-about__img">
                                         <CarImage src={aboutImg} />
                                     </div>
                                 </Col>
@@ -155,12 +205,12 @@ export default class Home extends Component {
                         </Container>
                     </div>
                 </div>
-                <div class="home-item flex bg-cover cancel-padding" style={{ minHeight: clientHeight, backgroundImage: `url(${banner3})` }}>
-                    {/* <div class="home-cultre__bg"></div> */}
+                <div className="home-item flex bg-cover cancel-padding" style={{ minHeight: clientHeight, backgroundImage: `url(${banner3})` }}>
+                    {/* <div className="home-cultre__bg"></div> */}
                     <Container>
                         <Row>
                             <Col lg={5} md={7} xs={10}>
-                                <div class="home-culture">
+                                <div className="home-culture">
                                     <span></span>
                                     <h2>BE DEDICATED</h2>
                                     <h2>TO QUALITY</h2>
@@ -172,14 +222,17 @@ export default class Home extends Component {
                         </Row>
                     </Container>
                 </div>
-                <div class="home-item flex" style={{ minHeight: clientHeight }}>
-                    <div class="item-flex__center">
+                <div className="home-item flex" style={{ minHeight: clientHeight }}>
+                    <div className="item-flex__center">
                         <ItemTitle letter={'NEWS INFORMATION'} title={'新闻动态'} />
                         <div>
                             <Container>
                                 <Row>
                                     <Col md={7} xs={12}>
-                                        <ul class="home-new__list">
+                                        <ul className="home-new__list">
+                                            <li>
+                                                <NewItem />
+                                            </li>
                                             <li>
                                                 <NewItem />
                                             </li>
@@ -195,7 +248,7 @@ export default class Home extends Component {
                                         </ul>
                                     </Col>
                                     <Col md={5} xs={12}>
-                                        <div class="home-new__img">
+                                        <div className="home-new__img">
                                             <CarImage src={newImg} />
                                         </div>
                                     </Col>
@@ -204,8 +257,8 @@ export default class Home extends Component {
                         </div>
                     </div>
                 </div>
-                <div class="home-nav__down" onClick={(e) => this.scrollToAnchor(e)}>
-                    <span class="iconfont icon-down"></span>
+                <div className="home-nav__down" onClick={(e) => this.scrollToAnchor(e)}>
+                    <span className="iconfont icon-down"></span>
                 </div>
             </div>
         )
