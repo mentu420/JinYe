@@ -17,7 +17,6 @@ $axios.interceptors.request.use((config) => {
 
 // 添加响应拦截器
 $axios.interceptors.response.use((response) => {
-    console.log(response)
     // 对响应数据做点什么
     return response.data;
 }, (error) => {

@@ -9,6 +9,7 @@ import {
     FormControl,
     Button
 } from 'react-bootstrap'
+import { withRouter } from "react-router-dom";
 
 import CardImg from 'components/common/cardImage/'
 import './index.scss'
@@ -60,7 +61,7 @@ const NAV_LIST = [
 
 
 
-export default class Header extends Component {
+class Header extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -75,9 +76,8 @@ export default class Header extends Component {
 
     searchSubmit = (event) => {
         event.preventDefault();
-        
         console.log(this.searchInput.value)
-        
+        this.props.history.push({ pathname: '/productList', query: { id: 0 } })
     }
 
     render() {
@@ -100,7 +100,7 @@ export default class Header extends Component {
                             }
                         </Nav>
                         <Form onSubmit={this.searchSubmit} inline>
-                            <FormControl ref={el => this.searchInput = el}type="text" placeholder="Search" className="mr-sm-2" />
+                            <FormControl ref={el => this.searchInput = el} type="text" placeholder="Search" className="mr-sm-2" />
                             <div className="nav-search__btn">
                                 <span className="iconfont icon-search"></span>
                                 <Button bsPrefix="search-btn" variant="outline-success" type="submit">search</Button>
@@ -112,3 +112,5 @@ export default class Header extends Component {
         )
     }
 }
+
+export default withRouter(Header)

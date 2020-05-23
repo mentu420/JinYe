@@ -3,7 +3,7 @@
     min-height      : 600px;
     padding         : 6rem 0;
     background-color: #f4f4f4;
-    overflow: hidden;
+    overflow        : hidden;
 }
 
 #footer-nav {
@@ -42,8 +42,12 @@
 
 .footer-qcode {
     max-width: 6rem;
-    margin:auto;
-    padding: 2.5rem 0;
+    margin   : auto;
+    padding  : 2.5rem 0;
+}
+
+.footer-nav__title {
+    padding: .5rem 1rem ;
 }
 
 @media screen and (max-width: 768px) {

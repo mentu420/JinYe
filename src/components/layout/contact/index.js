@@ -3,6 +3,7 @@ import { Container, Row, Col, Carousel, Image, Button, Media, Form, Modal } from
 import NewItem from 'components/common/newItem'
 import ModeTitle from 'components/common/modeTitle'
 import VerticalSpace from 'components/common/verticalSpace/'
+import textFill from 'constants/textFill'
 
 import './index.scss'
 import banner from 'assets/images/contact-banner.jpg'
@@ -53,50 +54,38 @@ export default class index extends Component {
     }
     render() {
         let { show, tips } = this.state
+        let { contactTxt } = textFill
+        let { orderList, content, letter, title, callTips, tel } = contactTxt
         return (
             <div>
                 <Image src={banner} fluid />
                 <VerticalSpace />
-                <ModeTitle letter={'CONTACT US'} title={'联系我们'} />
+                <ModeTitle letter={letter} title={title} />
                 <VerticalSpace />
                 <Container>
                     <Row>
                         <Col>
                             <div className="contact-tel">
-                                <label>如有任何问题请联系我们，我们7*24小时竭诚为您服务</label>
-                                <h3><a href="tel:0769-22409719">0769-22409719</a></h3>
+                                <label>{callTips}</label>
+                                <h3><a href={`tel:${tel}`}>{tel}</a></h3>
                             </div>
                             <VerticalSpace />
                         </Col>
                     </Row>
                     <Row>
-                        <Col md={4} xs={12}>
-                            <ul className="contact-item">
-                                <li className="contact-item__icon"><span className="iconfont icon-qq"></span></li>
-                                <li className="contact-item__text">
-                                    <p>在线QQ客服</p>
-                                    <p>442717390/42717390</p>
-                                </li>
-                            </ul>
-                        </Col>
-                        <Col md={4} xs={12}>
-                            <ul className="contact-item">
-                                <li className="contact-item__icon"><span className="iconfont icon-youjian"></span></li>
-                                <li className="contact-item__text">
-                                    <p>企业邮箱</p>
-                                    <p>442717390@qq.com</p>
-                                </li>
-                            </ul>
-                        </Col>
-                        <Col md={4} xs={12}>
-                            <ul className="contact-item">
-                                <li className="contact-item__icon"><span className="iconfont icon-ie"></span></li>
-                                <li className="contact-item__text">
-                                    <p>企业官网</p>
-                                    <p>www.sqjinye.com</p>
-                                </li>
-                            </ul>
-                        </Col>
+                        {
+                            orderList.map((item, index) => {
+                                return (<Col key={index} md={4} xs={12}>
+                                    <ul className="contact-item">
+                                        <li className="contact-item__icon"><span className={`iconfont ${item.icon}`}></span></li>
+                                        <li className="contact-item__text">
+                                            <p>{item.label}</p>
+                                            <p>{item.value}</p>
+                                        </li>
+                                    </ul>
+                                </Col>)
+                            })
+                        }
                     </Row>
                 </Container>
                 <VerticalSpace height={'4rem'} />
@@ -108,7 +97,7 @@ export default class index extends Component {
                                     <label>ONLINE MESSAGE</label>
                                     <p>在线留言</p>
                                 </div>
-                                <p className="contact-message__tips">尊敬的客户，欢迎您来到电热材料生产厂家——东莞市金烨电热材料有限公司！我们在电热材料领域有多年的技术经验积累，并致力于成为电热材料领域的佼佼者！我们迫切希望能够为您服务，如果您有任何对电热材料生产研发或者设备技术领域的疑问，您可以通过多种方式多种渠道联系我们，我们非常乐意为您解答，同时也随时欢迎您亲自来我们公司进行考察与访问！</p>
+                                <p className="contact-message__tips">{content}</p>
                             </Col>
                             <Col md={6} xs={12}>
                                 <Form>

@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { Container, Row, Col, Carousel, Image, Button, Media } from 'react-bootstrap'
-import Jsonp from 'jsonp'
-import $ from 'jquery'
+import Urls from 'constants/urls'
 
 import CarImage from 'components/common/cardImage'
 import ItemTitle from 'components/common/modeTitle'
-import CardSlide from 'components/common/CardSlide'
+import SlideCard from 'components/common/slideCard'
 import NewItem from 'components/common/newItem'
+import VerticalSpace from 'components/common/verticalSpace'
 import * as Api from 'api/'
 //图片
 import banner0 from 'assets/images/banner.jpg'
@@ -38,7 +38,11 @@ export default class Home extends Component {
             clientHeight: 814,
             clientWidth: 750,
             useList: [1, 2, 3, 4],
-            bannerList: [[banner0, bannerVertical0], [banner1, bannerVertical1], [banner2, bannerVertical2]]
+            bannerList: [
+                [{ image: banner0 }, { image: banner1 }, { image: banner2 }],
+                [{ image: bannerVertical0 }, { image: bannerVertical1 }, { image: bannerVertical2 }]
+            ],
+            aboutTxt: ''
         }
     }
     componentDidMount() {
@@ -46,66 +50,51 @@ export default class Home extends Component {
             clientHeight: document.body.clientHeight,
             clientWidth: document.body.clientWidth
         })
-        Api.getAbout().then(res=>{
+        Api.getAbout().then(res => {
             console.log(res)
-        })
-        Api.getBanner().then(res=>{
-            console.log('banner',res)
-        })
-        // Jsonp('http://106.55.0.171:8083//tools/about.ashx?jsoncallback=', null, (err, data) => {
-        //     console.log(err, data)
-        // })
-        // $.ajax({
-        //     type: "get",
-        //     url: "http://106.55.0.171:8083/tools/banner.ashx",
-        //     dataType: 'jsonp',
-        //     jsonp: "jsoncallback",
-        //     jsonpCallback: "jsoncallback",
-        //     success: function (data) {
-        //         console.log(data);
-        //     }
-        // });
-        // $.ajax({
-        //     url: "http://106.55.0.171:8083/tools/banner.ashx?jsoncallback=?",
-        //     dataType: "jsonp",
-        //     beforeSend: function (XMLHttpRequest) {
-        //         $("#div_clear").html("正在获取，请稍候...");
-        //     },
-        //     success: function (data, textStatus) {
-        //         $("#div_clear").html("获取值：" + data.result);
-        //     },
-        //     error: function (XMLHttpRequest, textStatus, errorThrown) {
-        //         $("#div_clear").html("获取出错！");
-        //     }
-        // });
-        // $.ajax({
-        //     url: "http://106.55.0.171:8083/tools/about.ashx",
-        //     // dataType: "jsonp",
-        //     beforeSend: function (XMLHttpRequest) {
-        //         // $("#div_clear").html("正在获取，请稍候...");
-        //     },
-        //     success: function (data, textStatus) {
-        //         // $("#div_clear").html("获取值：" + data.result);
-        //         console.log(data)
-        //     },
-        //     error: function (XMLHttpRequest, textStatus, errorThrown) {
-        //         // $("#div_clear").html("获取出错！");
-        //     }
-        // });
+            let encoder = new TextEncoder('utf8');
 
+            // let text= eval('\'' + encodeURI(res.content).replace(/%/gm, '\\x') + '\'');
+            console.log(decodeURIComponent(res.content))
+        }).catch(err => {
+            console.log(err)
+        })
+        Api.getBanner().then(res => {
+            console.log('banner', res)
+
+            let bannerList = [
+                [...res.pc.map(item => ({ ...item, image: Urls.BaseUrl + item.image }))],
+                [...res.mobile.map(item => ({ ...item, image: Urls.BaseUrl + item.image }))]
+            ]
+            this.setState({ bannerList })
+        }).catch(err => {
+            console.log(err)
+        })
+        Api.getCategory({ type: 1 }).then(res => {
+            console.log(res)
+        }).catch(err => {
+            console.log(err)
+        })
+        Api.getProductUse().then(res=>{
+            console.log(res)
+        }).catch(err=>{
+            console.log(err)
+        })
     }
-
+    goBannerDetail = (item) => {
+        if (item.linkUrl == '') return
+        this.props.history.push({ pathname: item.linkUrl })
+    }
+    goAdvantage = ()=>{
+        this.props.history.push({ pathname: '/advantage' })
+    }
+    //锚点移动
     scrollToAnchor = (e) => {
         // 找到锚点
         let anchorElement = document.querySelectorAll('.home-item');
         let clientHeight = document.body.clientHeight
         let n = parseInt(e.pageY / clientHeight)
-        console.log(e.pageY)
-        // console.log(e.pageY)
-        // n = n == 0 ? 1 : n
 
-        console.log(anchorElement[n])
-        console.log(n)
         if (n >= anchorElement.length) {
             //滚动到footer
             let homeElement = document.querySelector('.home-content')
@@ -115,10 +104,10 @@ export default class Home extends Component {
         }
         // 如果对应id的锚点存在，就跳转到锚点
         anchorElement[n].scrollIntoView({ block: 'start', behavior: 'smooth' })
-
     }
+
     render() {
-        let { clientHeight, useList, bannerList, clientWidth } = this.state
+        let { clientHeight, useList, bannerList, clientWidth, aboutTxt } = this.state
         console.log(clientHeight)
         let n = clientWidth >= 750 ? 0 : 1
         return (
@@ -126,10 +115,10 @@ export default class Home extends Component {
                 <div>
                     <Carousel>
                         {
-                            bannerList.map(item => {
-                                return (<Carousel.Item key={item}>
-                                    <div className="banner" style={{ height: clientHeight }}>
-                                        <CarImage src={item[n]} />
+                            bannerList[n].map(item => {
+                                return (<Carousel.Item key={item.image}>
+                                    <div className="banner" style={{ height: clientHeight }} onClick={() => this.goBannerDetail(item)}>
+                                        <CarImage src={item.image} />
                                     </div>
                                 </Carousel.Item>)
                             })
@@ -179,7 +168,14 @@ export default class Home extends Component {
                 <div className="home-item flex bg-cover" style={{ minHeight: clientHeight, backgroundImage: `url(${banner4})` }}>
                     <div className="item-flex__center">
                         <ItemTitle />
-                        <CardSlide />
+                        <div className="home-slide__box">
+                            <SlideCard hasArrow={clientWidth > 750} cols={clientWidth > 750 ? 3 : 1}>
+                                <div className="home-slide__item">
+                                    <CarImage />
+                                    <p>标题</p>
+                                </div>
+                            </SlideCard>
+                        </div>
                     </div>
                 </div>
                 <div className="home-item flex bg-cover" style={{ minHeight: clientHeight }}>
@@ -192,7 +188,7 @@ export default class Home extends Component {
                                         <h4>Company profile</h4>
                                     </div>
                                     <div className="home-about__text">
-                                        <p>东莞市金烨电热材料有限公司成立于2012年，公司本着”人性化服务，顾客为先”的宗旨，”诚实待客，信誉为本”的理念,现代化的管理模式，团结向上的精神风貌，孜孜不倦的敬业精神，为广大客户提供优良的产品，完善的服务。严格的交期，完善的服务，与各地众多的客户建立了良好的业务关系，赢得了广大信任和赞许..........</p>
+                                        <p>{aboutTxt}</p>
                                         <Button variant="success">了解详情</Button>
                                     </div>
                                 </Col>
@@ -206,7 +202,6 @@ export default class Home extends Component {
                     </div>
                 </div>
                 <div className="home-item flex bg-cover cancel-padding" style={{ minHeight: clientHeight, backgroundImage: `url(${banner3})` }}>
-                    {/* <div className="home-cultre__bg"></div> */}
                     <Container>
                         <Row>
                             <Col lg={5} md={7} xs={10}>
@@ -216,7 +211,8 @@ export default class Home extends Component {
                                     <h2>TO QUALITY</h2>
                                     <h1>恒于心 专于质</h1>
                                     <p>品  质  来  自  每  一  天  的  坚  持</p>
-                                    <Button variant="light">more</Button>
+                                    <VerticalSpace />
+                                    <Button variant="light" onClick={this.goAdvantage}>more</Button>
                                 </div>
                             </Col>
                         </Row>

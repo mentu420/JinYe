@@ -17,7 +17,7 @@ export default class HomeSlide extends Component {
     componentDidMount() {
         setTimeout(() => {
             this.initBscroll()
-        }, 1000);
+        }, 50);
     }
     getBscrollElement = () => {
         return {
@@ -83,7 +83,7 @@ export default class HomeSlide extends Component {
     }
 
     render() {
-        let { list, cols, itemWidth } = this.props
+        let { list, itemWidth, hasArrow } = this.props
         return (
             <div className="slide-card">
                 <div className="slide-card__wrapper" ref="slideWrapper">
@@ -97,8 +97,12 @@ export default class HomeSlide extends Component {
                         }
                     </ul>
                 </div>
-                <span className="iconfont icon-left-circle-fill" onClick={this.swriptLeft}></span>
-                <span className="iconfont icon-right-circle-fill" onClick={this.swriptRight}></span>
+                {
+                    hasArrow && (<>
+                        <span className="iconfont icon-left-circle-fill" onClick={this.swriptLeft}></span>
+                        <span className="iconfont icon-right-circle-fill" onClick={this.swriptRight}></span>
+                    </>)
+                }
             </div>
         )
     }
@@ -113,6 +117,7 @@ HomeSlide.defaultProps = {
         { id: 4, label: '标题' },
         { id: 5, label: '标题' },
     ],
-    cols: 3
+    cols: 3,
+    hasArrow: true
 }
 

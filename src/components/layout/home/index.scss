@@ -63,8 +63,9 @@
     margin-bottom  : 2rem;
     display        : flex;
     justify-content: space-around;
-    &>li{
-        flex:1;
+
+    &>li {
+        flex: 1;
     }
 
     &>li:nth-of-type(1) {
@@ -111,6 +112,15 @@
 .item-product__bg {
     width : 80%;
     height: 434px;
+}
+
+//产品用途
+.home-slide__box {
+    width: 80vw;
+}
+
+.home-slide__item {
+    padding: 10px;
 }
 
 //公司简介
@@ -250,6 +260,10 @@
 @media screen and (max-width: 992px) {
     .item-product__bg {
         width: 100%;
+    }
+
+    .home-slide__box {
+        width: 100vw;
     }
 
     .home-nav__down {
