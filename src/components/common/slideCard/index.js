@@ -91,7 +91,7 @@ export default class HomeSlide extends Component {
                         {
                             list.map(item => {
                                 return (<li key={item.id} className="slide-card__item" style={{ width: itemWidth }}>
-                                    {this.props.children}
+                                    {this.props.children && React.cloneElement(this.props.children, { item: item, })}
                                 </li>)
                             })
                         }

@@ -10,12 +10,17 @@ export default class NewItem extends Component {
 
         }
     }
+
     onClick = () => {
         let { item, onSeeMore } = this.props
         if (typeof onSeeMore === 'function') onSeeMore(item)
     }
+
     render() {
         let { item } = this.props
+        let content = decodeURIComponent(item.content)
+        var pattern = new RegExp('<p.*?>(.*?)<\/p>', 'i');
+        let str = content.match(pattern)[1] || ''
         return (
             <Media onClick={this.onClick}>
                 <div className="new-item__date">
@@ -23,8 +28,8 @@ export default class NewItem extends Component {
                     <time>{item.date}</time>
                 </div>
                 <Media.Body>
-                    <h5>{item.title}</h5>
-                    <p className="new-item__label">{item.label}</p>
+                    <h5 className="new-item__title">{item.title}</h5>
+                    <p className="new-item__label" dangerouslySetInnerHTML={{ __html: str }}></p>
                     <div className="new-item__btn"><Button variant="primary">more</Button></div>
                 </Media.Body>
             </Media>

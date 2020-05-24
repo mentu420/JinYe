@@ -1,35 +1,49 @@
 import React, { Component } from 'react'
 import VerticalSpace from 'components/common/verticalSpace'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Image } from 'react-bootstrap'
 import * as Api from 'api/'
 
 import './index.scss'
+import banner from 'assets/images/new-banner.jpg'
 
 export default class index extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            detail: {}
+        }
+    }
     componentDidMount() {
-        Api.getNewDetail({ id: '' })
+        const data = this.props.location.search  //地址栏截取
+        const id = data.split('?')[1]
+        console.log(id)
+        Api.getNewDetail({ id })
             .then(data => {
-
+                this.setState({
+                    detail: { ...data, content: decodeURIComponent(data.content) }
+                })
             })
             .catch(err => {
                 console.log(err)
             })
     }
     render() {
+        let { detail } = this.state
+        console.log(detail)
         return (
             <div>
+                <Image src={banner} fluid />
                 <VerticalSpace height={'6rem'} />
                 <Container>
                     <Row>
                         <Col>
                             <div className="new-detail__title">
-                                <h1>标题</h1>
-
+                                <h3>{detail.title}</h3>
                             </div>
+                            <VerticalSpace />
+                            <p>时间：<time>{detail.date}</time></p>
                             <VerticalSpace height={'4rem'} />
-                            <div className="new-detail__content">
-                                <p>新闻内容</p>
-                            </div>
+                            <div className="new-detail__content" dangerouslySetInnerHTML={{ __html: detail.content }}></div>
                         </Col>
                     </Row>
                 </Container>

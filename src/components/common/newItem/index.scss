@@ -1,8 +1,8 @@
 .new-item__date {
     width           : 64px;
     height          : 64px;
-    border-radius: 5px;
-    overflow: hidden;
+    border-radius   : 5px;
+    overflow        : hidden;
     background-color: $lightGray;
     margin-right    : 1rem;
     text-align      : center;
@@ -16,16 +16,27 @@
     }
 }
 
-.new-item__label {
+.new-item__title {
+    display           : -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow          : hidden;
+    line-height       : 1.2;
+}
+
+.new-item__label,
+.new-item__label span {
     display           : -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     font-size         : 1rem;
-    overflow: hidden;
-    line-height: 1.2;
-    color:$color-text__secondary;
+    overflow          : hidden;
+    line-height       : 1.2;
+    margin            : 10px 0;
+    color             : $color-text__secondary;
 }
-.new-item__btn{
-    padding-top:10px;
-    text-align: right;
+
+.new-item__btn {
+    padding-top: 10px;
+    text-align : right;
 }

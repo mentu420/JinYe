@@ -52,17 +52,14 @@ export default class Home extends Component {
             clientWidth: document.body.clientWidth
         })
         Api.getAbout().then(res => {
-            console.log(res)
-            let encoder = new TextEncoder('utf8');
-
-            // let text= eval('\'' + encodeURI(res.content).replace(/%/gm, '\\x') + '\'');
-            console.log(decodeURIComponent(res.content))
+            this.setState({
+                aboutTxt: decodeURIComponent(res.content)
+            })
         }).catch(err => {
             console.log(err)
         })
         //获取banner
         Api.getBanner().then(res => {
-            console.log('banner', res)
 
             let bannerList = [
                 [...res.pc.map(item => ({ ...item, image: Urls.BaseUrl + item.image }))],
@@ -74,20 +71,20 @@ export default class Home extends Component {
         })
         //获取产品用途
         Api.getProductUse().then(res => {
-            console.log(res)
+            console.log('use', res)
+            let useList = res.map(item => ({ ...item, src: Urls.BaseUrl + item.image }))
+            this.setState({ useList })
         }).catch(err => {
             console.log(err)
         })
         //获取新闻列表
         Api.getNewList({ pageSize: 3 }).then(res => {
-            console.log(res)
             let arr = res.items.map(item => {
                 let dateArr = item.date.split('-')
                 return {
                     ...item,
                     day: dateArr[2],
                     date: dateArr[0] + '-' + dateArr[1],
-                    label: item.content
                 }
             })
             this.setState({ newList: arr })
@@ -102,9 +99,8 @@ export default class Home extends Component {
     goAdvantage = () => {
         this.props.history.push({ pathname: '/advantage' })
     }
-    onSeeMore = (item) => {
-        console.log('succ')
-        this.props.history.push({ pathname: '/newDetail' })
+    goNewDetail = (item) => {
+        this.props.history.push({ pathname: '/newDetail', search: `${item.id}` })
     }
     goAbout = () => {
         this.props.history.push({ pathname: '/about' })
@@ -112,7 +108,7 @@ export default class Home extends Component {
     goProudctList = (id) => {
         this.props.history.push({
             pathname: '/productList',
-            query: { id }
+            search: id
         })
     }
     //锚点移动
@@ -195,10 +191,10 @@ export default class Home extends Component {
                     <div className="item-flex__center">
                         <ItemTitle />
                         <div className="home-slide__box">
-                            <SlideCard hasArrow={clientWidth > 750} cols={clientWidth > 750 ? 3 : 1}>
+                            <SlideCard list={useList} hasArrow={clientWidth > 750} cols={clientWidth > 750 ? 3 : 1}>
                                 <div className="home-slide__item">
-                                    <CarImage />
-                                    <p>标题</p>
+                                    <CarImage src={this.props.item.src} />
+                                    <p>{this.props.item.title}</p>
                                 </div>
                             </SlideCard>
                         </div>
@@ -214,7 +210,7 @@ export default class Home extends Component {
                                         <h4>Company profile</h4>
                                     </div>
                                     <div className="home-about__text">
-                                        <p>{aboutTxt}</p>
+                                        <p dangerouslySetInnerHTML={{ __html: aboutTxt }}></p>
                                         <Button variant="primary" onClick={this.goAbout}>了解详情</Button>
                                     </div>
                                 </Col>
@@ -250,19 +246,18 @@ export default class Home extends Component {
                         <div>
                             <Container>
                                 <Row>
-                                    <Col md={7} xs={12}>
+                                    <Col lg={7} xs={12}>
                                         <ul className="home-new__list">
                                             {
                                                 newList.map(item => {
-                                                    console.log(item)
-                                                    return (<li key={item.id} onClick={() => this.onSeeMore()}>
+                                                    return (<li key={item.id} onClick={() => this.goNewDetail(item)}>
                                                         <NewItem item={item} />
                                                     </li>)
                                                 })
                                             }
                                         </ul>
                                     </Col>
-                                    <Col md={5} xs={12}>
+                                    <Col lg={5} xs={12}>
                                         <div className="home-new__img">
                                             <CarImage src={newImg} />
                                         </div>

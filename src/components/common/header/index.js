@@ -79,17 +79,10 @@ class Header extends Component {
     }
     componentDidUpdate(prevProps) {
         if (this.props.location !== prevProps.location) {
-            // window.scrollTo(0, 0)
-            console.log('冲突')
-            console.log(this.props.location)
-            console.log(prevProps)
             let { navList } = this.state
             let [result = null] = navList.filter(option =>{
-                console.log(option.href.replace('#', ''))
-
                 return option.href.replace('#', '') == this.props.location.pathname + this.props.location.search
             })
-            console.log('result',result)
             if (!result) return
             this.setState({ navIndex: result.eventKey })
         }

@@ -19,26 +19,14 @@ const NAV_LIST = [
         list: [
             {
                 eventKey: 0,
-                label: '电热元件',
-            },
-            {
-                eventKey: 1,
-                label: '陶瓷配件',
-            },
-            {
-                eventKey: 2,
-                label: '产品中心',
-            },
-            {
-                eventKey: 3,
                 label: '生产实力',
             },
             {
-                eventKey: 4,
+                eventKey: 1,
                 label: '金烨动态',
             },
             {
-                eventKey: 5,
+                eventKey: 2,
                 label: '联系我们',
             },
         ]
@@ -57,7 +45,6 @@ class Footer extends Component {
     componentDidMount() {
         let { navList } = this.state
         let [product, about] = navList
-        console.log(product, about)
         Api.getCategory({ type: 2 }).then(res => {
             this.setState({
                 navList: [
@@ -117,6 +104,11 @@ class Footer extends Component {
                                     </ul>
                                 </Col>
                             </Row>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <p>广东金烨电热有限公司版权所有 COPYRIGHT @2020</p>
                         </Col>
                     </Row>
                 </Container>
