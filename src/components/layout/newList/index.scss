@@ -1,5 +1,6 @@
 .new-item {
-    padding:2rem 0;
+    padding:2rem;
+    border-radius: 5px;
     position: relative;
     &:hover{
         background-color: $color-bg;

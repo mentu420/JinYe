@@ -12,3 +12,5 @@ const storage = {
         return localStorage.clear()
     }
 }
+
+export default storage

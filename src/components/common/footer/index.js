@@ -85,7 +85,7 @@ class Footer extends Component {
                                         let { list } = item
                                         return (<Col xs={6} key={index}>
                                             <Nav className="flex-column">
-                                                <label class="footer-nav__title">{item.title}</label>
+                                                <label className="footer-nav__title">{item.title}</label>
                                                 {
                                                     list.map(option => {
                                                         return (<Nav.Link onSelect={() => this.onSelect(option)} key={option.label} bsPrefix="footer-nav__link" {...option}>{option.label}</Nav.Link>)

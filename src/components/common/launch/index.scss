@@ -1,0 +1,39 @@
+.lanunch-box {
+    width           : 100vw;
+    height          : 100vh;
+    position        : fixed;
+    top             : 0;
+    left            : 0;
+    z-index         : 9999;
+    background-color: $white;
+    overflow        : hidden;
+    display         : flex;
+    margin          : 0;
+
+    &.visible {
+        display: none;
+    }
+}
+
+.lanunch-content {
+    margin    : auto;
+    text-align: center;
+}
+
+.launch-logo {
+    width : 60px;
+    height: 60px;
+    margin: auto;
+}
+
+@keyframes hidden {
+    from {
+        transform: scale(.7);
+        opacity: .7;
+    }
+
+    to {
+        transform: scale(.1);
+        opacity: 0;
+    }
+}

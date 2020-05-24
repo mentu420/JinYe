@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Media} from 'react-bootstrap'
+import { Media, Button } from 'react-bootstrap'
 
 import './index.scss'
 
@@ -10,10 +10,14 @@ export default class NewItem extends Component {
 
         }
     }
+    onClick = () => {
+        let { item, onSeeMore } = this.props
+        if (typeof onSeeMore === 'function') onSeeMore(item)
+    }
     render() {
-        let {item} = this.props
+        let { item } = this.props
         return (
-            <Media>
+            <Media onClick={this.onClick}>
                 <div className="new-item__date">
                     <h4>{item.day}</h4>
                     <time>{item.date}</time>
@@ -21,6 +25,7 @@ export default class NewItem extends Component {
                 <Media.Body>
                     <h5>{item.title}</h5>
                     <p className="new-item__label">{item.label}</p>
+                    <div className="new-item__btn"><Button variant="primary">more</Button></div>
                 </Media.Body>
             </Media>
         )

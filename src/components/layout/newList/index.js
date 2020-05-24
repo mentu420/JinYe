@@ -33,8 +33,9 @@ export default class index extends Component {
                             </ul>
                         </Col>
                     </Row>
+                    <VerticalSpace />
                     <Row>
-                        <Col md={{ span: 9, offset: 3 }} id="pageination">
+                        <Col id="pageination">
                             <PageinationBar currPage={1} totalPage={20} onPageClick={this.onPageClick} />
                         </Col>
                     </Row>

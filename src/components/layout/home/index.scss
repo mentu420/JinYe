@@ -16,6 +16,10 @@
 
         &>.item-flex__center {
             margin: auto;
+
+            &.fluid-lg {
+                width: 100vw;
+            }
         }
     }
 
@@ -110,7 +114,6 @@
 }
 
 .item-product__bg {
-    width : 80%;
     height: 434px;
 }
 
@@ -209,6 +212,12 @@
 
 .home-new__list>li {
     margin-bottom: 2rem;
+    border-radius: 5px;
+    padding      : 10px;
+
+    &:hover {
+        box-shadow: 2px 2px 5px $color-bg, -2px -2px 5px $color-bg;
+    }
 }
 
 //滑动按钮
@@ -241,13 +250,17 @@
 }
 
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1400px) {
     .home-about__text {
-        padding-left: 10vw;
+        padding-left: 15vw;
     }
 
     .home-about__img {
         padding-right: 10vw;
+    }
+
+    .item-product__bg {
+        width: 80%;
     }
 }
 

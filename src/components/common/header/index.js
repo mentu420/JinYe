@@ -26,16 +26,16 @@ const NAV_LIST = [
         label: '关于金烨',
         href: '#/about',
     },
-    {
-        eventKey: 2,
-        label: '电热元件',
-        href: '#productList?id=0',
-    },
-    {
-        eventKey: 3,
-        label: '陶瓷元件',
-        href: '#productList?id=1',
-    },
+    // {
+    //     eventKey: 2,
+    //     label: '电热元件',
+    //     href: '#/productList?id=1',
+    // },
+    // {
+    //     eventKey: 3,
+    //     label: '陶瓷元件',
+    //     href: '#/productList?id=2',
+    // },
     {
         eventKey: 4,
         label: '产品中心',
@@ -69,8 +69,34 @@ class Header extends Component {
             navIndex: 0
         }
     }
+    componentDidMount() {
+        let index = sessionStorage.getItem('headerNavIndex')
+        if (!index) {
+            this.props.history.push({ pathname: '/home' })
+            return
+        }
+        this.setState({ navIndex: index })
+    }
+    componentDidUpdate(prevProps) {
+        if (this.props.location !== prevProps.location) {
+            // window.scrollTo(0, 0)
+            console.log('冲突')
+            console.log(this.props.location)
+            console.log(prevProps)
+            let { navList } = this.state
+            let [result = null] = navList.filter(option =>{
+                console.log(option.href.replace('#', ''))
+
+                return option.href.replace('#', '') == this.props.location.pathname + this.props.location.search
+            })
+            console.log('result',result)
+            if (!result) return
+            this.setState({ navIndex: result.eventKey })
+        }
+    }
 
     handleSelect = (index) => {
+        sessionStorage.setItem('headerNavIndex', index)
         this.setState({ navIndex: index })
     }
 

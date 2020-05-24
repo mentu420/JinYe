@@ -1,6 +1,8 @@
 .new-item__date {
     width           : 64px;
     height          : 64px;
+    border-radius: 5px;
+    overflow: hidden;
     background-color: $lightGray;
     margin-right    : 1rem;
     text-align      : center;
@@ -22,4 +24,8 @@
     overflow: hidden;
     line-height: 1.2;
     color:$color-text__secondary;
+}
+.new-item__btn{
+    padding-top:10px;
+    text-align: right;
 }

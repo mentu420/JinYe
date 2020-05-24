@@ -42,7 +42,8 @@ export default class Home extends Component {
                 [{ image: banner0 }, { image: banner1 }, { image: banner2 }],
                 [{ image: bannerVertical0 }, { image: bannerVertical1 }, { image: bannerVertical2 }]
             ],
-            aboutTxt: ''
+            aboutTxt: '',
+            newList: [],
         }
     }
     componentDidMount() {
@@ -59,6 +60,7 @@ export default class Home extends Component {
         }).catch(err => {
             console.log(err)
         })
+        //获取banner
         Api.getBanner().then(res => {
             console.log('banner', res)
 
@@ -70,14 +72,26 @@ export default class Home extends Component {
         }).catch(err => {
             console.log(err)
         })
-        Api.getCategory({ type: 1 }).then(res => {
+        //获取产品用途
+        Api.getProductUse().then(res => {
             console.log(res)
         }).catch(err => {
             console.log(err)
         })
-        Api.getProductUse().then(res=>{
+        //获取新闻列表
+        Api.getNewList({ pageSize: 3 }).then(res => {
             console.log(res)
-        }).catch(err=>{
+            let arr = res.items.map(item => {
+                let dateArr = item.date.split('-')
+                return {
+                    ...item,
+                    day: dateArr[2],
+                    date: dateArr[0] + '-' + dateArr[1],
+                    label: item.content
+                }
+            })
+            this.setState({ newList: arr })
+        }).catch(err => {
             console.log(err)
         })
     }
@@ -85,8 +99,21 @@ export default class Home extends Component {
         if (item.linkUrl == '') return
         this.props.history.push({ pathname: item.linkUrl })
     }
-    goAdvantage = ()=>{
+    goAdvantage = () => {
         this.props.history.push({ pathname: '/advantage' })
+    }
+    onSeeMore = (item) => {
+        console.log('succ')
+        this.props.history.push({ pathname: '/newDetail' })
+    }
+    goAbout = () => {
+        this.props.history.push({ pathname: '/about' })
+    }
+    goProudctList = (id) => {
+        this.props.history.push({
+            pathname: '/productList',
+            query: { id }
+        })
     }
     //锚点移动
     scrollToAnchor = (e) => {
@@ -107,8 +134,7 @@ export default class Home extends Component {
     }
 
     render() {
-        let { clientHeight, useList, bannerList, clientWidth, aboutTxt } = this.state
-        console.log(clientHeight)
+        let { clientHeight, useList, bannerList, clientWidth, aboutTxt, newList } = this.state
         let n = clientWidth >= 750 ? 0 : 1
         return (
             <div className="home-content">
@@ -126,7 +152,7 @@ export default class Home extends Component {
                     </Carousel>
                 </div>
                 <div className="home-item flex" style={{ minHeight: clientHeight }}>
-                    <div className="item-flex__center">
+                    <div className="item-flex__center fluid-lg">
                         <Container fluid>
                             <Row>
                                 <Col lg={{ span: 5, offset: 1 }} md={12}>
@@ -136,13 +162,13 @@ export default class Home extends Component {
                                     </div>
                                     <h3 >畅销榜单</h3>
                                     <ul className="item-product__list">
-                                        <li>
+                                        <li onClick={() => this.goProudctList(1)}>
                                             <div className="product-item__img">
                                                 <CarImage src={productImg0} />
                                             </div>
                                             <div className="product-item__title"><span>+</span><label>电热元件</label></div>
                                         </li>
-                                        <li>
+                                        <li onClick={() => this.goProudctList(2)}>
                                             <div className="product-item__title"><span>+</span><label>陶瓷配件</label></div>
                                             <div className="product-item__img">
                                                 <CarImage src={productImg1} />
@@ -155,9 +181,9 @@ export default class Home extends Component {
                                         <div className="produt-right__title">
                                             <h3>熔喷布加热器</h3>
                                         </div>
-                                        <Button variant="light">了解详情</Button>
+                                        <Button variant="light" onClick={() => this.goProudctList(0)}>了解详情</Button>
                                     </div>
-                                    <div className="item-product__bg">
+                                    <div className="item-product__bg" onClick={() => this.goProudctList(0)}>
                                         <CarImage src={productImg2} />
                                     </div>
                                 </Col>
@@ -179,7 +205,7 @@ export default class Home extends Component {
                     </div>
                 </div>
                 <div className="home-item flex bg-cover" style={{ minHeight: clientHeight }}>
-                    <div className="item-flex__center">
+                    <div className="item-flex__center fluid-lg">
                         <Container fluid>
                             <Row>
                                 <Col sm={12} md={7}>
@@ -189,7 +215,7 @@ export default class Home extends Component {
                                     </div>
                                     <div className="home-about__text">
                                         <p>{aboutTxt}</p>
-                                        <Button variant="success">了解详情</Button>
+                                        <Button variant="primary" onClick={this.goAbout}>了解详情</Button>
                                     </div>
                                 </Col>
                                 <Col>
@@ -226,21 +252,14 @@ export default class Home extends Component {
                                 <Row>
                                     <Col md={7} xs={12}>
                                         <ul className="home-new__list">
-                                            <li>
-                                                <NewItem />
-                                            </li>
-                                            <li>
-                                                <NewItem />
-                                            </li>
-                                            <li>
-                                                <NewItem />
-                                            </li>
-                                            <li>
-                                                <NewItem />
-                                            </li>
-                                            <li>
-                                                <NewItem />
-                                            </li>
+                                            {
+                                                newList.map(item => {
+                                                    console.log(item)
+                                                    return (<li key={item.id} onClick={() => this.onSeeMore()}>
+                                                        <NewItem item={item} />
+                                                    </li>)
+                                                })
+                                            }
                                         </ul>
                                     </Col>
                                     <Col md={5} xs={12}>

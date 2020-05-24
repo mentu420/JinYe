@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Container, Row, Col, Image } from 'react-bootstrap'
 import CardImage from 'components/common/cardImage/'
 import PageinationBar from 'components/common/paginationBar/'
+import * as Api from 'api/'
+
 import './index.scss'
 import banner from 'assets/images/product_banner.jpg'
 
@@ -11,13 +13,7 @@ export default class ProductList extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            navList: [
-                { id: 0, lable: '熔喷布加热器' },
-                { id: 1, lable: '熔喷布加热器' },
-                { id: 2, lable: '熔喷布加热器' },
-                { id: 3, lable: '熔喷布加热器' },
-                { id: 4, lable: '熔喷布加热器' },
-            ],
+            navList: [],
             productList: [1, 2, 3, 4, 5, 6],
             totalPage: 20,
             currPage: 1,
@@ -25,14 +21,20 @@ export default class ProductList extends Component {
         }
     }
     componentWillMount() {
-
+        Api.getCategory({ type: 2 })
+            .then(res => {
+                console.log(res)
+                this.setState({ navList: res })
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
     goDetail = (item) => {
         let { history } = this.props
         history.push({ pathname: '/ProductDetail' })
     }
-
-    onPageClick(page){
+    onPageClick(page) {
         console.log(page)
     }
     onNavClick = (item, index) => {
@@ -51,7 +53,7 @@ export default class ProductList extends Component {
                             <ul className="nav-list">
                                 {
                                     navList.map((item, index) => {
-                                        return (<li key={item.id} className={`nav-item ${navIndex == index && 'active'}`} onClick={() => this.onNavClick(item, index)}>{item.lable}</li>)
+                                        return (<li key={item.id} className={`nav-item ${navIndex == index && 'active'}`} onClick={() => this.onNavClick(item, index)}>{item.title}</li>)
                                     })
                                 }
                             </ul>
