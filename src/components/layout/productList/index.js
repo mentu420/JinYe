@@ -14,21 +14,42 @@ export default class ProductList extends Component {
         super(props)
         this.state = {
             navList: [],
-            productList: [1, 2, 3, 4, 5, 6],
+            productList: [1],
             totalPage: 20,
-            currPage: 1,
-            navIndex: 0
+            pageIndex: 1,
+            navIndex: 0,
+            pageSize: 6,
         }
+
     }
     componentWillMount() {
+        const data = this.props.location.search  //地址栏截取
+        const id = data.split('?')[1]
+
         Api.getCategory({ type: 2 })
             .then(res => {
                 console.log(res)
                 this.setState({ navList: res })
+                let categoryId = id ? id : res[0].id
+                this.getProductList(categoryId).then(res => {
+                    console.log('产品', res)
+                    this.productListHandle(res)
+                })
             })
             .catch(err => {
                 console.log(err)
             })
+    }
+    getProductList(categoryId, pageIndex = 1, pageSize = 6) {
+        return Api.getProductList({ categoryId, pageIndex, pageSize })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+    productListHandle = ({ totalCount, items }) => {
+        let { pageSize } = this.state
+        let totalPage = Math.ceil(totalCount / pageSize)
+        this.setState({ totalPage })
     }
     goDetail = (item) => {
         let { history } = this.props
@@ -42,7 +63,7 @@ export default class ProductList extends Component {
         this.setState({ navIndex: index })
     }
     render() {
-        let { navList, productList, totalPage, currPage, navIndex } = this.state
+        let { navList, productList, totalPage, pageIndex, navIndex } = this.state
         return (
             <div>
                 <Image src={banner} fluid />
@@ -65,9 +86,9 @@ export default class ProductList extends Component {
                                         return (<Col key={index} lg={4} xs={6}>
                                             <div className="product-item" onClick={() => this.goDetail(item, index)}>
                                                 <div className="product-item__img">
-                                                    <CardImage />
+                                                    <CardImage src={item.src} />
                                                 </div>
-                                                <p className="product-item__name">产品名称</p>
+                                                <p className="product-item__name">{item.title}</p>
                                             </div>
                                         </Col>)
                                     })
@@ -77,7 +98,7 @@ export default class ProductList extends Component {
                     </Row>
                     <Row>
                         <Col md={{ span: 9, offset: 3 }} id="pageination">
-                            <PageinationBar currPage={1} totalPage={20} onPageClick={this.onPageClick} />
+                            {totalPage > 0 && <PageinationBar currPage={pageIndex} totalPage={20} onPageClick={this.onPageClick} />}
                         </Col>
                     </Row>
                 </Container>

@@ -5,7 +5,7 @@ import CarImage from 'components/common/cardImage'
 
 import './index.scss'
 
-export default class HomeSlide extends Component {
+export default class SlideCard extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -39,7 +39,8 @@ export default class HomeSlide extends Component {
         console.log(wrapperStyles.width)
         let itemWidth = parseInt(wrapperStyles.width) / cols
         console.log('itemWidth', itemWidth)
-        listElement.style.width = list.length * itemWidth + 'px'
+        console.log(list.length)
+        listElement.style.width = (list.length - 1) * itemWidth + 'px'
 
         bscroll.refresh()
         this.setState({ bscroll, itemWidth })
@@ -83,15 +84,16 @@ export default class HomeSlide extends Component {
     }
 
     render() {
-        let { list, itemWidth, hasArrow } = this.props
+        let { list, itemWidth, hasArrow,cols } = this.props
+        let flexBasis = 100/cols * 100 + '%'
         return (
             <div className="slide-card">
                 <div className="slide-card__wrapper" ref="slideWrapper">
                     <ul className="slide-card__list" ref="slideList">
                         {
-                            list.map(item => {
-                                return (<li key={item.id} className="slide-card__item" style={{ width: itemWidth }}>
-                                    {this.props.children && React.cloneElement(this.props.children, { item: item, })}
+                            list.map((item,index) => {
+                                return (<li key={index} className="slide-card__item" style={{flexBasis }}>
+                                    {this.props.renderItem ? this.props.renderItem(item) : this.props.children}
                                 </li>)
                             })
                         }
@@ -108,7 +110,7 @@ export default class HomeSlide extends Component {
     }
 }
 
-HomeSlide.defaultProps = {
+SlideCard.defaultProps = {
     list: [
         { id: 0, label: '标题' },
         { id: 1, label: '标题' },

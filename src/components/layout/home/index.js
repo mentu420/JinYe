@@ -62,8 +62,8 @@ export default class Home extends Component {
         Api.getBanner().then(res => {
 
             let bannerList = [
-                [...res.pc.map(item => ({ ...item, image: Urls.BaseUrl + item.image }))],
-                [...res.mobile.map(item => ({ ...item, image: Urls.BaseUrl + item.image }))]
+                [...res.pc],
+                [...res.mobil]
             ]
             this.setState({ bannerList })
         }).catch(err => {
@@ -72,7 +72,7 @@ export default class Home extends Component {
         //获取产品用途
         Api.getProductUse().then(res => {
             console.log('use', res)
-            let useList = res.map(item => ({ ...item, src: Urls.BaseUrl + item.image }))
+            let useList = res.map(item => ({ ...item, src: item.imgUrl }))
             this.setState({ useList })
         }).catch(err => {
             console.log(err)
@@ -99,8 +99,9 @@ export default class Home extends Component {
     goAdvantage = () => {
         this.props.history.push({ pathname: '/advantage' })
     }
-    goNewDetail = (item) => {
-        this.props.history.push({ pathname: '/newDetail', search: `${item.id}` })
+    goNewDetail = (item, type = null) => {
+        let params = type ? `id=${item.id}&channelId=6` : `id=${item.id}`
+        this.props.history.push({ pathname: '/newDetail', search: `${params}` })
     }
     goAbout = () => {
         this.props.history.push({ pathname: '/about' })
@@ -191,12 +192,14 @@ export default class Home extends Component {
                     <div className="item-flex__center">
                         <ItemTitle />
                         <div className="home-slide__box">
-                            <SlideCard list={useList} hasArrow={clientWidth > 750} cols={clientWidth > 750 ? 3 : 1}>
-                                <div className="home-slide__item">
-                                    <CarImage src={this.props.item.src} />
-                                    <p>{this.props.item.title}</p>
-                                </div>
-                            </SlideCard>
+                            <SlideCard list={useList} hasArrow={clientWidth > 750} cols={clientWidth > 750 ? 3 : 1} renderItem={item => {
+                                return (<div className="home-slide__item" onClick={() => this.goNewDetail(item, 1)}>
+                                    <div className="slide-item__img">
+                                        <CarImage src={item.src} />
+                                    </div>
+                                    <p>{item.title}</p>
+                                </div>)
+                            }} />
                         </div>
                     </div>
                 </div>

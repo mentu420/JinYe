@@ -123,7 +123,9 @@
 }
 
 .home-slide__item {
-    padding: 10px;
+    &>.slide-item__img{
+        height: 280px;
+    }
 }
 
 //公司简介

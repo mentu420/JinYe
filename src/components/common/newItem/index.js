@@ -10,6 +10,19 @@ export default class NewItem extends Component {
 
         }
     }
+    componentDidMount() {
+        let { item } = this.props
+        let content = decodeURIComponent(item.content)
+        if (!content || content == undefined) {
+            this.setState({ content: item.content })
+            return
+        }
+        console.log('走了这里')
+        let pattern = new RegExp('<p.*?>(.*?)<\/p>', 'i');
+        let str = content.match(pattern)
+        str && this.setState({ content: str[1] })
+
+    }
 
     onClick = () => {
         let { item, onSeeMore } = this.props
@@ -18,9 +31,8 @@ export default class NewItem extends Component {
 
     render() {
         let { item } = this.props
-        let content = decodeURIComponent(item.content)
-        var pattern = new RegExp('<p.*?>(.*?)<\/p>', 'i');
-        let str = content.match(pattern)[1] || ''
+        let { content } = this.state
+        console.log('content', content)
         return (
             <Media onClick={this.onClick}>
                 <div className="new-item__date">
@@ -29,7 +41,7 @@ export default class NewItem extends Component {
                 </div>
                 <Media.Body>
                     <h5 className="new-item__title">{item.title}</h5>
-                    <p className="new-item__label" dangerouslySetInnerHTML={{ __html: str }}></p>
+                    <p className="new-item__label" dangerouslySetInnerHTML={{ __html: content }}></p>
                     <div className="new-item__btn"><Button variant="primary">more</Button></div>
                 </Media.Body>
             </Media>
@@ -41,7 +53,7 @@ NewItem.defaultProps = {
         day: '11',
         date: '2020-05',
         title: 'Media Heading',
-        label: `Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque
+        content: `Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque
         ante sollicitudin commodo.Cras purus odio, vestibulum in vulputate at,
         tempus viverra turpis.Fusce condimentum nunc ac nisi vulputate
         fringilla.Donec lacinia congue felis in faucibus.`

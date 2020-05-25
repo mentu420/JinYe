@@ -4,6 +4,9 @@ import ModeTitle from 'components/common/modeTitle'
 import CardImage from 'components/common/cardImage'
 import './index.scss'
 import banner from 'assets/images/about-banner.jpg'
+import banner1 from 'assets/images/about-slice1.jpg'
+import banner2 from 'assets/images/about-slice2.jpg'
+
 
 
 export default class index extends Component {
@@ -30,10 +33,10 @@ export default class index extends Component {
                         <Col md={12}>
                             <ul className="about-link">
                                 <li>
-                                    <CardImage />
+                                    <CardImage src={banner1}/>
                                 </li>
                                 <li>
-                                    <CardImage />
+                                    <CardImage src={banner2}/>
                                 </li>
                             </ul>
                         </Col>

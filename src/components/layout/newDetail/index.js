@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import VerticalSpace from 'components/common/verticalSpace'
 import { Container, Row, Col, Image } from 'react-bootstrap'
 import * as Api from 'api/'
+import QS from 'qs'
 
 import './index.scss'
 import banner from 'assets/images/new-banner.jpg'
@@ -15,9 +16,10 @@ export default class index extends Component {
     }
     componentDidMount() {
         const data = this.props.location.search  //地址栏截取
-        const id = data.split('?')[1]
-        console.log(id)
-        Api.getNewDetail({ id })
+        const query = data.split('?')[1]
+        const params = QS.parse(query)
+        console.log(params)
+        Api.getNewDetail(params)
             .then(data => {
                 this.setState({
                     detail: { ...data, content: decodeURIComponent(data.content) }
