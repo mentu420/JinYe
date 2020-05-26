@@ -20,6 +20,7 @@ export default class SlideCard extends Component {
         }, 50);
     }
     getBscrollElement = () => {
+        console.log('this.refs.slideList',this.refs.slideList)
         return {
             wrapper: this.refs.slideWrapper,
             listElement: this.refs.slideList,
@@ -84,7 +85,7 @@ export default class SlideCard extends Component {
     }
 
     render() {
-        let { list, itemWidth, hasArrow,cols } = this.props
+        let { list, hasArrow,cols } = this.props
         let flexBasis = 100/cols * 100 + '%'
         return (
             <div className="slide-card">

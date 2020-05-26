@@ -9,7 +9,7 @@ import * as Api from 'api/'
 import './index.scss'
 import banner from 'assets/images/product_banner.jpg'
 
-export default class index extends Component {
+export default class ProductDetail extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -74,9 +74,9 @@ export default class index extends Component {
                                 <Accordion defaultActiveKey="0">
                                     {
                                         accordion.map((item, index) => {
-                                            return (<Card>
+                                            return (<Card key={index}>
                                                 <Card.Header>
-                                                    <Accordion.Toggle as={Button} variant="link" eventKey={index}>
+                                                    <Accordion.Toggle as={'div'} eventKey={index}>
                                                         {item.title}
                                                     </Accordion.Toggle>
                                                 </Card.Header>
