@@ -109,7 +109,7 @@ export default class Home extends Component {
     goProudctList = (id) => {
         this.props.history.push({
             pathname: '/productList',
-            search: id
+            search: `${id}`
         })
     }
     //锚点移动
@@ -159,13 +159,13 @@ export default class Home extends Component {
                                     </div>
                                     <h3 >畅销榜单</h3>
                                     <ul className="item-product__list">
-                                        <li onClick={() => this.goProudctList(1)}>
+                                        <li onClick={() => this.goProudctList(55)}>
                                             <div className="product-item__img">
                                                 <CarImage src={productImg0} />
                                             </div>
                                             <div className="product-item__title"><span>+</span><label>电热元件</label></div>
                                         </li>
-                                        <li onClick={() => this.goProudctList(2)}>
+                                        <li onClick={() => this.goProudctList(57)}>
                                             <div className="product-item__title"><span>+</span><label>陶瓷配件</label></div>
                                             <div className="product-item__img">
                                                 <CarImage src={productImg1} />
@@ -178,9 +178,9 @@ export default class Home extends Component {
                                         <div className="produt-right__title">
                                             <h3>熔喷布加热器</h3>
                                         </div>
-                                        <Button variant="light" onClick={() => this.goProudctList(0)}>了解详情</Button>
+                                        <Button variant="light" onClick={() => this.goProudctList(54)}>了解详情</Button>
                                     </div>
-                                    <div className="item-product__bg" onClick={() => this.goProudctList(0)}>
+                                    <div className="item-product__bg" onClick={() => this.goProudctList(54)}>
                                         <CarImage src={productImg2} />
                                     </div>
                                 </Col>

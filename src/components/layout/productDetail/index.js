@@ -32,7 +32,8 @@ export default class ProductDetail extends Component {
                     text: [],
                     byte: 'details'
                 }
-            ]
+            ],
+            images:[]
         }
     }
     componentDidMount() {
@@ -41,7 +42,7 @@ export default class ProductDetail extends Component {
         
         Api.getProductDetail({ id })
             .then(res => {
-
+                console.log('产品',res)
             })
             .catch(err => {
                 console.log(err)

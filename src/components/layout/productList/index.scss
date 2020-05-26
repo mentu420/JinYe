@@ -3,7 +3,8 @@
 
     .nav-list {
         position: relative;
-        margin:1rem 0;
+        margin  : 1rem 0;
+
         &::after {
             content         : "";
             position        : absolute;
@@ -55,21 +56,20 @@
         }
     }
 
+    .product-item {
+        margin-bottom: 1rem;
+    }
+
     .product-item__img {
         height: 300px;
     }
 
     .product-item__name {
+        padding:.5rem 0;
         text-align        : center;
         display           : -webkit-box;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
         overflow          : hidden;
-    }
-
-    #pageination {
-        padding        : 1rem;
-        display        : flex;
-        justify-content: center;
     }
 }

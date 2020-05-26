@@ -17,7 +17,7 @@ export default class SlideCard extends Component {
     componentDidMount() {
         setTimeout(() => {
             this.initBscroll()
-        }, 50);
+        }, 350);
     }
     getBscrollElement = () => {
         console.log('this.refs.slideList',this.refs.slideList)

@@ -4,43 +4,95 @@ import NewItem from 'components/common/newItem'
 import ModeTitle from 'components/common/modeTitle'
 import VerticalSpace from 'components/common/verticalSpace/'
 import PageinationBar from 'components/common/paginationBar/'
+import * as Api from 'api/'
+
 
 import './index.scss'
 import banner from 'assets/images/new-banner.jpg'
 
 export default class index extends Component {
-
-    goDetail(){
-        
+    constructor(props) {
+        super(props)
+        this.state = {
+            pageSize: 10,
+            pageIndex: 1,
+            totalPage: 3,
+            newList: [],
+        }
     }
-    onPageClick(page) {
-        console.log(page)
+
+    componentDidMount() {
+        let { pageSize, pageIndex } = this.state
+        this.getNewList(pageSize, pageIndex)
+    }
+
+    getNewList(pageSize, pageIndex) {
+        return Api.getNewList({ pageSize, pageIndex }).then(res => {
+            this.newListHandle(res)
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+
+    newListHandle = (res) => {
+        let { pageSize } = this.state
+        let { totalCount, items } = res
+        let arr = items.map(item => {
+            let dateArr = item.date.split('-')
+            return {
+                ...item,
+                day: dateArr[2],
+                date: dateArr[0] + '-' + dateArr[1],
+            }
+        })
+        console.log(arr)
+        let totalPage = Math.ceil(totalCount / pageSize)
+        console.log('totalPage', totalPage)
+        this.setState({ newList: arr, totalPage })
+    }
+
+    goDetail() {
+
+    }
+    onPageClick = (pageIndex) => {
+        console.log(pageIndex)
+        let { pageSize } = this.state
+        this.setState({ pageIndex: pageIndex })
+        this.getNewList(pageSize, pageIndex)
     }
     render() {
+        let { newList, totalPage, pageIndex } = this.state
+        console.log('render', totalPage)
         return (
             <div>
                 <Image src={banner} fluid />
-                <VerticalSpace/>
+                <VerticalSpace />
                 <ModeTitle letter={'NEWS INFORMATION'} title={'新闻动态'} />
                 <VerticalSpace />
                 <Container>
                     <Row>
                         <Col>
                             <ul className="new-list">
-                                <li className="new-item" onClick={()=>this.goDetail()}>
-                                    <NewItem />
-                                </li>
+                                {
+                                    newList.map(item => {
+                                        return (<li key={item.id} className="new-item" onClick={() => this.goDetail()}>
+                                            <NewItem item={item} />
+                                        </li>)
+                                    })
+                                }
                             </ul>
                         </Col>
                     </Row>
                     <VerticalSpace />
-                    <Row>
-                        <Col id="pageination">
-                            <PageinationBar currPage={1} totalPage={20} onPageClick={this.onPageClick} />
-                        </Col>
-                    </Row>
+                    {
+                        totalPage > 1 && (<Row>
+                            <Col id="pageination">
+                                <PageinationBar currPage={pageIndex} totalPage={totalPage} onPageClick={this.onPageClick} />
+                            </Col>
+                        </Row>)
+                    }
                 </Container>
-                <VerticalSpace height={'4rem'}/>
+                <VerticalSpace height={'4rem'} />
             </div>
         )
     }

@@ -4,6 +4,7 @@ import NewItem from 'components/common/newItem'
 import ModeTitle from 'components/common/modeTitle'
 import VerticalSpace from 'components/common/verticalSpace/'
 import textFill from 'constants/textFill'
+import * as Api from 'api/'
 
 import './index.scss'
 import banner from 'assets/images/contact-banner.jpg'
@@ -18,6 +19,7 @@ export default class index extends Component {
         }
     }
     componentWillMount() {
+        
     }
 
 
@@ -31,7 +33,7 @@ export default class index extends Component {
             this.setState({ tips: '请填写姓名' })
             return false
         }
-        if (this.ftel.value == '') {
+        if (this.ftel.value == '' || this.ftel.value.length != 11) {
             this.setState({ tips: '请填写手机号码' })
             return false
         }
@@ -47,10 +49,19 @@ export default class index extends Component {
             this.modalVisible()
             return
         }
-        console.log('succ')
-        console.log(this.fname.value)
-        console.log(this.ftel.value)
-        console.log(this.fmessage.value)
+        Api.submitMessage({
+            userName: this.fname.value,
+            tel: this.ftel.value,
+            content: this.fmessage.value
+        }).then(res => {
+            this.fname.value = ''
+            this.ftel.value = ''
+            this.fmessage.value = ''
+            this.setState({ tips: '留言成功' })
+            this.modalVisible()
+        }).catch(err => {
+            console.log(err)
+        })
     }
     render() {
         let { show, tips } = this.state

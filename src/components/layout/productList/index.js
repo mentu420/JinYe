@@ -14,10 +14,10 @@ export default class ProductList extends Component {
         super(props)
         this.state = {
             navList: [],
-            productList: [1],
+            productList: [],
             totalPage: 20,
             pageIndex: 1,
-            navIndex: 0,
+            navId: 0,
             pageSize: 6,
         }
 
@@ -29,8 +29,10 @@ export default class ProductList extends Component {
         Api.getCategory({ type: 2 })
             .then(res => {
                 console.log(res)
-                this.setState({ navList: res })
                 let categoryId = id ? id : res[0].id
+                let [item = null] = res.filter((item, index) => item.id == categoryId)
+                let navId = item ? item.id : res[0].id
+                this.setState({ navList: res, navId })
                 this.getProductList(categoryId).then(res => {
                     console.log('产品', res)
                     this.productListHandle(res)
@@ -49,7 +51,8 @@ export default class ProductList extends Component {
     productListHandle = ({ totalCount, items }) => {
         let { pageSize } = this.state
         let totalPage = Math.ceil(totalCount / pageSize)
-        this.setState({ totalPage })
+        console.log('totalPage', totalPage)
+        this.setState({ totalPage, productList: items })
     }
     goDetail = (item) => {
         let { history } = this.props
@@ -60,10 +63,13 @@ export default class ProductList extends Component {
     }
     onNavClick = (item, index) => {
         console.log(item)
-        this.setState({ navIndex: index })
+        this.setState({ navId: item.id })
+        this.getProductList(item.id).then(res => {
+            this.productListHandle(res)
+        })
     }
     render() {
-        let { navList, productList, totalPage, pageIndex, navIndex } = this.state
+        let { navList, productList, totalPage, pageIndex, navId } = this.state
         return (
             <div>
                 <Image src={banner} fluid />
@@ -74,7 +80,7 @@ export default class ProductList extends Component {
                             <ul className="nav-list">
                                 {
                                     navList.map((item, index) => {
-                                        return (<li key={item.id} className={`nav-item ${navIndex == index && 'active'}`} onClick={() => this.onNavClick(item, index)}>{item.title}</li>)
+                                        return (<li key={item.id} className={`nav-item ${navId == item.id && 'active'}`} onClick={() => this.onNavClick(item, index)}>{item.title}</li>)
                                     })
                                 }
                             </ul>
@@ -86,7 +92,7 @@ export default class ProductList extends Component {
                                         return (<Col key={index} lg={4} xs={6}>
                                             <div className="product-item" onClick={() => this.goDetail(item, index)}>
                                                 <div className="product-item__img">
-                                                    <CardImage src={item.src} />
+                                                    <CardImage src={item.imgUrl} />
                                                 </div>
                                                 <p className="product-item__name">{item.title}</p>
                                             </div>
@@ -96,11 +102,13 @@ export default class ProductList extends Component {
                             </Row>
                         </Col>
                     </Row>
-                    <Row>
-                        <Col md={{ span: 9, offset: 3 }} id="pageination">
-                            {totalPage > 0 && <PageinationBar currPage={pageIndex} totalPage={20} onPageClick={this.onPageClick} />}
-                        </Col>
-                    </Row>
+                    {
+                        totalPage > 1 && (<Row>
+                            <Col md={{ span: 9, offset: 3 }} id="pageination">
+                                {totalPage > 0 && <PageinationBar currPage={pageIndex} totalPage={totalPage} onPageClick={this.onPageClick} />}
+                            </Col>
+                        </Row>)
+                    }
                 </Container>
             </div>
         )

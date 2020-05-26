@@ -17,11 +17,9 @@ export default class NewItem extends Component {
             this.setState({ content: item.content })
             return
         }
-        console.log('走了这里')
         let pattern = new RegExp('<p.*?>(.*?)<\/p>', 'i');
         let str = content.match(pattern)
         str && this.setState({ content: str[1] })
-
     }
 
     onClick = () => {
@@ -32,7 +30,6 @@ export default class NewItem extends Component {
     render() {
         let { item } = this.props
         let { content } = this.state
-        console.log('content', content)
         return (
             <Media onClick={this.onClick}>
                 <div className="new-item__date">
