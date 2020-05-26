@@ -33,16 +33,23 @@ export default class ProductDetail extends Component {
                     byte: 'details'
                 }
             ],
-            images:[]
+            images: [],
+            title: '',
+            content: ''
         }
     }
     componentDidMount() {
+        let { accordion } = this.state
         const data = this.props.location.search  //地址栏截取
         const id = data.split('?')[1]
-        
+        console.log('xxxxxxxxxxxxx', id)
         Api.getProductDetail({ id })
             .then(res => {
-                console.log('产品',res)
+                console.log('产品', res)
+                let { images, content, title } = res
+                let arr = accordion.map(item => ({ ...item, text: decodeURIComponent(res[item.byte]) }))
+
+                this.setState({ accordion: arr, images, title, content: decodeURIComponent(content) })
             })
             .catch(err => {
                 console.log(err)
@@ -50,7 +57,7 @@ export default class ProductDetail extends Component {
 
     }
     render() {
-        let { accordion } = this.state
+        let { accordion, title, images, content } = this.state
         return (
             <div>
                 <Image src={banner} fluid />
@@ -71,7 +78,7 @@ export default class ProductDetail extends Component {
                         </Col>
                         <Col md={8} xs={12}>
                             <div className="product-detail__info">
-                                <h3>产品名称</h3>
+                                <h3>{title}</h3>
                                 <Accordion defaultActiveKey="0">
                                     {
                                         accordion.map((item, index) => {
@@ -82,7 +89,7 @@ export default class ProductDetail extends Component {
                                                     </Accordion.Toggle>
                                                 </Card.Header>
                                                 <Accordion.Collapse eventKey={index}>
-                                                    <Card.Body>Hello! I'm the body</Card.Body>
+                                                    <Card.Body>{item.text}</Card.Body>
                                                 </Accordion.Collapse>
                                             </Card>)
                                         })
@@ -94,8 +101,7 @@ export default class ProductDetail extends Component {
                     <Row>
                         <Col>
                             <VerticalSpace />
-                            <h1>产品详情</h1>
-                            <CardImage />
+                            <p dangerouslySetInnerHTML={{ __html: content }}></p>
                         </Col>
                     </Row>
                 </Container>

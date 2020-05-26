@@ -19,20 +19,13 @@ export default class SlideCard extends Component {
             this.initBscroll()
         }, 350);
     }
-    getBscrollElement = () => {
-        console.log('this.refs.slideList',this.refs.slideList)
-        return {
-            wrapper: this.refs.slideWrapper,
-            listElement: this.refs.slideList,
-            itemElement: this.refs.slideList.childNodes
-        }
-    }
+
     initBscroll = () => {
         let { list, cols } = this.props
-        let { wrapper, listElement, itemElement } = this.getBscrollElement()
-        let wrapperStyles = window.getComputedStyle(wrapper)
-        //选中DOM中定义的 .wrapper 进行初始化
-        const bscroll = new BScroll(wrapper, {
+
+        let wrapperStyles = window.getComputedStyle(this.refs.slideWrapper)
+        //选中DOM中定义的 .this.refs.slideWrapper 进行初始化
+        const bscroll = new BScroll(this.refs.slideWrapper, {
             scrollX: true,  //开启横向滚动
             click: true,  // better-scroll 默认会阻止浏览器的原生 click 事件
             scrollY: true, //关闭竖向滚动
@@ -41,7 +34,7 @@ export default class SlideCard extends Component {
         let itemWidth = parseInt(wrapperStyles.width) / cols
         console.log('itemWidth', itemWidth)
         console.log(list.length)
-        listElement.style.width = (list.length - 1) * itemWidth + 'px'
+        this.refs.slideList.style.width = (list.length - 1) * itemWidth + 'px'
 
         bscroll.refresh()
         this.setState({ bscroll, itemWidth })
@@ -49,9 +42,8 @@ export default class SlideCard extends Component {
     }
     swriptLeft = () => {
         let { bscroll, itemWidth } = this.state
-        let { listElement, itemElement } = this.getBscrollElement()
-
-        let listRect = listElement.getBoundingClientRect()
+        let itemElement = this.refs.slideList.childNodes
+        let listRect = this.refs.slideList.getBoundingClientRect()
 
         if (listRect.x == 0) return
 
@@ -67,12 +59,12 @@ export default class SlideCard extends Component {
     }
     swriptRight = () => {
         let { bscroll, itemWidth } = this.state
-        console.log(bscroll, itemWidth)
-        let { wrapper, listElement, itemElement } = this.getBscrollElement()
 
-        let listRect = listElement.getBoundingClientRect()
+        let itemElement = this.refs.slideList.childNodes
 
-        let wrapperRect = wrapper.getBoundingClientRect()
+        let listRect = this.refs.slideList.getBoundingClientRect()
+
+        let wrapperRect = this.refs.slideWrapper.getBoundingClientRect()
 
         let slideCount = parseInt(wrapperRect.width / itemWidth)
 

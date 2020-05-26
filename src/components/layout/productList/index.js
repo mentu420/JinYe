@@ -56,7 +56,7 @@ export default class ProductList extends Component {
     }
     goDetail = (item) => {
         let { history } = this.props
-        history.push({ pathname: '/ProductDetail' })
+        history.push({ pathname: '/ProductDetail', search: `${item.id}` })
     }
     onPageClick(page) {
         console.log(page)
