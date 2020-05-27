@@ -1,6 +1,7 @@
 
 export default {
-    BaseUrl: 'http://106.55.0.171:8083/',
+    // BaseUrl: 'http://106.55.0.171:8083/',
+    BaseUrl: 'http://jinyereneng.gotoip3.com',
     // 首页
     Banner: '/tools/banner.ashx',
     // 分类

@@ -10,8 +10,10 @@ export default class SlideCard extends Component {
         super(props)
         this.state = {
             bscroll: null,
-            itemWidth: 317
+            itemWidth: 317,
+            itemIndex: 0,
         }
+        this.bscroll = null
     }
 
     componentDidMount() {
@@ -22,70 +24,54 @@ export default class SlideCard extends Component {
 
     initBscroll = () => {
         let { list, cols } = this.props
-
-        let wrapperStyles = window.getComputedStyle(this.refs.slideWrapper)
         //选中DOM中定义的 .this.refs.slideWrapper 进行初始化
-        const bscroll = new BScroll(this.refs.slideWrapper, {
+        this.bscroll = new BScroll(this.refs.slideWrapper, {
             scrollX: true,  //开启横向滚动
             click: true,  // better-scroll 默认会阻止浏览器的原生 click 事件
             scrollY: true, //关闭竖向滚动
         })
-        console.log(wrapperStyles.width)
-        let itemWidth = parseInt(wrapperStyles.width) / cols
-        console.log('itemWidth', itemWidth)
-        console.log(list.length)
-        this.refs.slideList.style.width = (list.length - 1) * itemWidth + 'px'
 
-        bscroll.refresh()
-        this.setState({ bscroll, itemWidth })
+        let wrapperStyles = window.getComputedStyle(this.refs.slideWrapper)
+
+        let itemWidth = parseInt(wrapperStyles.width) / cols
+
+        console.log('itemWidth', itemWidth)
+
+        this.refs.slideList.style.width = (list.length - 1) * (itemWidth + 12) + 'px'
+
+        this.bscroll.refresh()
+        this.setState({ itemWidth })
 
     }
     swriptLeft = () => {
-        let { bscroll, itemWidth } = this.state
+        //点击以下移动一个item
+        let { itemIndex } = this.state
+        if (itemIndex == 0) return
         let itemElement = this.refs.slideList.childNodes
-        let listRect = this.refs.slideList.getBoundingClientRect()
-
-        if (listRect.x == 0) return
-
-        let index = parseInt(Math.abs(listRect.x) / itemWidth)
-
-        index = index == 0 ? 0 : index - 1
-
-        console.log(index)
-        console.log(itemElement[index])
-
-        bscroll.scrollToElement(itemElement[index], 300)
-
+        this.bscroll.scrollToElement(itemElement[--itemIndex], 300)
+        this.setState({ itemIndex: itemIndex })
     }
     swriptRight = () => {
-        let { bscroll, itemWidth } = this.state
-
+        let { itemIndex } = this.state
+        let { list, cols } = this.props
+        if (itemIndex + cols >= list.length) return
         let itemElement = this.refs.slideList.childNodes
-
-        let listRect = this.refs.slideList.getBoundingClientRect()
-
-        let wrapperRect = this.refs.slideWrapper.getBoundingClientRect()
-
-        let slideCount = parseInt(wrapperRect.width / itemWidth)
-
-        let index = slideCount + parseInt(Math.abs(listRect.x) / itemWidth)
-
-        if (index == itemElement.length) return
-
-        bscroll.scrollToElement(itemElement[index], 300)
-
+        console.log(itemIndex)
+        this.bscroll.scrollToElement(itemElement[++itemIndex], 300)
+        this.setState({ itemIndex: itemIndex })
     }
 
     render() {
-        let { list, hasArrow,cols } = this.props
-        let flexBasis = 100/cols * 100 + '%'
+        let { list, hasArrow } = this.props
+        let { itemWidth } = this.state
+
         return (
             <div className="slide-card">
                 <div className="slide-card__wrapper" ref="slideWrapper">
                     <ul className="slide-card__list" ref="slideList">
                         {
-                            list.map((item,index) => {
-                                return (<li key={index} className="slide-card__item" style={{flexBasis }}>
+                            list.map((item, index) => {
+                                return (<li key={index} className="slide-card__item" style={{ width: itemWidth + 'px' }}>
                                     {this.props.renderItem ? this.props.renderItem(item) : this.props.children}
                                 </li>)
                             })
@@ -111,6 +97,7 @@ SlideCard.defaultProps = {
         { id: 3, label: '标题' },
         { id: 4, label: '标题' },
         { id: 5, label: '标题' },
+        { id: 6, label: '标题' },
     ],
     cols: 3,
     hasArrow: true

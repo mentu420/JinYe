@@ -60,10 +60,9 @@ export default class Home extends Component {
         })
         //获取banner
         Api.getBanner().then(res => {
-
             let bannerList = [
                 [...res.pc],
-                [...res.mobil]
+                [...res.mobile]
             ]
             this.setState({ bannerList })
         }).catch(err => {
@@ -192,7 +191,7 @@ export default class Home extends Component {
                     <div className="item-flex__center">
                         <ItemTitle />
                         <div className="home-slide__box">
-                            <SlideCard list={useList} hasArrow={clientWidth > 750} cols={clientWidth > 750 ? 3 : 1} renderItem={item => {
+                            <SlideCard list={useList} hasArrow={clientWidth > 750 && useList.length > 3} cols={clientWidth > 750 ? 3 : 1} renderItem={item => {
                                 return (<div className="home-slide__item" onClick={() => this.goNewDetail(item, 1)}>
                                     <div className="slide-item__img">
                                         <CarImage src={item.src} />

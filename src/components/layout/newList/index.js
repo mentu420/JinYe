@@ -51,8 +51,9 @@ export default class index extends Component {
         this.setState({ newList: arr, totalPage })
     }
 
-    goDetail() {
-
+    goDetail(item) {
+        console.log(item)
+        this.props.history.push({ pathname: '/newDetail', search: `id=${item.id}` })
     }
     onPageClick = (pageIndex) => {
         console.log(pageIndex)
@@ -75,7 +76,7 @@ export default class index extends Component {
                             <ul className="new-list">
                                 {
                                     newList.map(item => {
-                                        return (<li key={item.id} className="new-item" onClick={() => this.goDetail()}>
+                                        return (<li key={item.id} className="new-item" onClick={() => this.goDetail(item)}>
                                             <NewItem item={item} />
                                         </li>)
                                     })

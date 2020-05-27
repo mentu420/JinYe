@@ -47,6 +47,7 @@ export default class ProductDetail extends Component {
             .then(res => {
                 console.log('产品', res)
                 let { images, content, title } = res
+
                 let arr = accordion.map(item => ({ ...item, text: decodeURIComponent(res[item.byte]) }))
 
                 this.setState({ accordion: arr, images, title, content: decodeURIComponent(content) })
@@ -66,14 +67,20 @@ export default class ProductDetail extends Component {
                     <Row>
                         <Col md={4} xs={12}>
                             <div className="product-detail__left">
-                                <div className="product-detail__img">
-                                    <CardImage />
-                                </div>
-                                <SlideCard renderItem={item => {
-                                    return (<div className="product-thumbnail">
-                                        <CardImage />
-                                    </div>)
-                                }} />
+                                {
+                                    images.map(item => {
+                                        return (<div key={item} className="product-detail__img">
+                                            <CardImage src={item} />
+                                        </div>)
+                                    })
+                                }
+                                {
+                                    images.length > 0 && (<SlideCard list={images} renderItem={item => {
+                                        return (<div className="product-thumbnail" onClick={() => this.selectImage(item)}>
+                                            <CardImage />
+                                        </div>)
+                                    }} />)
+                                }
                             </div>
                         </Col>
                         <Col md={8} xs={12}>
