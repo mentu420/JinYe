@@ -24,10 +24,13 @@
     }
 }
 
-.footer-contact__item {
-    height     : 2.5rem;
-    line-height: 2.5rem;
+.footer-contact__list{
+    margin:1rem 0;
+}
 
+.footer-contact__item {
+    height: 20px;
+    line-height: 1.6;
     &.tel {
         height     : 3rem;
         line-height: 3rem;

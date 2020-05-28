@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Container, Row, Col, Nav } from 'react-bootstrap'
 import * as Api from 'api/'
 import { withRouter } from "react-router-dom";
+import textFill from 'constants/textFill'
 
 import './index.scss'
 import logo from 'assets/images/logo-normal.png'
@@ -95,13 +96,19 @@ class Footer extends Component {
                                     </div>
                                 </Col>
                                 <Col xs={12} sm={8}>
-                                    <p className="footer-contact__item">全国服务热线</p>
+                                    <p className="footer-contact__item ">全国服务热线</p>
                                     <p className="footer-contact__item tel"><a href="tel:076922409717 ">0769-22409717 </a></p>
-                                    <ul>
-                                        <li className="footer-contact__item"><a href="tel:13711995800 ">手机：137 1199 5800</a></li>
-                                        <li className="footer-contact__item"><a href="mailto:442717390@qq.com ">邮箱：442717390@qq.com</a></li>
-                                        <li className="footer-contact__item">地址：东莞市东城区温塘莞温中路488号</li>
-                                    </ul>
+                                    {
+                                        textFill.contactTxt.list.map((item, index) => {
+                                            return (<ul class="footer-contact__list" key={index} >
+                                                {
+                                                    item.map((option, i) => {
+                                                        return (<li key={i} className="footer-contact__item">{option}</li>)
+                                                    })
+                                                }
+                                            </ul>)
+                                        })
+                                    }
                                 </Col>
                             </Row>
                         </Col>

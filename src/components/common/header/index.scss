@@ -2,6 +2,10 @@
     width: 100vw;
 }
 
+.nav-link{
+    margin:0 1rem;
+}
+
 .nav-link.active,
 .nav-dropdown.active {
     color: #fff !important;

@@ -35,7 +35,8 @@ export default class ProductDetail extends Component {
             ],
             images: [],
             title: '',
-            content: ''
+            content: '',
+            accordionIndex: -1,
         }
     }
     componentDidMount() {
@@ -57,8 +58,17 @@ export default class ProductDetail extends Component {
             })
 
     }
+    onAccordionToggle = (index) => {
+        console.log(index)
+        let { accordionIndex } = this.state
+        if (index == accordionIndex) {
+            this.setState({accordionIndex:-1})
+            return
+        }
+        this.setState({accordionIndex:index})
+    }
     render() {
-        let { accordion, title, images, content } = this.state
+        let { accordion, title, images, content, accordionIndex } = this.state
         return (
             <div>
                 <Image src={banner} fluid />
@@ -89,16 +99,19 @@ export default class ProductDetail extends Component {
                                 <Accordion defaultActiveKey="0">
                                     {
                                         accordion.map((item, index) => {
-                                            return (<Card key={index}>
-                                                <Card.Header>
-                                                    <Accordion.Toggle as={'div'} eventKey={index}>
-                                                        {item.title}
+                                            return (<div className="accordion-item" key={index}>
+                                                <div className="accordion-header">
+                                                    <Accordion.Toggle as={'div'} eventKey={index} onClick={() => this.onAccordionToggle(index)}>
+                                                        <div class="accordion-header__title">
+                                                            <p> {item.title}</p>
+                                                            <span className={`iconfont ${accordionIndex == index ? 'icon-minus':'icon-plus'}`}></span>
+                                                        </div>
                                                     </Accordion.Toggle>
-                                                </Card.Header>
+                                                </div>
                                                 <Accordion.Collapse eventKey={index}>
                                                     <Card.Body>{item.text}</Card.Body>
                                                 </Accordion.Collapse>
-                                            </Card>)
+                                            </div>)
                                         })
                                     }
                                 </Accordion>
@@ -108,6 +121,7 @@ export default class ProductDetail extends Component {
                     <Row>
                         <Col>
                             <VerticalSpace />
+                            <h4>产品详情</h4>
                             <p dangerouslySetInnerHTML={{ __html: content }}></p>
                         </Col>
                     </Row>

@@ -7,7 +7,10 @@ import {
     NavDropdown,
     Form,
     FormControl,
-    Button
+    Button,
+    Container,
+    Row,
+    Col
 } from 'react-bootstrap'
 import { withRouter } from "react-router-dom";
 
@@ -80,7 +83,7 @@ class Header extends Component {
     componentDidUpdate(prevProps) {
         if (this.props.location !== prevProps.location) {
             let { navList } = this.state
-            let [result = null] = navList.filter(option =>{
+            let [result = null] = navList.filter(option => {
                 return option.href.replace('#', '') == this.props.location.pathname + this.props.location.search
             })
             if (!result) return
@@ -103,30 +106,37 @@ class Header extends Component {
         let { navList, navIndex } = this.state
         return (
             <div className="header">
-                <Navbar expand="xl" fixed="top" variant="light" bsPrefix="navbar" collapseOnSelect>
-                    <Navbar.Brand href="#home">
-                        <div className="brand-logo">
-                            <CardImg fit={'contain'} src={logoIcon} />
-                        </div>
-                    </Navbar.Brand>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="mr-auto" justify variant="pills" activeKey={navIndex} defaultActiveKey="/home" onSelect={this.handleSelect}>
-                            {
-                                navList.map(item => {
-                                    return (<Nav.Link bsPrefix="nav-link" key={item.href} {...item}>{item.label}</Nav.Link>)
-                                })
-                            }
-                        </Nav>
-                        <Form onSubmit={this.searchSubmit} inline>
-                            <FormControl ref={el => this.searchInput = el} type="text" placeholder="Search" className="mr-sm-2" />
-                            <div className="nav-search__btn">
-                                <span className="iconfont icon-search"></span>
-                                <Button bsPrefix="search-btn" variant="outline-success" type="submit">search</Button>
-                            </div>
-                        </Form>
-                    </Navbar.Collapse>
-                </Navbar>
+                <Container>
+                    <Row>
+                        <Col>
+                            <Navbar expand="xl" fixed="top" variant="light" bsPrefix="navbar" collapseOnSelect>
+                                <Navbar.Brand href="#home">
+                                    <div className="brand-logo">
+                                        <CardImg fit={'contain'} src={logoIcon} />
+                                    </div>
+                                </Navbar.Brand>
+                                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                                <Navbar.Collapse id="basic-navbar-nav">
+                                    <Nav className="mr-auto" justify variant="pills" activeKey={navIndex} defaultActiveKey="/home" onSelect={this.handleSelect}>
+                                        {
+                                            navList.map(item => {
+                                                return (<Nav.Link bsPrefix="nav-link" key={item.href} {...item}>{item.label}</Nav.Link>)
+                                            })
+                                        }
+                                    </Nav>
+                                    <Form onSubmit={this.searchSubmit} inline>
+                                        <FormControl ref={el => this.searchInput = el} type="text" placeholder="Search" className="mr-sm-2" />
+                                        <div className="nav-search__btn">
+                                            <span className="iconfont icon-search"></span>
+                                            <Button bsPrefix="search-btn" variant="outline-success" type="submit">search</Button>
+                                        </div>
+                                    </Form>
+                                </Navbar.Collapse>
+                            </Navbar>
+                        </Col>
+                    </Row>
+                </Container>
+
             </div>
         )
     }

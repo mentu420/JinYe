@@ -24,3 +24,27 @@
 .product-detail__info>h3 {
     margin-bottom: 1rem;
 }
+
+.accordion-item {
+    position: relative;
+
+    &::after {
+        content         : "";
+        position: absolute;
+        left            : 0;
+        right           : 0;
+        bottom          : 0;
+        margin          : auto;
+        height          : 1px;
+        background-color: $color-line;
+        transform       : scaleY(.5);
+    }
+    .accordion-header {
+        padding: 1rem;
+        .accordion-header__title{
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+}
+

@@ -24,7 +24,6 @@ import productImg2 from 'assets/images/slice-img_03.jpg'
 import userImg0 from 'assets/images/slice-img_14.jpg'
 import userImg1 from 'assets/images/slice-img_16.jpg'
 import userImg2 from 'assets/images/slice-img_18.jpg'
-import aboutImg from 'assets/images/slice-img_24.jpg'
 import newImg from 'assets/images/slice-img_27.jpg'
 
 
@@ -43,6 +42,7 @@ export default class Home extends Component {
                 [{ image: bannerVertical0 }, { image: bannerVertical1 }, { image: bannerVertical2 }]
             ],
             aboutTxt: '',
+            aboutImage: '',
             newList: [],
         }
     }
@@ -52,7 +52,9 @@ export default class Home extends Component {
             clientWidth: document.body.clientWidth
         })
         Api.getAbout().then(res => {
+            console.log(res)
             this.setState({
+                aboutImage: res.cover,
                 aboutTxt: decodeURIComponent(res.content)
             })
         }).catch(err => {
@@ -130,7 +132,7 @@ export default class Home extends Component {
     }
 
     render() {
-        let { clientHeight, useList, bannerList, clientWidth, aboutTxt, newList } = this.state
+        let { clientHeight, useList, bannerList, clientWidth, aboutTxt, aboutImage, newList } = this.state
         let n = clientWidth >= 750 ? 0 : 1
         return (
             <div className="home-content">
@@ -218,7 +220,7 @@ export default class Home extends Component {
                                 </Col>
                                 <Col>
                                     <div className="home-about__img">
-                                        <CarImage src={aboutImg} />
+                                        <CarImage src={aboutImage} />
                                     </div>
                                 </Col>
                             </Row>

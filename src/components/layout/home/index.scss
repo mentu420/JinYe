@@ -157,12 +157,11 @@
 
     &>p {
         padding           : 2rem 0;
-        line-height       : 2.4rem;
+        line-height       : 2rem;
         display           : -webkit-box;
         -webkit-box-orient: vertical;
-        -webkit-line-clamp: 6;
+        -webkit-line-clamp: 5;
         font-size         : 1rem;
-        ;
         overflow: hidden;
 
     }
