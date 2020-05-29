@@ -100,7 +100,7 @@ class Footer extends Component {
                                     <p className="footer-contact__item tel"><a href="tel:076922409717 ">0769-22409717 </a></p>
                                     {
                                         textFill.contactTxt.list.map((item, index) => {
-                                            return (<ul class="footer-contact__list" key={index} >
+                                            return (<ul className="footer-contact__list" key={index} >
                                                 {
                                                     item.map((option, i) => {
                                                         return (<li key={i} className="footer-contact__item">{option}</li>)

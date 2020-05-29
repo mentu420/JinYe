@@ -1,0 +1,24 @@
+.aside-position{
+    position: fixed;
+    right:0;
+    top:0;
+    margin:0;
+    z-index: $zindex-flot-layout;
+    display: flex;
+    min-height: 100vh;
+    &.footer{
+        bottom:0;
+        min-height: auto;
+        min-width: 100vw;
+    }
+    &>.aside-lg{
+        margin:auto;
+        &>li{
+            margin:.5rem 0;
+        }
+    }
+    .iconfont{
+        margin-right:.5rem;
+        font-size: 20px;
+    }
+}
