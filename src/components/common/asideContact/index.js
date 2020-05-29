@@ -11,17 +11,20 @@ export default class AsideContact extends Component {
                 {
                     id: 0,
                     title: '电话咨询',
-                    icon: 'icon-tel01'
+                    icon: 'icon-tel01',
+                    href: 'tel:0769-22409719'
                 },
                 {
                     id: 1,
                     title: '短信咨询',
-                    icon: 'icon-youjian'
+                    icon: 'icon-youjian',
+                    href: 'sms:13711995800'
                 },
                 {
                     id: 2,
                     title: '在线咨询',
-                    icon: 'icon-message'
+                    icon: 'icon-message',
+                    href: '#/contact'
                 }
             ]
         }
@@ -30,7 +33,7 @@ export default class AsideContact extends Component {
         let { list } = this.state
         let clientWidth = document.body.clientWidth
         return (
-            <div className={`aside-position ${clientWidth < 768 && 'footer'}`}>
+            <div className={`aside-position ${clientWidth < 768 ? 'bottom' : 'right'}`}>
                 {
                     clientWidth >= 768 && (<ul className="aside-lg">
                         {
@@ -44,29 +47,33 @@ export default class AsideContact extends Component {
                                             </Tooltip>
                                         }
                                     >
-                                        <Button variant="primary"><span className={`iconfont ${item.icon}`}></span></Button>
+                                        <a href={item.href} >
+                                            <Button variant="primary">
+                                                <span className={`iconfont ${item.icon}`}></span>
+                                            </Button>
+                                        </a>
                                     </OverlayTrigger>
                                 </li>)
                             })
                         }
                     </ul>)
                 }
-                {/* {
+                {
                     clientWidth < 768 && (<ul className="aside-md">
                         {
                             list.map((item, index) => {
                                 return (<li key={item.id}>
-                                    <OverlayTrigger
-                                        placement={'left'}
-                                        overlay={<Tooltip >{item.title}</Tooltip>}
-                                    >
-                                        <Button variant="primary"><span className={`iconfont ${item.icon}`}></span></Button>
-                                    </OverlayTrigger>
+                                    <a href={item.href} >
+                                        <p className="aside-contact__item">
+                                            <span className={`iconfont ${item.icon}`}></span>
+                                            <span className="title">{item.title}</span>
+                                        </p>
+                                    </a>
                                 </li>)
                             })
                         }
                     </ul>)
-                } */}
+                }
             </div>
         )
     }

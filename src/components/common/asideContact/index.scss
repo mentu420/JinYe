@@ -1,24 +1,60 @@
-.aside-position{
+.aside-position {
     position: fixed;
-    right:0;
-    top:0;
-    margin:0;
-    z-index: $zindex-flot-layout;
-    display: flex;
-    min-height: 100vh;
-    &.footer{
-        bottom:0;
-        min-height: auto;
+    margin  : 0;
+    z-index : $zindex-divider;
+    display : flex;
+
+
+    &.right {
+        right     : 0;
+        top       : 0;
+        min-height: 100vh;
+    }
+
+    &.bottom {
+        bottom   : 0;
         min-width: 100vw;
     }
-    &>.aside-lg{
-        margin:auto;
-        &>li{
-            margin:.5rem 0;
+
+    &>.aside-lg {
+
+        margin: auto;
+
+        &>li {
+            margin: .5rem 0;
         }
     }
-    .iconfont{
-        margin-right:.5rem;
-        font-size: 20px;
+
+    &>.aside-md {
+        width          : 100vw;
+        display        : flex;
+        justify-content: space-around;
+
+        &>li {
+            flex: 1;
+        }
+    }
+
+    .aside-contact__item {
+        height          : 30px;
+        line-height     : 30px;
+        color           : $color;
+        background-color: rgba($color: #fff, $alpha: .5);
+        display         : flex;
+        justify-content : center;
+
+        &>.iconfont {
+            color: $color;
+        }
+    }
+
+    .iconfont {
+        margin-right: .5rem;
+        font-size   : 20px;
+        color       : $white;
+    }
+
+    .title {
+        font-size: 12px;
     }
 }

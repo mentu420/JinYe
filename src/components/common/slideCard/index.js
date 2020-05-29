@@ -31,13 +31,13 @@ export default class SlideCard extends Component {
             scrollY: true, //关闭竖向滚动
         })
 
-        let wrapperStyles = window.getComputedStyle(this.refs.slideWrapper)
+        let wrapperWidth = parseInt(window.getComputedStyle(this.refs.slideWrapper).width)
 
-        let itemWidth = parseInt(wrapperStyles.width) / cols
+        let itemWidth = wrapperWidth / cols
 
-        console.log('itemWidth', itemWidth)
+        let listWidth = (list.length - 1) * (itemWidth + 12)
 
-        this.refs.slideList.style.width = (list.length - 1) * (itemWidth + 12) + 'px'
+        this.refs.slideList.style.width = listWidth < wrapperWidth ? wrapperWidth + 'px' : listWidth + 'px'
 
         this.bscroll.refresh()
         this.setState({ itemWidth })

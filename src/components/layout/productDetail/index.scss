@@ -1,50 +1,74 @@
-.product-detail__slide {
-    position: relative;
-    padding : .2rem;
+.product-detail {
 
-    .detail-slide__list {
-        display: flex;
 
-        &>li {
-            flex: 1;
-        }
-    }
-}
+    .product-detail__slide {
+        position: relative;
+        padding : .2rem;
 
-.product-thumbnail {
-    height: 60px;
-}
-
-.my-div {
-    width           : 599px;
-    height          : 10px;
-    background-color: red;
-}
-
-.product-detail__info>h3 {
-    margin-bottom: 1rem;
-}
-
-.accordion-item {
-    position: relative;
-
-    &::after {
-        content         : "";
-        position: absolute;
-        left            : 0;
-        right           : 0;
-        bottom          : 0;
-        margin          : auto;
-        height          : 1px;
-        background-color: $color-line;
-        transform       : scaleY(.5);
-    }
-    .accordion-header {
-        padding: 1rem;
-        .accordion-header__title{
+        .detail-slide__list {
             display: flex;
-            justify-content: space-between;
+
+            &>li {
+                flex: 1;
+            }
+        }
+    }
+
+    .product-thumbnail {
+        width: 100%;
+        height: 60px;
+    }
+
+    .my-div {
+        width           : 599px;
+        height          : 10px;
+        background-color: red;
+    }
+
+    .product-detail__info>h3 {
+        margin-bottom: 1rem;
+    }
+
+    .accordion-item {
+        position: relative;
+
+        &::after {
+            content         : "";
+            position        : absolute;
+            left            : 0;
+            right           : 0;
+            bottom          : 0;
+            margin          : auto;
+            height          : 1px;
+            background-color: $color-line;
+            transform       : scaleY(.5);
+        }
+
+        .accordion-header {
+            padding: 1rem;
+
+            .accordion-header__title {
+                display        : flex;
+                justify-content: space-between;
+            }
+        }
+    }
+
+    .detail-content__title {
+        padding:.5rem 0;
+        margin-bottom: 1rem;
+        position     : relative;
+
+        &::after {
+            content         : "";
+            position        : absolute;
+            left            : 0;
+            right           : 0;
+            bottom          : 0;
+            margin          : auto;
+            height          : 1px;
+            background-color: $color-line;
+            transform       : scaleY(.5);
         }
     }
 }
-

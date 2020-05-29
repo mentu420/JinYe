@@ -47,11 +47,11 @@ export default class ProductDetail extends Component {
         Api.getProductDetail({ id })
             .then(res => {
                 console.log('产品', res)
-                let { images, content, title } = res
+                let { images, content, title, cover } = res
 
                 let arr = accordion.map(item => ({ ...item, text: decodeURIComponent(res[item.byte]) }))
 
-                this.setState({ accordion: arr, images, title, content: decodeURIComponent(content) })
+                this.setState({ accordion: arr, images: [cover, ...images], title, content: decodeURIComponent(content) })
             })
             .catch(err => {
                 console.log(err)
@@ -62,15 +62,15 @@ export default class ProductDetail extends Component {
         console.log(index)
         let { accordionIndex } = this.state
         if (index == accordionIndex) {
-            this.setState({accordionIndex:-1})
+            this.setState({ accordionIndex: -1 })
             return
         }
-        this.setState({accordionIndex:index})
+        this.setState({ accordionIndex: index })
     }
     render() {
         let { accordion, title, images, content, accordionIndex } = this.state
         return (
-            <div>
+            <div className="product-detail">
                 <Image src={banner} fluid />
                 <VerticalSpace height="4rem" />
                 <Container>
@@ -87,7 +87,7 @@ export default class ProductDetail extends Component {
                                 {
                                     images.length > 0 && (<SlideCard list={images} renderItem={item => {
                                         return (<div className="product-thumbnail" onClick={() => this.selectImage(item)}>
-                                            <CardImage />
+                                            <CardImage src={item}/>
                                         </div>)
                                     }} />)
                                 }
@@ -104,7 +104,7 @@ export default class ProductDetail extends Component {
                                                     <Accordion.Toggle as={'div'} eventKey={index} onClick={() => this.onAccordionToggle(index)}>
                                                         <div class="accordion-header__title">
                                                             <p> {item.title}</p>
-                                                            <span className={`iconfont ${accordionIndex == index ? 'icon-minus':'icon-plus'}`}></span>
+                                                            <span className={`iconfont ${accordionIndex == index ? 'icon-minus' : 'icon-plus'}`}></span>
                                                         </div>
                                                     </Accordion.Toggle>
                                                 </div>
@@ -121,7 +121,7 @@ export default class ProductDetail extends Component {
                     <Row>
                         <Col>
                             <VerticalSpace />
-                            <h4>产品详情</h4>
+                            <h4 className="detail-content__title">产品详情</h4>
                             <p dangerouslySetInnerHTML={{ __html: content }}></p>
                         </Col>
                     </Row>
