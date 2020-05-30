@@ -21,14 +21,17 @@ const NAV_LIST = [
             {
                 eventKey: 0,
                 label: '生产实力',
+                pathName: '#/advantage'
             },
             {
                 eventKey: 1,
                 label: '金烨动态',
+                pathName: '#/newList'
             },
             {
                 eventKey: 2,
                 label: '联系我们',
+                pathName: '#/contact'
             },
         ]
     }
@@ -57,8 +60,18 @@ class Footer extends Component {
             console.log(err)
         })
     }
-    onSelect = (option) => {
-        console.log(this.props.history)
+    onSelect = (option, index) => {
+        switch (index) {
+            case 0:
+                this.props.history.push({ pathName: option.pathName })
+                break;
+            default:
+                this.props.history.push({
+                    pathname: '/productList',
+                    search: `${option.id}`
+                })
+                break;
+        }
     }
     render() {
         let { navList } = this.state
@@ -76,7 +89,7 @@ class Footer extends Component {
                                                 <label className="footer-nav__title">{item.title}</label>
                                                 {
                                                     list.map(option => {
-                                                        return (<Nav.Link onSelect={() => this.onSelect(option)} key={option.label} bsPrefix="footer-nav__link" {...option}>{option.label}</Nav.Link>)
+                                                        return (<Nav.Link onSelect={() => this.onSelect(option, index)} key={option.label} bsPrefix="footer-nav__link" {...option}>{option.label}</Nav.Link>)
                                                     })
                                                 }
                                             </Nav>
