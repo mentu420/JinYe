@@ -21,6 +21,7 @@ export default class index extends Component {
 
     componentDidMount() {
         Api.getAbout().then(res => {
+            console.log(res)
             this.setState({
                 aboutImage: res.cover,
                 aboutTxt: decodeURIComponent(res.content)
