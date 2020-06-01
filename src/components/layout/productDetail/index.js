@@ -102,7 +102,7 @@ export default class ProductDetail extends Component {
                                             return (<div className="accordion-item" key={index}>
                                                 <div className="accordion-header">
                                                     <Accordion.Toggle as={'div'} eventKey={index} onClick={() => this.onAccordionToggle(index)}>
-                                                        <div class="accordion-header__title">
+                                                        <div className="accordion-header__title">
                                                             <p> {item.title}</p>
                                                             <span className={`iconfont ${accordionIndex == index ? 'icon-minus' : 'icon-plus'}`}></span>
                                                         </div>
@@ -122,7 +122,7 @@ export default class ProductDetail extends Component {
                         <Col>
                             <VerticalSpace />
                             <h4 className="detail-content__title">产品详情</h4>
-                            <p dangerouslySetInnerHTML={{ __html: content }}></p>
+                            <p class="detail-content__content" dangerouslySetInnerHTML={{ __html: content }}></p>
                         </Col>
                     </Row>
                 </Container>

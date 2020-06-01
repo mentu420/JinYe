@@ -21,17 +21,17 @@ const NAV_LIST = [
             {
                 eventKey: 0,
                 label: '生产实力',
-                pathName: '#/advantage'
+                pathname: '/advantage'
             },
             {
                 eventKey: 1,
                 label: '金烨动态',
-                pathName: '#/newList'
+                pathname: '/newList'
             },
             {
                 eventKey: 2,
                 label: '联系我们',
-                pathName: '#/contact'
+                pathname: '/contact'
             },
         ]
     }
@@ -63,13 +63,13 @@ class Footer extends Component {
     onSelect = (option, index) => {
         switch (index) {
             case 0:
-                this.props.history.push({ pathName: option.pathName })
-                break;
-            default:
                 this.props.history.push({
                     pathname: '/productList',
                     search: `${option.id}`
                 })
+                break;
+            case 1:
+                this.props.history.push({ pathname: option.pathname })
                 break;
         }
     }
