@@ -13,16 +13,15 @@ export default class NewItem extends Component {
     }
     componentDidMount() {
         let { item } = this.props
-        console.log(item.content)
         let content = DecodeURI(item.content)
-        console.log(content)
+        // console.log(content)
         if (!content || content == undefined) {
             this.setState({ content: item.content })
             return
         }
-        let pattern = new RegExp('<p.*?>(.*?)<\/p>', 'i');
+        let pattern = new RegExp('<p.*?>(.*?)<\/p>', 'g');
         let str = content.match(pattern)
-        console.log('str',str)
+        // console.log('str',str)
         str && this.setState({ content: str[1] })
     }
 

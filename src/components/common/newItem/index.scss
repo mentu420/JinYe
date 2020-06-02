@@ -23,10 +23,12 @@
     overflow          : hidden;
     line-height       : 1.2;
 }
-.new-item__label{
-    height: 50px;
+
+.new-item__label {
+    height  : 50px;
     overflow: hidden;
 }
+
 .new-item__label,
 .new-item__label span {
     display           : -webkit-box;
@@ -34,9 +36,9 @@
     -webkit-line-clamp: 2;
     font-size         : 1rem;
     overflow          : hidden;
-    line-height       : 1.2;
-    margin            : 10px 0;
+    line-height       : 1.6rem;
     color             : $color-text__secondary;
+    background-color  : transparent;
 }
 
 .new-item__btn {

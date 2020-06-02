@@ -53,14 +53,14 @@ export default class Home extends Component {
             clientWidth: document.body.clientWidth
         })
         Api.getAbout().then(res => {
-
             let content = DecodeURI(res.content)
-            let pattern = new RegExp('<p.*?>(.*?)<\/p>', 'i');
+            let pattern = new RegExp('<p.*?>(.*?)<\/p>', 'g');
             let str = content.match(pattern)
-
+            console.log('about',str[1])
+            console.log('about img', res.cover)
             this.setState({
                 aboutImage: res.cover,
-                aboutTxt: str
+                aboutTxt: str[1]
             })
         }).catch(err => {
             console.log(err)
@@ -165,14 +165,14 @@ export default class Home extends Component {
                                     </div>
                                     <h3 >畅销榜单</h3>
                                     <ul className="item-product__list">
-                                        <li onClick={() => this.goProudctList(55)}>
+                                        <li onClick={() => this.goProudctList(57)}>
                                             <div className="product-item__img">
                                                 <CarImage src={productImg0} />
                                             </div>
                                             <div className="product-item__title"><span>+</span><label>电热元件</label></div>
                                         </li>
-                                        <li onClick={() => this.goProudctList(57)}>
-                                            <div className="product-item__title"><span>+</span><label>陶瓷配件</label></div>
+                                        <li onClick={() => this.goProudctList(54)}>
+                                            <div className="product-item__title"><span>+</span><label>发热管</label></div>
                                             <div className="product-item__img">
                                                 <CarImage src={productImg1} />
                                             </div>

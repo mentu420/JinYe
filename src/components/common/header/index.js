@@ -57,12 +57,12 @@ const NAV_LIST = [
             {
                 eventKey: 0,
                 label: '行业动态',
-                href: '#/newList',
+                href: '#/newList?id=0',
             },
             {
                 eventKey: 1,
                 label: '金烨动态',
-                href: '#/newList',
+                href: '#/newList?id=1',
             }
         ]
     },
@@ -135,10 +135,10 @@ class Header extends Component {
                                                 let { list } = item
                                                 return (
                                                     list ? (
-                                                        <NavDropdown title={item.label} id="basic-nav-dropdown">
+                                                        <NavDropdown key={item.eventKey} title={item.label} id="basic-nav-dropdown">
                                                             {
-                                                                list.map(option => {
-                                                                    return (<NavDropdown.Item key={option.id} href={item.href}>{option.label}</NavDropdown.Item>)
+                                                                list.map((option,i) => {
+                                                                    return (<NavDropdown.Item key={i} href={option.href}>{option.label}</NavDropdown.Item>)
                                                                 })
                                                             }
                                                         </NavDropdown>

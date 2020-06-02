@@ -7,6 +7,9 @@
     border-radius: 10px;
     display      : flex;
     padding      : 2rem .5rem;
+    &.address{
+        min-height: 192px;
+    }
 
     &:hover {
         background-color: $color-bg;

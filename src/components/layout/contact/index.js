@@ -19,7 +19,7 @@ export default class index extends Component {
         }
     }
     componentWillMount() {
-        
+
     }
 
 
@@ -65,7 +65,7 @@ export default class index extends Component {
     }
     render() {
         let { show, tips } = this.state
-        let { contactTxt } = textFill
+        let { contactTxt, } = textFill
         let { orderList, content, letter, title, callTips, tel } = contactTxt
         return (
             <div>
@@ -92,6 +92,25 @@ export default class index extends Component {
                                         <li className="contact-item__text">
                                             <p>{item.label}</p>
                                             <p>{item.value}</p>
+                                        </li>
+                                    </ul>
+                                </Col>)
+                            })
+                        }
+                    </Row>
+                    <VerticalSpace/>
+                    <Row>
+                        {
+                            contactTxt.list.map((item, index) => {
+                                return (<Col key={index}>
+                                    <ul className="contact-item address">
+                                        {/* <li className="contact-item__icon"><span className="iconfont icon-address"></span></li> */}
+                                        <li className="contact-item__text">
+                                            {
+                                                item.map(option => {
+                                                    return <p key={option}>{option}</p>
+                                                })
+                                            }
                                         </li>
                                     </ul>
                                 </Col>)

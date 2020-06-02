@@ -1,9 +1,10 @@
 .new-item {
-    padding:2rem;
+    padding      : 2rem;
     border-radius: 5px;
-    position: relative;
-    &:hover{
-        background-color: $color-bg;
+    position     : relative;
+
+    &:hover {
+        box-shadow: 4px 4px 5px $color-bg, -4px -4px 5px $color-bg;
     }
 
     &::after {
