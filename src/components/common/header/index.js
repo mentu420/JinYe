@@ -51,8 +51,20 @@ const NAV_LIST = [
     },
     {
         eventKey: 6,
-        label: '金烨动态',
+        label: '新闻动态',
         href: '#/newList',
+        list: [
+            {
+                eventKey: 0,
+                label: '行业动态',
+                href: '#/newList',
+            },
+            {
+                eventKey: 1,
+                label: '金烨动态',
+                href: '#/newList',
+            }
+        ]
     },
     {
         eventKey: 7,
@@ -119,8 +131,20 @@ class Header extends Component {
                                 <Navbar.Collapse id="basic-navbar-nav">
                                     <Nav className="mr-auto" justify variant="pills" activeKey={navIndex} defaultActiveKey="/home" onSelect={this.handleSelect}>
                                         {
-                                            navList.map(item => {
-                                                return (<Nav.Link bsPrefix="nav-link" key={item.href} {...item}>{item.label}</Nav.Link>)
+                                            navList.map((item, index) => {
+                                                let { list } = item
+                                                return (
+                                                    list ? (
+                                                        <NavDropdown title={item.label} id="basic-nav-dropdown">
+                                                            {
+                                                                list.map(option => {
+                                                                    return (<NavDropdown.Item key={option.id} href={item.href}>{option.label}</NavDropdown.Item>)
+                                                                })
+                                                            }
+                                                        </NavDropdown>
+                                                    ) : <Nav.Link bsPrefix="nav-link" key={item.href} {...item}>{item.label}</Nav.Link>
+
+                                                )
                                             })
                                         }
                                     </Nav>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Media, Button } from 'react-bootstrap'
+import { DecodeURI } from 'utils/urlCodeHandler/'
 
 import './index.scss'
 
@@ -12,13 +13,16 @@ export default class NewItem extends Component {
     }
     componentDidMount() {
         let { item } = this.props
-        let content = decodeURIComponent(item.content)
+        console.log(item.content)
+        let content = DecodeURI(item.content)
+        console.log(content)
         if (!content || content == undefined) {
             this.setState({ content: item.content })
             return
         }
         let pattern = new RegExp('<p.*?>(.*?)<\/p>', 'i');
         let str = content.match(pattern)
+        console.log('str',str)
         str && this.setState({ content: str[1] })
     }
 

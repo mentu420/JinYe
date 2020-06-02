@@ -8,6 +8,7 @@ import SlideCard from 'components/common/slideCard'
 import NewItem from 'components/common/newItem'
 import VerticalSpace from 'components/common/verticalSpace'
 import * as Api from 'api/'
+import { DecodeURI } from 'utils/urlCodeHandler/'
 //图片
 import banner0 from 'assets/images/banner.jpg'
 import banner1 from 'assets/images/banner1.jpg'
@@ -52,10 +53,14 @@ export default class Home extends Component {
             clientWidth: document.body.clientWidth
         })
         Api.getAbout().then(res => {
-            console.log(res)
+
+            let content = DecodeURI(res.content)
+            let pattern = new RegExp('<p.*?>(.*?)<\/p>', 'i');
+            let str = content.match(pattern)
+
             this.setState({
                 aboutImage: res.cover,
-                aboutTxt: decodeURIComponent(res.content)
+                aboutTxt: str
             })
         }).catch(err => {
             console.log(err)

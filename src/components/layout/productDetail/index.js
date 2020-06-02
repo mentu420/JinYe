@@ -4,6 +4,7 @@ import CardImage from 'components/common/cardImage/'
 import SlideCard from 'components/common/slideCard/'
 import VerticalSpace from 'components/common/verticalSpace/'
 import * as Api from 'api/'
+import { DecodeURI } from 'utils/urlCodeHandler/'
 
 
 import './index.scss'
@@ -49,9 +50,12 @@ export default class ProductDetail extends Component {
                 console.log('产品', res)
                 let { images, content, title, cover } = res
 
-                let arr = accordion.map(item => ({ ...item, text: decodeURIComponent(res[item.byte]) }))
+                let arr = accordion.map(item => {
+                    console.log(res[item.byte])
+                    return { ...item, text: DecodeURI(res[item.byte]) }
+                })
 
-                this.setState({ accordion: arr, images: [cover, ...images], title, content: decodeURIComponent(content) })
+                this.setState({ accordion: arr, images: [cover, ...images], title, content: DecodeURI(content) })
             })
             .catch(err => {
                 console.log(err)
@@ -122,7 +126,7 @@ export default class ProductDetail extends Component {
                         <Col>
                             <VerticalSpace />
                             <h4 className="detail-content__title">产品详情</h4>
-                            <p class="detail-content__content" dangerouslySetInnerHTML={{ __html: content }}></p>
+                            <p className="detail-content__content" dangerouslySetInnerHTML={{ __html: content }}></p>
                         </Col>
                     </Row>
                 </Container>

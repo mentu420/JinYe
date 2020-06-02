@@ -16,7 +16,6 @@ function App() {
 
     return (
         <div id="app">
-            <Launch />
             <Router>
                 <Header></Header>
                 <ScrollToTop>

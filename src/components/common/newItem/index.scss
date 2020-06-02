@@ -23,7 +23,10 @@
     overflow          : hidden;
     line-height       : 1.2;
 }
-
+.new-item__label{
+    height: 50px;
+    overflow: hidden;
+}
 .new-item__label,
 .new-item__label span {
     display           : -webkit-box;

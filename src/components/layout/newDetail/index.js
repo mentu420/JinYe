@@ -3,6 +3,7 @@ import VerticalSpace from 'components/common/verticalSpace'
 import { Container, Row, Col, Image } from 'react-bootstrap'
 import * as Api from 'api/'
 import QS from 'qs'
+import { DecodeURI } from 'utils/urlCodeHandler/'
 
 import './index.scss'
 import banner from 'assets/images/new-banner.jpg'
@@ -22,7 +23,7 @@ export default class index extends Component {
         Api.getNewDetail(params)
             .then(data => {
                 this.setState({
-                    detail: { ...data, content: decodeURIComponent(data.content) }
+                    detail: { ...data, content: DecodeURI(data.content) }
                 })
             })
             .catch(err => {
