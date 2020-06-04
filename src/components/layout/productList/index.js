@@ -34,7 +34,7 @@ export default class ProductList extends Component {
                 let navId = item ? item.id : res[0].id
                 this.setState({ navList: res, navId })
                 this.getProductList(categoryId).then(res => {
-                    console.log('产品', res)
+                    console.log('产品列表', res)
                     this.productListHandle(res)
                 })
             })
@@ -50,8 +50,7 @@ export default class ProductList extends Component {
     }
     productListHandle = ({ totalCount, items }) => {
         let { pageSize } = this.state
-        let totalPage = Math.ceil(totalCount / pageSize)
-        console.log('totalPage', totalPage)
+        let totalPage = Math.ceil((totalCount-pageSize) / pageSize)
         this.setState({ totalPage, productList: items })
     }
     goDetail = (item) => {

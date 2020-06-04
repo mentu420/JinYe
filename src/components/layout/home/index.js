@@ -182,11 +182,11 @@ export default class Home extends Component {
                                 <Col>
                                     <div className="item-product__btn">
                                         <div className="produt-right__title">
-                                            <h3>熔喷布加热器</h3>
+                                            <h3>电炉丝</h3>
                                         </div>
-                                        <Button variant="light" onClick={() => this.goProudctList(54)}>了解详情</Button>
+                                        <Button variant="light" onClick={() => this.goProudctList(56)}>了解详情</Button>
                                     </div>
-                                    <div className="item-product__bg" onClick={() => this.goProudctList(54)}>
+                                    <div className="item-product__bg" onClick={() => this.goProudctList(56)}>
                                         <CarImage src={productImg2} />
                                     </div>
                                 </Col>

@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { Container, Row, Col, Carousel, Image, Button, Media } from 'react-bootstrap'
+import { Container, Row, Col, Image, Button, Nav } from 'react-bootstrap'
 import NewItem from 'components/common/newItem'
 import ModeTitle from 'components/common/modeTitle'
 import VerticalSpace from 'components/common/verticalSpace/'
 import PageinationBar from 'components/common/paginationBar/'
+import QS from 'qs'
 import * as Api from 'api/'
 
 
@@ -18,16 +19,47 @@ export default class index extends Component {
             pageIndex: 1,
             totalPage: 3,
             newList: [],
+            newNavbar: [
+                {
+                    id: 0,
+                    categoryId: 0,
+                    title: '行业动态',
+                },
+                {
+                    id: 1,
+                    categoryId: 56,
+                    title: '金烨动态',
+                }
+            ],
+            activeKey: 0
         }
     }
 
-    componentDidMount() {
-        let { pageSize, pageIndex } = this.state
-        this.getNewList(pageSize, pageIndex)
+    componentWillReceiveProps(nextProps) {
+        console.log('nextProps', nextProps)
+        let { newNavbar, activeKey,pageSize, pageIndex } = this.state
+        let { location } = nextProps
+        let query = location.search.split('?')[1]
+        let params = QS.parse(query)
+        let [{ categoryId }] = newNavbar.filter(item => item.categoryId == params.categoryId)
+        if (activeKey == categoryId) return
+        this.setState({ activeKey: categoryId })
+        this.getNewList({ categoryId, pageSize, pageIndex })
     }
 
-    getNewList(pageSize, pageIndex) {
-        return Api.getNewList({ pageSize, pageIndex }).then(res => {
+    componentDidMount() {
+        console.log('componentDidMount')
+        let { pageSize, pageIndex, newNavbar } = this.state
+        let data = this.props.location.search  //地址栏截取
+        let query = data.split('?')[1]
+        let params = QS.parse(query)
+        this.getNewList({ ...params, pageSize, pageIndex })
+        let [{ id }] = newNavbar.filter(item => item.categoryId == params.categoryId)
+        this.setState({ activeKey: id })
+    }
+
+    getNewList({ categoryId = 0, pageSize, pageIndex }) {
+        return Api.getNewList({ categoryId, pageSize, pageIndex }).then(res => {
             this.newListHandle(res)
         }).catch(err => {
             console.log(err)
@@ -45,9 +77,7 @@ export default class index extends Component {
                 date: dateArr[0] + '-' + dateArr[1],
             }
         })
-        console.log(arr)
-        let totalPage = Math.ceil(totalCount / pageSize)
-        console.log('totalPage', totalPage)
+        let totalPage = Math.ceil((totalCount - pageSize) / pageSize)
         this.setState({ newList: arr, totalPage })
     }
 
@@ -59,11 +89,16 @@ export default class index extends Component {
         console.log(pageIndex)
         let { pageSize } = this.state
         this.setState({ pageIndex: pageIndex })
-        this.getNewList(pageSize, pageIndex)
+        this.getNewList({ pageSize, pageIndex })
+    }
+    navbarSelect = (eventKey) => {
+        console.log('eventKey', eventKey)
+        let { pageSize, pageIndex } = this.state
+        this.setState({ activeKey: eventKey })
+        this.getNewList({ categoryId: eventKey, pageSize, pageIndex })
     }
     render() {
-        let { newList, totalPage, pageIndex } = this.state
-        console.log('render', totalPage)
+        let { newList, totalPage, pageIndex, newNavbar, activeKey } = this.state
         return (
             <div>
                 <Image src={banner} fluid />
@@ -71,6 +106,20 @@ export default class index extends Component {
                 <ModeTitle letter={'NEWS INFORMATION'} title={'新闻动态'} />
                 <VerticalSpace />
                 <Container>
+                    <Row>
+                        <Col>
+                            <Nav variant="pills" className="justify-content-center" activeKey={activeKey} onSelect={this.navbarSelect}>
+                                {
+                                    newNavbar.map((item, index) => {
+                                        return (<Nav.Item key={index}>
+                                            <Nav.Link href={`#/newList?categoryId=${item.categoryId}`} eventKey={item.categoryId}>{item.title}</Nav.Link>
+                                        </Nav.Item>)
+                                    })
+                                }
+                            </Nav>
+                        </Col>
+                    </Row>
+                    <VerticalSpace />
                     <Row>
                         <Col>
                             <ul className="new-list">

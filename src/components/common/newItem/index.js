@@ -14,15 +14,16 @@ export default class NewItem extends Component {
     componentDidMount() {
         let { item } = this.props
         let content = DecodeURI(item.content)
-        // console.log(content)
+
         if (!content || content == undefined) {
             this.setState({ content: item.content })
             return
         }
-        let pattern = new RegExp('<p.*?>(.*?)<\/p>', 'g');
-        let str = content.match(pattern)
-        // console.log('str',str)
-        str && this.setState({ content: str[1] })
+        this.setState({ content: this.getText(content) })
+    }
+
+    getText = (str) => {
+        return str.replace(/<[^<>]+>/g, "").replace(/&nbsp;/gi, "");
     }
 
     onClick = () => {

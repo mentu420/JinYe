@@ -29,8 +29,8 @@
     overflow: hidden;
 }
 
-.new-item__label,
-.new-item__label span {
+.new-item__label {
+    margin            : .5rem 0;
     display           : -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;

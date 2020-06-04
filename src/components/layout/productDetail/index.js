@@ -17,7 +17,7 @@ export default class ProductDetail extends Component {
             accordion: [
                 {
                     id: 0,
-                    title: '产品参数',
+                    title: '产品关键词',
                     text: [],
                     byte: 'parameter'
                 },
@@ -29,7 +29,7 @@ export default class ProductDetail extends Component {
                 },
                 {
                     id: 2,
-                    title: '产品明细',
+                    title: '产品简述',
                     text: [],
                     byte: 'details'
                 }

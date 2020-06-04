@@ -56,13 +56,15 @@ const NAV_LIST = [
         list: [
             {
                 eventKey: 0,
+                id:0,
                 label: '行业动态',
-                href: '#/newList?id=0',
+                href: '#/newList?categoryId=0',
             },
             {
                 eventKey: 1,
+                id:56,
                 label: '金烨动态',
-                href: '#/newList?id=1',
+                href: '#/newList?categoryId=56',
             }
         ]
     },
