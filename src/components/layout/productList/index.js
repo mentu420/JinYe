@@ -15,10 +15,10 @@ export default class ProductList extends Component {
         this.state = {
             navList: [],
             productList: [],
-            totalPage: 20,
+            totalPage: 5,
             pageIndex: 1,
             navId: 0,
-            pageSize: 6,
+            pageSize: 12,
         }
 
     }
@@ -33,8 +33,7 @@ export default class ProductList extends Component {
                 let [item = null] = res.filter((item, index) => item.id == categoryId)
                 let navId = item ? item.id : res[0].id
                 this.setState({ navList: res, navId })
-                this.getProductList(categoryId).then(res => {
-                    console.log('产品列表', res)
+                this.getProductList({ categoryId }).then(res => {
                     this.productListHandle(res)
                 })
             })
@@ -42,7 +41,7 @@ export default class ProductList extends Component {
                 console.log(err)
             })
     }
-    getProductList(categoryId, pageIndex = 1, pageSize = 6) {
+    getProductList({ categoryId, pageIndex = 1, pageSize = 6 }) {
         return Api.getProductList({ categoryId, pageIndex, pageSize })
             .catch(err => {
                 console.log(err)
@@ -50,20 +49,27 @@ export default class ProductList extends Component {
     }
     productListHandle = ({ totalCount, items }) => {
         let { pageSize } = this.state
-        let totalPage = Math.ceil((totalCount-pageSize) / pageSize)
+        let totalPage = Math.ceil(totalCount / pageSize)
+        console.log('totalCount', totalCount)
+        console.log('totalPage', totalPage)
         this.setState({ totalPage, productList: items })
     }
     goDetail = (item) => {
         let { history } = this.props
         history.push({ pathname: '/ProductDetail', search: `${item.id}` })
     }
-    onPageClick(page) {
-        console.log(page)
+    onPageClick=(pageIndex)=> {
+        let { navId } = this.state
+        this.setState({ pageIndex })
+        console.log(navId)
+        this.getProductList({ categoryId: navId, pageIndex }).then(res => {
+            this.productListHandle(res)
+        })
     }
     onNavClick = (item, index) => {
         console.log(item)
         this.setState({ navId: item.id })
-        this.getProductList(item.id).then(res => {
+        this.getProductList({ categoryId: item.id }).then(res => {
             this.productListHandle(res)
         })
     }

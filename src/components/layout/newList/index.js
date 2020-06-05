@@ -15,7 +15,7 @@ export default class index extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            pageSize: 10,
+            pageSize: 8,
             pageIndex: 1,
             totalPage: 3,
             newList: [],
@@ -77,7 +77,8 @@ export default class index extends Component {
                 date: dateArr[0] + '-' + dateArr[1],
             }
         })
-        let totalPage = Math.ceil((totalCount - pageSize) / pageSize)
+        let totalPage = Math.ceil(totalCount  / pageSize)
+        console.log('totalPage',totalPage)
         this.setState({ newList: arr, totalPage })
     }
 
@@ -87,9 +88,10 @@ export default class index extends Component {
     }
     onPageClick = (pageIndex) => {
         console.log(pageIndex)
+        let { activeKey} = this.state
         let { pageSize } = this.state
         this.setState({ pageIndex: pageIndex })
-        this.getNewList({ pageSize, pageIndex })
+        this.getNewList({ categoryId: activeKey, pageSize, pageIndex })
     }
     navbarSelect = (eventKey) => {
         console.log('eventKey', eventKey)
@@ -134,13 +136,11 @@ export default class index extends Component {
                         </Col>
                     </Row>
                     <VerticalSpace />
-                    {
-                        totalPage > 1 && (<Row>
-                            <Col id="pageination">
-                                <PageinationBar currPage={pageIndex} totalPage={totalPage} onPageClick={this.onPageClick} />
-                            </Col>
-                        </Row>)
-                    }
+                    <Row>
+                        <Col id="pageination">
+                            <PageinationBar currPage={pageIndex} totalPage={totalPage} onPageClick={this.onPageClick} />
+                        </Col>
+                    </Row>
                 </Container>
                 <VerticalSpace height={'4rem'} />
             </div>
