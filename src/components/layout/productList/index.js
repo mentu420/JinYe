@@ -18,6 +18,7 @@ export default class ProductList extends Component {
             totalPage: 5,
             pageIndex: 1,
             navId: 0,
+            secondId:0,
             pageSize: 12,
         }
 
@@ -28,6 +29,7 @@ export default class ProductList extends Component {
 
         Api.getCategory({ type: 2 })
             .then(res => {
+                console.log('xxxxxxxxxxxxxxx')
                 console.log(res)
                 let categoryId = id ? id : res[0].id
                 let [item = null] = res.filter((item, index) => item.id == categoryId)
@@ -58,7 +60,7 @@ export default class ProductList extends Component {
         let { history } = this.props
         history.push({ pathname: '/ProductDetail', search: `${item.id}` })
     }
-    onPageClick=(pageIndex)=> {
+    onPageClick = (pageIndex) => {
         let { navId } = this.state
         this.setState({ pageIndex })
         console.log(navId)
@@ -73,6 +75,10 @@ export default class ProductList extends Component {
             this.productListHandle(res)
         })
     }
+    onSecondItemClick=(option)=>{
+        console.log(option)
+    }
+
     render() {
         let { navList, productList, totalPage, pageIndex, navId } = this.state
         return (
@@ -85,7 +91,22 @@ export default class ProductList extends Component {
                             <ul className="nav-list">
                                 {
                                     navList.map((item, index) => {
-                                        return (<li key={item.id} className={`nav-item ${navId == item.id && 'active'}`} onClick={() => this.onNavClick(item, index)}>{item.title}</li>)
+                                        let secondHeight = navId == item.id ? '80px' : '0'
+                                        return (<li key={item.id} onClick={() => this.onNavClick(item, index)}>
+                                            <div className={`nav-item ${navId == item.id && 'active'}`}>
+                                                {item.title}
+                                                <span className={`iconfont ${navId == item.id ? 'icon-minus' : 'icon-plus'}`}></span>
+                                            </div>
+                                            <ol className="nav-second__list" style={{ height: secondHeight }}>
+                                                {
+                                                    [1,2].map(option=>{
+                                                        return (<li className="nav-second__item" key={option} onClick={()=>this.onSecondItemClick(option)}>
+                                                            二级分类
+                                                        </li>)
+                                                    })
+                                                }
+                                            </ol>
+                                        </li>)
                                     })
                                 }
                             </ul>

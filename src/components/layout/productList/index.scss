@@ -22,6 +22,13 @@
         line-height : 60px;
         padding-left: 20px;
         position    : relative;
+        overflow    : hidden;
+        font-weight : bold;
+
+        &:hover {
+            background-color: $color;
+            color           : $white;
+        }
 
         &.active {
             background-color: $color;
@@ -32,16 +39,55 @@
             }
         }
 
-        &::after {
+        &>.iconfont {
+            position: absolute;
+            top     : 0;
+            right   : 0;
+            bottom  : 0;
+            margin  : auto;
+        }
+
+        // &::after {
+        //     content         : "";
+        //     position        : absolute;
+        //     right           : 0;
+        //     top             : 0;
+        //     bottom          : 0;
+        //     margin          : auto;
+        //     width           : 6px;
+        //     height          : 2px;
+        //     background-color: $gray;
+        // }
+
+        &::before {
             content         : "";
             position        : absolute;
+            height          : 1px;
+            left            : 0;
             right           : 0;
             top             : 0;
-            bottom          : 0;
-            margin          : auto;
-            width           : 6px;
-            height          : 2px;
-            background-color: $gray;
+            transform       : scaleY(.5);
+            background-color: $color-text__placeholder;
+        }
+    }
+
+    .nav-second__list {
+        height    : 0;
+        overflow  : hidden;
+        transition: all .3s ease-in-out;
+    }
+
+
+    .nav-second__item {
+        height          : 40px;
+        line-height     : 40px;
+        padding-left    : 20px;
+        position        : relative;
+        background-color: $color-bg;
+
+        &.active{
+            background-color: $color-heavy;
+            color:$white;
         }
 
         &::before {
@@ -65,8 +111,8 @@
     }
 
     .product-item__name {
-        padding:.5rem 0;
-        text-align        : center;
+        padding              : .5rem 0;
+        text-align           : center;
         // display           : -webkit-box;
         // -webkit-box-orient: vertical;
         // -webkit-line-clamp: 2;

@@ -91,14 +91,18 @@ export default class index extends Component {
                                         <li className="contact-item__icon"><span className={`iconfont ${item.icon}`}></span></li>
                                         <li className="contact-item__text">
                                             <p>{item.label}</p>
-                                            <p>{item.value}</p>
+                                            {
+                                                item.value.map(option => {
+                                                    return (<p key={option}>{option}</p>)
+                                                })
+                                            }
                                         </li>
                                     </ul>
                                 </Col>)
                             })
                         }
                     </Row>
-                    <VerticalSpace/>
+                    <VerticalSpace />
                     <Row>
                         {
                             contactTxt.list.map((item, index) => {

@@ -43,6 +43,20 @@ const NAV_LIST = [
         eventKey: 4,
         label: '产品中心',
         href: '#/productList',
+        list: [
+            {
+                eventKey: 0,
+                id: 0,
+                label: '行业动态',
+                href: '#/newList?categoryId=0',
+            },
+            {
+                eventKey: 1,
+                id: 56,
+                label: '金烨动态',
+                href: '#/newList?categoryId=56',
+            }
+        ]
     },
     {
         eventKey: 5,

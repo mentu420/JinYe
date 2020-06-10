@@ -62,6 +62,18 @@
     height          : 142px;
 }
 
+.item-image__list {
+    padding-top    : 2rem;
+    margin-bottom  : 2rem;
+    display        : flex;
+    justify-content: space-around;
+
+    &>li {
+        flex: 1;
+        height: 236px;
+    }
+}
+
 .item-product__list {
     padding-top    : 2rem;
     margin-bottom  : 2rem;
@@ -114,7 +126,7 @@
 }
 
 .item-product__bg {
-    height: 404px;
+    height: 300px;
 }
 
 //产品用途
