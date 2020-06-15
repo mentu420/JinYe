@@ -18,7 +18,7 @@ export default class ProductList extends Component {
             totalPage: 5,
             pageIndex: 1,
             navId: 0,
-            secondId:0,
+            secondId: 0,
             pageSize: 12,
         }
 
@@ -26,7 +26,7 @@ export default class ProductList extends Component {
     componentWillMount() {
         const data = this.props.location.search  //地址栏截取
         const id = data.split('?')[1]
-
+        console.log('id', id)
         Api.getCategory({ type: 2 })
             .then(res => {
                 console.log('xxxxxxxxxxxxxxx')
@@ -42,6 +42,16 @@ export default class ProductList extends Component {
             .catch(err => {
                 console.log(err)
             })
+    }
+    componentWillReceiveProps(nextProps) {
+        let { location } = nextProps
+        let id = location.search.split('?')[1]
+        console.log(id)
+        this.setState({ navId: id })
+        this.getProductList({ categoryId: id }).then(res => {
+            this.productListHandle(res)
+        })
+
     }
     getProductList({ categoryId, pageIndex = 1, pageSize = 6 }) {
         return Api.getProductList({ categoryId, pageIndex, pageSize })
@@ -61,26 +71,33 @@ export default class ProductList extends Component {
         history.push({ pathname: '/ProductDetail', search: `${item.id}` })
     }
     onPageClick = (pageIndex) => {
-        let { navId } = this.state
+        let { navId, secondId } = this.state
         this.setState({ pageIndex })
         console.log(navId)
-        this.getProductList({ categoryId: navId, pageIndex }).then(res => {
+        this.getProductList({ categoryId: secondId ? secondId : navId, pageIndex }).then(res => {
             this.productListHandle(res)
         })
     }
     onNavClick = (item, index) => {
-        console.log(item)
-        this.setState({ navId: item.id })
+
+        this.setState({ navId: item.id, secondId: null, pageIndex: 1 })
         this.getProductList({ categoryId: item.id }).then(res => {
             this.productListHandle(res)
         })
     }
-    onSecondItemClick=(option)=>{
-        console.log(option)
+    onSecondItemClick = (option, e) => {
+        console.log('option', option)
+        e.stopPropagation();
+        e.nativeEvent.stopImmediatePropagation();
+        this.setState({ secondId: option.id, pageIndex: 1 })
+        this.getProductList({ categoryId: option.id }).then(res => {
+            this.productListHandle(res)
+        })
     }
 
     render() {
-        let { navList, productList, totalPage, pageIndex, navId } = this.state
+        let { navList, productList, totalPage, pageIndex, navId, secondId } = this.state
+        console.log('secondId', secondId)
         return (
             <div>
                 <Image src={banner} fluid />
@@ -91,7 +108,8 @@ export default class ProductList extends Component {
                             <ul className="nav-list">
                                 {
                                     navList.map((item, index) => {
-                                        let secondHeight = navId == item.id ? '80px' : '0'
+                                        let { children } = item
+                                        let secondHeight = navId == item.id ? children.length * 40 + 'px' : '0'
                                         return (<li key={item.id} onClick={() => this.onNavClick(item, index)}>
                                             <div className={`nav-item ${navId == item.id && 'active'}`}>
                                                 {item.title}
@@ -99,9 +117,9 @@ export default class ProductList extends Component {
                                             </div>
                                             <ol className="nav-second__list" style={{ height: secondHeight }}>
                                                 {
-                                                    [1,2].map(option=>{
-                                                        return (<li className="nav-second__item" key={option} onClick={()=>this.onSecondItemClick(option)}>
-                                                            二级分类
+                                                    children.map(option => {
+                                                        return (<li className={`nav-second__item ${secondId == option.id && 'active'}`} key={option.id} onClick={(e) => this.onSecondItemClick(option, e)}>
+                                                            {item.title}
                                                         </li>)
                                                     })
                                                 }
