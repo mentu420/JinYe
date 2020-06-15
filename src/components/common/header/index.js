@@ -33,20 +33,7 @@ const NAV_LIST = [
         eventKey: 2,
         label: '产品中心',
         href: '#/productList',
-        list: [
-            {
-                eventKey: 0,
-                id: 0,
-                label: '行业动态',
-                href: '#/newList?categoryId=0',
-            },
-            {
-                eventKey: 1,
-                id: 56,
-                label: '金烨动态',
-                href: '#/newList?categoryId=56',
-            }
-        ]
+        list: []
     },
     {
         eventKey: 3,
@@ -91,14 +78,9 @@ class Header extends Component {
         }
     }
     componentDidMount() {
-        let index = sessionStorage.getItem('headerNavIndex')
-        if (!index) {
-            this.props.history.push({ pathname: '/home' })
-            return
-        }
-        this.setState({ navIndex: index })
         Api.getCategory({ type: 2 })
             .then(data => {
+                console.log('data', data)
                 let { navList } = this.state
                 let productNav = data.map((item, index) => {
                     return {
@@ -116,6 +98,16 @@ class Header extends Component {
                     })
                 })
             })
+            .catch(err => {
+                console.log('请求分类出错', err)
+            })
+        let index = sessionStorage.getItem('headerNavIndex')
+        if (!index) {
+            this.props.history.push({ pathname: '/home' })
+            return
+        }
+        this.setState({ navIndex: index })
+
 
     }
     componentDidUpdate(prevProps) {
