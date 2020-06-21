@@ -85,9 +85,9 @@
         position        : relative;
         background-color: $color-bg;
 
-        &.active{
+        &.active {
             background-color: $color-heavy;
-            color:$white;
+            color           : $white;
         }
 
         &::before {
@@ -117,5 +117,24 @@
         // -webkit-box-orient: vertical;
         // -webkit-line-clamp: 2;
         // overflow          : hidden;
+    }
+}
+
+.no-data {
+    width     : 100%;
+    min-height: 360px;
+    text-align: center;
+    color     : $color-text__placeholder;
+    display   : flex;
+    margin    : 0;
+
+    .no-data__content {
+        margin: auto;
+
+        .iconfont {
+            display  : inline-block;
+            font-size: 80px;
+            height: 80px;
+        }
     }
 }
