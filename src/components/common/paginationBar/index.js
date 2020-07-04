@@ -18,6 +18,11 @@ export default class index extends Component {
         console.log('pageArr', pageArr)
         this.setState({ totalPage, currPage, pageArr })
     }
+    componentWillReceiveProps(nextProps) {
+        let { totalPage, currPage } = nextProps
+        let pageArr = Array.from({ length: totalPage }, (v, k) => k + 1)
+        this.setState({ totalPage, currPage, pageArr })
+    } ß
 
     goFirstPage = () => {
         this.setState({ currPage: 1 })
@@ -47,18 +52,24 @@ export default class index extends Component {
         if (typeof this.props.onPageClick === 'function') this.props.onPageClick(item)
     }
     render() {
-        let { totalPage, currPage, pageArr } = this.state
+        let { totalPage, currPage } = this.state
+        let pageArr = [currPage, currPage + 1, currPage + 2]
+        if (currPage >= totalPage - 2 && totalPage > 3) pageArr = [totalPage - 2, totalPage - 1, totalPage]
         return (<Pagination>
             {
                 totalPage > 3 && <Pagination.First onClick={this.goFirstPage} />
             }
-            <Pagination.Prev onClick={this.goPrevPage} />
             {
-                pageArr.map(item => {
+                totalPage > 3 && <Pagination.Prev onClick={this.goPrevPage} />
+            }
+            {
+                totalPage > 0 && pageArr.map(item => {
                     return (<Pagination.Item key={item} active={currPage == item} onClick={() => this.goCurrPage(item)}>{item}</Pagination.Item>)
                 })
             }
-            <Pagination.Next onClick={this.goNextPage} />
+            {
+                totalPage > 3 && <Pagination.Next onClick={this.goNextPage} />
+            }
             {
                 totalPage > 3 && <Pagination.Last onClick={this.goLastPage} />
             }

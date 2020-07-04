@@ -13,7 +13,14 @@ export default class NewItem extends Component {
     }
     componentDidMount() {
         let { item } = this.props
-        let content = DecodeURI(item.content)
+        let content = ''
+        try {
+            content = DecodeURI(item.content)
+        } catch (err) {
+            console.log(item.content)
+            console.log(err)
+            content = DecodeURI(decodeURIComponent(item.content))
+        }
 
         if (!content || content == undefined) {
             this.setState({ content: item.content })

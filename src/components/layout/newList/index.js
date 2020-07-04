@@ -26,7 +26,7 @@ export default class index extends Component {
                     title: '行业动态',
                 },
                 {
-                    id: 1,
+                    id: 56,
                     categoryId: 56,
                     title: '金烨动态',
                 }
@@ -37,7 +37,7 @@ export default class index extends Component {
 
     componentWillReceiveProps(nextProps) {
         console.log('nextProps', nextProps)
-        let { newNavbar, activeKey,pageSize, pageIndex } = this.state
+        let { newNavbar, activeKey, pageSize, pageIndex } = this.state
         let { location } = nextProps
         let query = location.search.split('?')[1]
         let params = QS.parse(query)
@@ -53,17 +53,22 @@ export default class index extends Component {
         let data = this.props.location.search  //地址栏截取
         let query = data.split('?')[1]
         let params = QS.parse(query)
+
         this.getNewList({ ...params, pageSize, pageIndex })
         let [{ id }] = newNavbar.filter(item => item.categoryId == params.categoryId)
+        console.log('id', id)
         this.setState({ activeKey: id })
     }
 
     getNewList({ categoryId = 0, pageSize, pageIndex }) {
-        return Api.getNewList({ categoryId, pageSize, pageIndex }).then(res => {
-            this.newListHandle(res)
-        }).catch(err => {
-            console.log(err)
-        })
+        return Api.getNewList({ categoryId, pageSize, pageIndex })
+            .then(res => {
+                console.log('getNewList', res)
+                this.newListHandle(res)
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     newListHandle = (res) => {
@@ -77,8 +82,10 @@ export default class index extends Component {
                 date: dateArr[0] + '-' + dateArr[1],
             }
         })
-        let totalPage = Math.ceil(totalCount  / pageSize)
-        console.log('totalPage',totalPage)
+        console.log('totalCount', totalCount)
+        console.log('pageSize', pageSize)
+        let totalPage = Math.ceil(totalCount / pageSize)
+        console.log('totalPage', totalPage)
         this.setState({ newList: arr, totalPage })
     }
 
@@ -88,7 +95,7 @@ export default class index extends Component {
     }
     onPageClick = (pageIndex) => {
         console.log(pageIndex)
-        let { activeKey} = this.state
+        let { activeKey } = this.state
         let { pageSize } = this.state
         this.setState({ pageIndex: pageIndex })
         this.getNewList({ categoryId: activeKey, pageSize, pageIndex })
