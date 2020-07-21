@@ -19,7 +19,10 @@ export default class index extends Component {
         let { letter, title, orderList, subtitle, content } = advantageTxt
         return (
             <div>
-                <Image src={banner} fluid />
+                <div>
+                    {/* <Image src={banner} fluid /> */}
+                    <CardImage src={banner} />
+                </div>
                 <VerticalSpace />
                 <ModeTitle letter={letter} title={title} />
                 <VerticalSpace />

@@ -13,7 +13,7 @@ import {
     Col
 } from 'react-bootstrap'
 import { withRouter } from "react-router-dom";
-
+import * as Api from 'api/'
 import CardImg from 'components/common/cardImage/'
 import './index.scss'
 import logoIcon from 'assets/images/logo-normal.png'
@@ -29,47 +29,38 @@ const NAV_LIST = [
         label: '关于金烨',
         href: '#/about',
     },
-    // {
-    //     eventKey: 2,
-    //     label: '电热元件',
-    //     href: '#/productList?id=1',
-    // },
-    // {
-    //     eventKey: 3,
-    //     label: '陶瓷元件',
-    //     href: '#/productList?id=2',
-    // },
     {
-        eventKey: 4,
+        eventKey: 2,
         label: '产品中心',
         href: '#/productList',
+        list: []
     },
     {
-        eventKey: 5,
+        eventKey: 3,
         label: '生产实力',
         href: '#/advantage',
     },
     {
-        eventKey: 6,
+        eventKey: 4,
         label: '新闻动态',
         href: '#/newList',
         list: [
             {
                 eventKey: 0,
-                id:0,
+                id: 0,
                 label: '行业动态',
                 href: '#/newList?categoryId=0',
             },
             {
                 eventKey: 1,
-                id:56,
+                id: 56,
                 label: '金烨动态',
                 href: '#/newList?categoryId=56',
             }
         ]
     },
     {
-        eventKey: 7,
+        eventKey: 5,
         label: '联系我们',
         href: '#/contact',
     },
@@ -87,12 +78,37 @@ class Header extends Component {
         }
     }
     componentDidMount() {
+        Api.getCategory({ type: 2 })
+            .then(data => {
+                console.log('data', data)
+                let { navList } = this.state
+                let productNav = data.map((item, index) => {
+                    return {
+                        eventKey: index,
+                        id: item.id,
+                        label: item.title,
+                        href: `#/productList?${item.id}`,
+                    }
+                })
+
+                this.setState({
+                    navList: navList.map(item => {
+                        if (item.eventKey == 2) return { ...item, list: productNav }
+                        return item
+                    })
+                })
+            })
+            .catch(err => {
+                console.log('请求分类出错', err)
+            })
         let index = sessionStorage.getItem('headerNavIndex')
         if (!index) {
             this.props.history.push({ pathname: '/home' })
             return
         }
         this.setState({ navIndex: index })
+
+
     }
     componentDidUpdate(prevProps) {
         if (this.props.location !== prevProps.location) {
@@ -139,7 +155,7 @@ class Header extends Component {
                                                     list ? (
                                                         <NavDropdown key={item.eventKey} title={item.label} id="basic-nav-dropdown">
                                                             {
-                                                                list.map((option,i) => {
+                                                                list.map((option, i) => {
                                                                     return (<NavDropdown.Item key={i} href={option.href}>{option.label}</NavDropdown.Item>)
                                                                 })
                                                             }

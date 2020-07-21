@@ -55,8 +55,13 @@ export default class ProductDetail extends Component {
                     let result = res[item.byte]
                     return { ...item, text: result == '' ? '' : DecodeURI(result) }
                 })
-
-                this.setState({ accordion: arr, images: [cover, ...images], title, content: DecodeURI(decodeURIComponent(content)) })
+                let contentTxt = ''
+                try {
+                    contentTxt = DecodeURI(content)
+                } catch (e) {
+                    contentTxt = DecodeURI(decodeURIComponent(content))
+                }
+                this.setState({ accordion: arr, images: [cover, ...images], title, content: contentTxt })
             })
             .catch(err => {
                 console.log(err)

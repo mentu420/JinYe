@@ -19,8 +19,8 @@ import bannerVertical0 from 'assets/images/banner_vertical0.jpg'
 import bannerVertical1 from 'assets/images/banner_vertical1.jpg'
 import bannerVertical2 from 'assets/images/banner_vertical2.jpg'
 
-import productImg0 from 'assets/images/slice-img_06.jpg'
-import productImg1 from 'assets/images/slice-img_09.jpg'
+import productImg0 from 'assets/images/home-product_item1.jpeg'
+import productImg1 from 'assets/images/home-product_item2.jpeg'
 import productImg2 from 'assets/images/slice-img_03.jpg'
 import userImg0 from 'assets/images/slice-img_14.jpg'
 import userImg1 from 'assets/images/slice-img_16.jpg'
@@ -56,7 +56,7 @@ export default class Home extends Component {
             let content = DecodeURI(res.content)
             let pattern = new RegExp('<p.*?>(.*?)<\/p>', 'g');
             let str = content.match(pattern)
-            console.log('about',str[1])
+            console.log('about', str[1])
             console.log('about img', res.cover)
             this.setState({
                 aboutImage: res.cover,
@@ -164,7 +164,16 @@ export default class Home extends Component {
                                         <h1>BEST SELLING LIST</h1>
                                     </div>
                                     <h3 >畅销榜单</h3>
-                                    <ul className="item-product__list">
+
+                                    <ul className="item-image__list ">
+                                        <li onClick={() => this.goProudctList(57)}>
+                                            <CarImage src={productImg0} />
+                                        </li>
+                                        <li onClick={() => this.goProudctList(54)}>
+                                            <CarImage src={productImg1} />
+                                        </li>
+                                    </ul>
+                                    {/* <ul className="item-product__list">
                                         <li onClick={() => this.goProudctList(57)}>
                                             <div className="product-item__img">
                                                 <CarImage src={productImg0} />
@@ -177,7 +186,7 @@ export default class Home extends Component {
                                                 <CarImage src={productImg1} />
                                             </div>
                                         </li>
-                                    </ul>
+                                    </ul> */}
                                 </Col>
                                 <Col>
                                     <div className="item-product__btn">

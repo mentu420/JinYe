@@ -22,8 +22,14 @@ export default class index extends Component {
         console.log(params)
         Api.getNewDetail(params)
             .then(data => {
+                let content = ''
+                try {
+                    content = DecodeURI(data.content)
+                } catch (e) {
+                    content = DecodeURI(decodeURIComponent(data.content))
+                }
                 this.setState({
-                    detail: { ...data, content: DecodeURI(data.content) }
+                    detail: { ...data, content }
                 })
             })
             .catch(err => {

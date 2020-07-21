@@ -6,6 +6,13 @@
   "description": "金烨企业网站",
   "glyphs": [
     {
+      "icon_id": "1388132",
+      "name": "nodata-search",
+      "font_class": "nodata-search",
+      "unicode": "e619",
+      "unicode_decimal": 58905
+    },
+    {
       "icon_id": "5821110",
       "name": "address",
       "font_class": "address",
