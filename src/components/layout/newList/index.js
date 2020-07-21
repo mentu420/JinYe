@@ -15,7 +15,7 @@ export default class index extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            pageSize: 10,
+            pageSize: 20,
             pageIndex: 1,
             totalPage: 3,
             newList: [],
@@ -77,7 +77,7 @@ export default class index extends Component {
                 date: dateArr[0] + '-' + dateArr[1],
             }
         })
-        let totalPage = Math.ceil((totalCount - pageSize) / pageSize)
+        let totalPage = Math.ceil(totalCount / pageSize)
         this.setState({ newList: arr, totalPage })
     }
 

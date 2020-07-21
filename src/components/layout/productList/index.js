@@ -18,7 +18,7 @@ export default class ProductList extends Component {
             totalPage: 20,
             pageIndex: 1,
             navId: 0,
-            pageSize: 6,
+            pageSize: 20,
         }
 
     }
@@ -42,7 +42,7 @@ export default class ProductList extends Component {
                 console.log(err)
             })
     }
-    getProductList(categoryId, pageIndex = 1, pageSize = 6) {
+    getProductList(categoryId, pageIndex = 1, pageSize = 20) {
         return Api.getProductList({ categoryId, pageIndex, pageSize })
             .catch(err => {
                 console.log(err)
@@ -50,7 +50,7 @@ export default class ProductList extends Component {
     }
     productListHandle = ({ totalCount, items }) => {
         let { pageSize } = this.state
-        let totalPage = Math.ceil((totalCount-pageSize) / pageSize)
+        let totalPage = Math.ceil(totalCount / pageSize)
         this.setState({ totalPage, productList: items })
     }
     goDetail = (item) => {
