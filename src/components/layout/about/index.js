@@ -47,7 +47,7 @@ export default class index extends Component {
                         <Col md={12}>
                             <ul className="about-link">
                                 <li>
-                                    <CardImage src={aboutImage} />
+                                    <CardImage src={banner1} />
                                 </li>
                                 <li>
                                     <CardImage src={banner2} />
