@@ -17,6 +17,7 @@ import * as Api from 'api/'
 import CardImg from 'components/common/cardImage/'
 import './index.scss'
 import logoIcon from 'assets/images/logo-normal.png'
+import Storage from 'utils/storage/'
 
 const NAV_LIST = [
     {
@@ -124,6 +125,7 @@ class Header extends Component {
     handleSelect = (index) => {
         sessionStorage.setItem('headerNavIndex', index)
         this.setState({ navIndex: index })
+        Storage.remove('pageIndex')
     }
 
     searchSubmit = (event) => {

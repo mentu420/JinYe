@@ -7,7 +7,6 @@ import { routes } from 'routes/'
 import ScrollToTop from 'components/common/scrollToTop'
 import Launch from 'components/common/launch'
 import AsideContact from 'components/common/asideContact/'
-
 import 'assets/iconfont/iconfont.scss'
 import './App.scss';
 
@@ -29,7 +28,7 @@ function App() {
                         <Redirect to="/404" />
                     </Switch>
                 </ScrollToTop>
-                <AsideContact/>
+                <AsideContact />
                 <Footer></Footer>
             </Router>
         </div>

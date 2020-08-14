@@ -4,9 +4,9 @@ import NewItem from 'components/common/newItem'
 import ModeTitle from 'components/common/modeTitle'
 import VerticalSpace from 'components/common/verticalSpace/'
 import PageinationBar from 'components/common/paginationBar/'
-import KeepAlive, { AliveScope } from 'react-activation'
 import QS from 'qs'
 import * as Api from 'api/'
+import Storage from 'utils/storage/'
 
 
 import './index.scss'
@@ -49,16 +49,16 @@ export default class index extends Component {
     }
 
     componentDidMount() {
-        console.log('componentDidMount')
-        let { pageSize, pageIndex, newNavbar } = this.state
+        let { pageSize, newNavbar } = this.state
         let data = this.props.location.search  //地址栏截取
         let query = data.split('?')[1]
         let params = QS.parse(query)
-
-        this.getNewList({ ...params, pageSize, pageIndex })
+        let { pageIndex = null } = Storage.fetch('pageIndex')
+        let index = pageIndex ? pageIndex : this.state.pageIndex
+        this.getNewList({ ...params, pageSize, pageIndex: index })
         let [{ id }] = newNavbar.filter(item => item.categoryId == params.categoryId)
         console.log('id', id)
-        this.setState({ activeKey: id })
+        this.setState({ activeKey: id, pageIndex: index })
     }
 
     getNewList({ categoryId = 0, pageSize, pageIndex }) {
@@ -92,6 +92,8 @@ export default class index extends Component {
 
     goDetail(item) {
         console.log(item)
+        let { pageIndex } = this.state
+        Storage.save('pageIndex', { pageIndex })
         this.props.history.push({ pathname: '/newDetail', search: `id=${item.id}` })
     }
     onPageClick = (pageIndex) => {
@@ -110,50 +112,48 @@ export default class index extends Component {
     render() {
         let { newList, totalPage, pageIndex, newNavbar, activeKey } = this.state
         return (
-            <AliveScope>
+            <>
                 <Image src={banner} fluid />
                 <VerticalSpace />
                 <ModeTitle letter={'NEWS INFORMATION'} title={'新闻动态'} />
                 <VerticalSpace />
-                <KeepAlive>
-                    <Container>
-                        <Row>
-                            <Col>
-                                <Nav variant="pills" className="justify-content-center" activeKey={activeKey} onSelect={this.navbarSelect}>
-                                    {
-                                        newNavbar.map((item, index) => {
-                                            return (<Nav.Item key={index}>
-                                                <Nav.Link href={`#/newList?categoryId=${item.categoryId}`} eventKey={item.categoryId}>{item.title}</Nav.Link>
-                                            </Nav.Item>)
-                                        })
-                                    }
-                                </Nav>
-                            </Col>
-                        </Row>
-                        <VerticalSpace />
-                        <Row>
-                            <Col>
-                                <ul className="new-list">
-                                    {
-                                        newList.map(item => {
-                                            return (<li key={item.id} className="new-item" onClick={() => this.goDetail(item)}>
-                                                <NewItem item={item} />
-                                            </li>)
-                                        })
-                                    }
-                                </ul>
-                            </Col>
-                        </Row>
-                        <VerticalSpace />
-                        <Row>
-                            <Col id="pageination">
-                                <PageinationBar currPage={pageIndex} totalPage={totalPage} onPageClick={this.onPageClick} />
-                            </Col>
-                        </Row>
-                    </Container>
-                </KeepAlive>
+                <Container>
+                    <Row>
+                        <Col>
+                            <Nav variant="pills" className="justify-content-center" activeKey={activeKey} onSelect={this.navbarSelect}>
+                                {
+                                    newNavbar.map((item, index) => {
+                                        return (<Nav.Item key={index}>
+                                            <Nav.Link href={`#/newList?categoryId=${item.categoryId}`} eventKey={item.categoryId}>{item.title}</Nav.Link>
+                                        </Nav.Item>)
+                                    })
+                                }
+                            </Nav>
+                        </Col>
+                    </Row>
+                    <VerticalSpace />
+                    <Row>
+                        <Col>
+                            <ul className="new-list">
+                                {
+                                    newList.map(item => {
+                                        return (<li key={item.id} className="new-item" onClick={() => this.goDetail(item)}>
+                                            <NewItem item={item} />
+                                        </li>)
+                                    })
+                                }
+                            </ul>
+                        </Col>
+                    </Row>
+                    <VerticalSpace />
+                    <Row>
+                        <Col id="pageination">
+                            <PageinationBar currPage={pageIndex} totalPage={totalPage} onPageClick={this.onPageClick} />
+                        </Col>
+                    </Row>
+                </Container>
                 <VerticalSpace height={'4rem'} />
-            </AliveScope>
+            </>
         )
     }
 }
