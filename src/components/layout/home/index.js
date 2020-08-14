@@ -242,7 +242,7 @@ export default class Home extends Component {
                     </div>
                 </div>
                 <div className="home-item flex bg-cover cancel-padding" style={{ minHeight: clientHeight, backgroundImage: `url(${banner3})` }}>
-                    <Container>
+                    {/* <Container>
                         <Row>
                             <Col lg={5} md={7} xs={10}>
                                 <div className="home-culture">
@@ -256,7 +256,7 @@ export default class Home extends Component {
                                 </div>
                             </Col>
                         </Row>
-                    </Container>
+                    </Container> */}
                 </div>
                 <div className="home-item flex" style={{ minHeight: clientHeight }}>
                     <div className="item-flex__center">
