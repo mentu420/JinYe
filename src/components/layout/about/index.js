@@ -17,7 +17,7 @@ export default class index extends Component {
         super(props)
         this.state = {
             aboutTxt: '',
-            aboutImage:''
+            aboutImage: ''
         }
     }
 
@@ -34,28 +34,30 @@ export default class index extends Component {
     }
 
     render() {
-        let {aboutImage,aboutTxt} = this.state
+        let { aboutImage, aboutTxt } = this.state
         return (
             <div className="about-page">
-                <Image src={banner} fluid />
-                <ModeTitle letter={'ABOUT US'} title={'关于金烨'} />
-                <Container>
-                    <Row>
-                        <Col md={12}>
-                            <p className="about-text" dangerouslySetInnerHTML={{ __html: aboutTxt }}></p>
-                        </Col>
-                        <Col md={12}>
-                            <ul className="about-link">
-                                <li>
-                                    <CardImage src={banner1} />
-                                </li>
-                                <li>
-                                    <CardImage src={banner2} />
-                                </li>
-                            </ul>
-                        </Col>
-                    </Row>
-                </Container>
+                <CardImage src={banner} />
+                <div className="about-content">
+                    <ModeTitle letter={'ABOUT US'} title={'关于金烨'} />
+                    <Container>
+                        <Row>
+                            <Col md={12}>
+                                <p className="about-text" dangerouslySetInnerHTML={{ __html: aboutTxt }}></p>
+                            </Col>
+                            <Col md={12}>
+                                <ul className="about-link">
+                                    <li>
+                                        <CardImage src={banner1} />
+                                    </li>
+                                    <li>
+                                        <CardImage src={banner2} />
+                                    </li>
+                                </ul>
+                            </Col>
+                        </Row>
+                    </Container>
+                </div>
             </div>
         )
     }

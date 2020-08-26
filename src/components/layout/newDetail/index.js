@@ -4,6 +4,7 @@ import { Container, Row, Col, Image } from 'react-bootstrap'
 import * as Api from 'api/'
 import QS from 'qs'
 import { DecodeURI } from 'utils/urlCodeHandler/'
+import CardImage from 'components/common/cardImage'
 
 import './index.scss'
 import banner from 'assets/images/new-banner.jpg'
@@ -41,7 +42,7 @@ export default class index extends Component {
         console.log(detail)
         return (
             <div>
-                <Image src={banner} fluid />
+                <CardImage src={banner} />
                 <VerticalSpace height={'6rem'} />
                 <Container>
                     <Row>

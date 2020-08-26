@@ -81,7 +81,7 @@ export default class ProductDetail extends Component {
         let { accordion, title, images, content, accordionIndex } = this.state
         return (
             <div className="product-detail">
-                <Image src={banner} fluid />
+                <CardImage src={banner} />
                 <VerticalSpace height="4rem" />
                 <Container>
                     <Row>

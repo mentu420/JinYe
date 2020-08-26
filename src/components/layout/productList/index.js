@@ -80,7 +80,7 @@ export default class ProductList extends Component {
         })
     }
     onNavClick = (item, index) => {
-        
+
         this.setState({ navId: item.id, secondId: null, pageIndex: 1 })
         this.getProductList({ categoryId: item.id }).then(res => {
             this.productListHandle(res)
@@ -101,7 +101,7 @@ export default class ProductList extends Component {
         console.log('secondId', secondId)
         return (
             <div>
-                <Image src={banner} fluid />
+                <CardImage src={banner} />
                 <Container id="product-container">
                     <Row>
                         <Col md={3}>
@@ -145,11 +145,11 @@ export default class ProductList extends Component {
                                     })
                                 }
                                 {
-                                    productList.length==0&&(<div className="no-data">
-                                       <div className="no-data__content">
+                                    productList.length == 0 && (<div className="no-data">
+                                        <div className="no-data__content">
                                             <span className="iconfont icon-nodata-search"></span>
                                             <p>暂无数据</p>
-                                       </div>
+                                        </div>
                                     </div>)
                                 }
                             </Row>

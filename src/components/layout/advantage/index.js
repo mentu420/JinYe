@@ -12,17 +12,14 @@ import banner3 from 'assets/images/advantage_04.jpg'
 
 export default class index extends Component {
     componentDidMount() {
-        
+
     }
     render() {
         let { advantageTxt } = textFill
         let { letter, title, orderList, subtitle, content } = advantageTxt
         return (
             <div>
-                <div>
-                    {/* <Image src={banner} fluid /> */}
-                    <CardImage src={banner} />
-                </div>
+                <CardImage src={banner} />
                 <VerticalSpace />
                 <ModeTitle letter={letter} title={title} />
                 <VerticalSpace />
@@ -47,7 +44,13 @@ export default class index extends Component {
                     </Row>
                 </Container>
                 <VerticalSpace />
-                <Image src={banner2} fluid />
+                <Container fluid>
+                    <Row>
+                        <Col>
+                            <CardImage src={banner2} />
+                        </Col>
+                    </Row>
+                </Container>
                 <VerticalSpace />
                 <Container >
                     <Row>

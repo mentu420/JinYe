@@ -3,6 +3,7 @@ import { Container, Row, Col, Carousel, Image, Button, Media, Form, Modal } from
 import NewItem from 'components/common/newItem'
 import ModeTitle from 'components/common/modeTitle'
 import VerticalSpace from 'components/common/verticalSpace/'
+import CardImage from 'components/common/cardImage'
 import textFill from 'constants/textFill'
 import * as Api from 'api/'
 
@@ -69,7 +70,7 @@ export default class index extends Component {
         let { orderList, content, letter, title, callTips, tel } = contactTxt
         return (
             <div>
-                <Image src={banner} fluid />
+                <CardImage src={banner} />
                 <VerticalSpace />
                 <ModeTitle letter={letter} title={title} />
                 <VerticalSpace />

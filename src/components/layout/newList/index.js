@@ -4,6 +4,7 @@ import NewItem from 'components/common/newItem'
 import ModeTitle from 'components/common/modeTitle'
 import VerticalSpace from 'components/common/verticalSpace/'
 import PageinationBar from 'components/common/paginationBar/'
+import CardImage from 'components/common/cardImage'
 import QS from 'qs'
 import * as Api from 'api/'
 import Storage from 'utils/storage/'
@@ -113,7 +114,7 @@ export default class index extends Component {
         let { newList, totalPage, pageIndex, newNavbar, activeKey } = this.state
         return (
             <>
-                <Image src={banner} fluid />
+                <CardImage src={banner} />
                 <VerticalSpace />
                 <ModeTitle letter={'NEWS INFORMATION'} title={'新闻动态'} />
                 <VerticalSpace />
