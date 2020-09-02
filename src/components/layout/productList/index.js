@@ -134,7 +134,7 @@ export default class ProductList extends Component {
                             <Row>
                                 {
                                     productList.map((item, index) => {
-                                        return (<Col key={index} lg={4} xs={6}>
+                                        return (<Col key={index} lg={4} sm={6} xs={12}>
                                             <div className="product-item" onClick={() => this.goDetail(item, index)}>
                                                 <div className="product-item__img">
                                                     <CardImage src={item.imgUrl} />

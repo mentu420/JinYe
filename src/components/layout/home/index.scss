@@ -69,7 +69,7 @@
     justify-content: space-around;
 
     &>li {
-        flex: 1;
+        flex  : 1;
         height: 280px;
     }
 }
@@ -298,5 +298,9 @@
 
     .home-nav__down {
         display: none;
+    }
+
+    .home-slide__item > .slide-item__img {
+        height: 280px;
     }
 }

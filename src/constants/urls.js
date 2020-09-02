@@ -1,7 +1,7 @@
 
 export default {
     // BaseUrl: 'http://106.55.0.171:8083/',
-    BaseUrl: 'http://sqjinye.com',
+    BaseUrl: 'http://www.sqjinye.com',
     // 首页
     Banner: '/tools/banner.ashx',
     // 分类

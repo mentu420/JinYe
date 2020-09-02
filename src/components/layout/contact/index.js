@@ -107,7 +107,7 @@ export default class index extends Component {
                     <Row>
                         {
                             contactTxt.list.map((item, index) => {
-                                return (<Col key={index}>
+                                return (<Col key={index} md={4} xs={12}>
                                     <ul className="contact-item address">
                                         {/* <li className="contact-item__icon"><span className="iconfont icon-address"></span></li> */}
                                         <li className="contact-item__text">

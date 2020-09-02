@@ -128,7 +128,7 @@ class Footer extends Component {
                     </Row>
                     <Row>
                         <Col>
-                            <p >
+                            <p className="copyright">
                                 <label>广东金烨电热有限公司版权所有 COPYRIGHT @2020</label>
                                 <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/recordQuery">
                                     <span className="copyright-icon"></span>

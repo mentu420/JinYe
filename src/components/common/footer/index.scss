@@ -59,7 +59,25 @@
     }
 
 }
-
+.copyright{
+    display:flex;
+    flex-wrap: wrap;
+    height: 20px;
+    align-items: center;
+    &>label{
+        margin-right:10px;
+        margin-bottom:0;
+    }
+    &>a{
+        display: flex;
+        height: 20px;
+        align-items: center;
+        &>label{
+            margin-bottom:0;
+            margin-left:5px;
+        }
+    }
+}
 .copyright-icon{
     display: inline-block;
     width: 16px;
@@ -68,5 +86,4 @@
     background-repeat: no-repeat;
     background-size: contain;
     background-position:center;
-    margin-left:1rem;   
 }

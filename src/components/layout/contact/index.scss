@@ -6,9 +6,12 @@
     border       : 1px solid $color-line;
     border-radius: 10px;
     display      : flex;
-    padding      : 2rem .5rem;
+    min-height: 100px;
+    align-items: center;
+    padding      : 0 .5rem;
+    margin-bottom:1rem;
     &.address{
-        min-height: 192px;
+        min-height: 160px;
     }
 
     &:hover {
