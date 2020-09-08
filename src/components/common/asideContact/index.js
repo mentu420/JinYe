@@ -12,7 +12,7 @@ export default class AsideContact extends Component {
                     id: 0,
                     title: '电话咨询',
                     icon: 'icon-tel01',
-                    href: 'tel:0769-22409719'
+                    href: 'tel:13711995800'
                 },
                 {
                     id: 1,
@@ -22,7 +22,7 @@ export default class AsideContact extends Component {
                 },
                 {
                     id: 2,
-                    title: '在线咨询',
+                    title: '联系我们',
                     icon: 'icon-message',
                     href: '#/contact'
                 }

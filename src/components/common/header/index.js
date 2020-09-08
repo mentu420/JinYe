@@ -88,7 +88,7 @@ class Header extends Component {
                         eventKey: index,
                         id: item.id,
                         label: item.title,
-                        href: `#/productList/${item.id}`,
+                        href: `#/productList/?${item.id}`,
                         state: { id: item.id }
                     }
                 })
@@ -106,10 +106,10 @@ class Header extends Component {
         let index = sessionStorage.getItem('headerNavIndex')
         if (!index) {
             let { pathname } = this.props.location
-            let [{ eventKey }] = navList.filter(item => {
+            let result = navList.filter(item => {
                 return pathname.indexOf(item.href.replace('#', '')) != -1
             })
-            index = eventKey
+            index = result.length > 0 ? result.eventKey : 0
             sessionStorage.setItem('headerNavIndex', index)
         }
         this.setState({ navIndex: index })
@@ -135,7 +135,6 @@ class Header extends Component {
 
     searchSubmit = (event) => {
         event.preventDefault();
-        console.log(this.searchInput.value)
         this.props.history.push({ pathname: '/productList', query: { id: 0 } })
     }
 
@@ -144,7 +143,7 @@ class Header extends Component {
     }
 
     render() {
-        let { navList, navIndex } = this.state
+        let { navList ,navIndex} = this.state
         return (
             <div className="header">
                 <Container>

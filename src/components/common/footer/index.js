@@ -21,17 +21,20 @@ const NAV_LIST = [
             {
                 eventKey: 0,
                 label: '生产实力',
-                pathname: '/advantage'
+                pathname: '/advantage',
+                headerNavIndex:3,
             },
             {
                 eventKey: 1,
                 label: '金烨动态',
-                pathname: '/newList'
+                pathname: '/newList',
+                headerNavIndex:4,
             },
             {
                 eventKey: 2,
                 label: '联系我们',
-                pathname: '/contact'
+                pathname: '/contact',
+                headerNavIndex:5,
             },
         ]
     }
@@ -61,15 +64,18 @@ class Footer extends Component {
         })
     }
     onSelect = (option, index) => {
+
         switch (index) {
             case 0:
                 this.props.history.push({
                     pathname: '/productList',
-                    search: `${option.id}`
+                    search: `?${option.id}`
                 })
+                sessionStorage.setItem('headerNavIndex', 2)
                 break;
             case 1:
-                this.props.history.push({ pathname: option.pathname })
+                this.props.history.push({ pathname: option.pathname, search: `?categoryId=0` })
+                sessionStorage.setItem('headerNavIndex', option.headerNavIndex)
                 break;
         }
     }

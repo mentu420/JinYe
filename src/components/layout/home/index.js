@@ -114,8 +114,8 @@ export default class Home extends Component {
     }
     goProudctList = (id) => {
         this.props.history.push({
-            pathname: '/productList',
-            search: `${id}`
+            pathname: `/productList`,
+            search: `?${id}`
         })
     }
     //锚点移动
@@ -169,7 +169,7 @@ export default class Home extends Component {
                                         <li onClick={() => this.goProudctList(57)}>
                                             <CarImage fit={"contain"} src={productImg0} />
                                         </li>
-                                        <li onClick={() => this.goProudctList(54)}>
+                                        <li onClick={() => this.goProudctList(63)}>
                                             <CarImage fit={"contain"} src={productImg1} />
                                         </li>
                                     </ul>
@@ -241,10 +241,13 @@ export default class Home extends Component {
                         </Container>
                     </div>
                 </div>
-                <div className="home-item flex bg-cover cancel-padding" style={{ minHeight: clientHeight, backgroundImage: `url(${banner3})` }}>
+                {/* <div className="home-item flex bg-cover cancel-padding" style={{ minHeight: clientHeight, backgroundImage: `url(${banner3})` }}> */}
+                <div className="home-item auto" >
+                    <CarImage src={banner3} />
                     {/* <Container>
                         <Row>
-                            <Col lg={5} md={7} xs={10}>
+                            <Col>
+                                
                                 <div className="home-culture">
                                     <span></span>
                                     <h2>BE DEDICATED</h2>

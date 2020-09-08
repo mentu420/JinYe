@@ -29,8 +29,9 @@ export default class index extends Component {
                 } catch (e) {
                     content = DecodeURI(decodeURIComponent(data.content))
                 }
+                console.log(content)
                 this.setState({
-                    detail: { ...data, content }
+                    detail: { ...data, content:content.replace(/<img/g, `<img style="object-fit: contain;width:100%;height:100%" `) }
                 })
             })
             .catch(err => {

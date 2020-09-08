@@ -2,4 +2,8 @@
 .new-detail__content{
     word-break: break-all;
     overflow: hidden;
+    /deep/ img{
+        object-fit: contain;
+        object-position: center;
+    }
 }

@@ -26,8 +26,9 @@ export default class ProductList extends Component {
     }
     componentWillMount() {
         console.log(this.props.location)
-        const data = this.props.location.search  //地址栏截取
-        const id = data.split('?')[1]
+        const {search} = this.props.location  //地址栏截取
+        console.log(search)
+        const id = search.split('?')[1]
         console.log('id', id)
         Api.getCategory({ type: 2 })
             .then(res => {

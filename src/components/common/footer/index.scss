@@ -13,14 +13,8 @@
 .footer-nav__link {
     padding: .5rem 1rem !important;
     color  : #363636;
-
     &.active {
         color: green;
-    }
-
-    &:link,
-    &:visited {
-        text-decoration: none;
     }
 }
 

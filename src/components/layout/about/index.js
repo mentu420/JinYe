@@ -26,7 +26,7 @@ export default class index extends Component {
             console.log(res)
             this.setState({
                 aboutImage: res.cover,
-                aboutTxt: DecodeURI(res.content)
+                aboutTxt: DecodeURI(res.content).replace(/<img/g, `<img style="object-fit: contain;width:100%;height:100%" `)
             })
         }).catch(err => {
             console.log(err)
