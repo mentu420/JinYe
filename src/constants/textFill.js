@@ -30,7 +30,7 @@ const textFill = {
             {
                 icon: 'icon-qq',
                 label: '在线QQ客服',
-                value: ['442717390', '42717390']
+                value: ['442717390']
             },
             {
                 icon: 'icon-youjian',

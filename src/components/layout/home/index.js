@@ -165,12 +165,12 @@ export default class Home extends Component {
                                     </div>
                                     <h3 >畅销榜单</h3>
 
-                                    <ul className="item-image__list ">
+                                    <ul className="item-image__list">
                                         <li onClick={() => this.goProudctList(57)}>
-                                            <CarImage src={productImg0} />
+                                            <CarImage fit={"contain"} src={productImg0} />
                                         </li>
                                         <li onClick={() => this.goProudctList(54)}>
-                                            <CarImage src={productImg1} />
+                                            <CarImage fit={"contain"} src={productImg1} />
                                         </li>
                                     </ul>
                                     {/* <ul className="item-product__list">

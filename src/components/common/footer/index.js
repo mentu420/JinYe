@@ -106,11 +106,12 @@ class Footer extends Component {
                                     </div>
                                     <div className="footer-qcode">
                                         <CardImage src={QCode} />
+                                        <CardImage src={QCode} />
                                     </div>
                                 </Col>
                                 <Col xs={12} sm={8}>
                                     <p className="footer-contact__item ">全国服务热线</p>
-                                    <p className="footer-contact__item tel"><a href="tel:076922409717 ">0769-22409717 </a></p>
+                                    <p className="footer-contact__item tel"><a href="tel:076922409717 ">137 1199 5800</a></p>
                                     {
                                         textFill.contactTxt.list.map((item, index) => {
                                             return (<ul className="footer-contact__list" key={index} >

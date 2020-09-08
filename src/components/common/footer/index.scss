@@ -44,13 +44,17 @@
 }
 
 .footer-qcode {
-    max-width: 6rem;
-    margin   : auto;
+    display:flex;
     padding  : 2.5rem 0;
+    /deep/ .crad-image{
+        padding:6px;
+    }
 }
 
 .footer-nav__title {
     padding: .5rem 1rem ;
+    font-weight: 600;
+    color:$color-text__secondary
 }
 
 @media screen and (max-width: 768px) {

@@ -79,16 +79,17 @@ class Header extends Component {
         }
     }
     componentDidMount() {
+        let { navList } = this.state
         Api.getCategory({ type: 2 })
             .then(data => {
                 console.log('data', data)
-                let { navList } = this.state
                 let productNav = data.map((item, index) => {
                     return {
                         eventKey: index,
                         id: item.id,
                         label: item.title,
-                        href: `#/productList?${item.id}`,
+                        href: `#/productList/${item.id}`,
+                        state: { id: item.id }
                     }
                 })
 
@@ -104,8 +105,12 @@ class Header extends Component {
             })
         let index = sessionStorage.getItem('headerNavIndex')
         if (!index) {
-            this.props.history.push({ pathname: '/home' })
-            return
+            let { pathname } = this.props.location
+            let [{ eventKey }] = navList.filter(item => {
+                return pathname.indexOf(item.href.replace('#', '')) != -1
+            })
+            index = eventKey
+            sessionStorage.setItem('headerNavIndex', index)
         }
         this.setState({ navIndex: index })
 
@@ -134,6 +139,10 @@ class Header extends Component {
         this.props.history.push({ pathname: '/productList', query: { id: 0 } })
     }
 
+    dropdownClick = (arg) => {
+        console.log('dropdownClick', arg)
+    }
+
     render() {
         let { navList, navIndex } = this.state
         return (
@@ -155,10 +164,10 @@ class Header extends Component {
                                                 let { list } = item
                                                 return (
                                                     list ? (
-                                                        <NavDropdown key={item.eventKey} title={item.label} id="basic-nav-dropdown">
+                                                        <NavDropdown key={item.eventKey} title={item.label} id="basic-nav-dropdown" onClick={this.dropdownClick}>
                                                             {
                                                                 list.map((option, i) => {
-                                                                    return (<NavDropdown.Item key={i} href={option.href}>{option.label}</NavDropdown.Item>)
+                                                                    return (<NavDropdown.Item key={i} {...option}>{option.label}</NavDropdown.Item>)
                                                                 })
                                                             }
                                                         </NavDropdown>

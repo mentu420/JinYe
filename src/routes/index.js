@@ -29,7 +29,7 @@ const routes = [
         component: About
     },
     {
-        path: '/productList',
+        path: '/productList/:id',
         component: ProductList
     },
     {

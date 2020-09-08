@@ -2,10 +2,9 @@ import React from 'react';
 import Header from 'components/common/header'
 import Footer from 'components/common/footer'
 import Home from 'components/layout/home'
-import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { HashRouter, Route, Switch, Redirect,IndexRoute } from 'react-router-dom';
 import { routes } from 'routes/'
 import ScrollToTop from 'components/common/scrollToTop'
-import Launch from 'components/common/launch'
 import AsideContact from 'components/common/asideContact/'
 import 'assets/iconfont/iconfont.scss'
 import './App.scss';
@@ -15,7 +14,7 @@ function App() {
 
     return (
         <div id="app">
-            <Router>
+            <HashRouter >
                 <Header></Header>
                 <ScrollToTop>
                     <Switch>
@@ -30,7 +29,7 @@ function App() {
                 </ScrollToTop>
                 <AsideContact />
                 <Footer></Footer>
-            </Router>
+            </HashRouter>
         </div>
     );
 }
