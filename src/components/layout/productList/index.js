@@ -26,14 +26,12 @@ export default class ProductList extends Component {
     }
     componentWillMount() {
         console.log(this.props.location)
-        const {search} = this.props.location  //地址栏截取
+        const { search } = this.props.location  //地址栏截取
         console.log(search)
         const id = search.split('?')[1]
         console.log('id', id)
         Api.getCategory({ type: 2 })
             .then(res => {
-                console.log('xxxxxxxxxxxxxxx')
-                console.log(res)
                 let categoryId = id ? id : res[0].id
                 let [item = null] = res.filter((item, index) => item.id == categoryId)
                 let navId = item ? item.id : res[0].id
@@ -47,10 +45,16 @@ export default class ProductList extends Component {
             })
     }
     componentWillReceiveProps(nextProps) {
+        let { navList } = this.state
         let { location } = nextProps
         let id = location.search.split('?')[1]
-        console.log(id)
-        this.setState({ navId: id })
+        let secondId = null;
+        let [item = null] = navList.filter(option => {
+            let bool = option.children.some(val => val.id == id)
+            if (bool) secondId = id
+            return option.id == id || bool
+        })
+        this.setState({ navId: item.id, pageIndex: 1, secondId })
         this.getProductList({ categoryId: id }).then(res => {
             this.productListHandle(res)
         })
@@ -82,20 +86,24 @@ export default class ProductList extends Component {
         })
     }
     onNavClick = (item, index) => {
-
-        this.setState({ navId: item.id, secondId: null, pageIndex: 1 })
-        this.getProductList({ categoryId: item.id }).then(res => {
-            this.productListHandle(res)
-        })
+        console.log('item', item.id)
+        let { history } = this.props
+        history.push({ pathname: '/ProductList', search: `${item.id}` })
+        // this.setState({ navId: item.id, secondId: null, pageIndex: 1 })
+        // this.getProductList({ categoryId: item.id }).then(res => {
+        //     this.productListHandle(res)
+        // })
     }
     onSecondItemClick = (option, e) => {
         console.log('option', option)
+        let { history } = this.props
         e.stopPropagation();
         e.nativeEvent.stopImmediatePropagation();
-        this.setState({ secondId: option.id, pageIndex: 1 })
-        this.getProductList({ categoryId: option.id }).then(res => {
-            this.productListHandle(res)
-        })
+        history.push({ pathname: '/ProductList', search: `${option.id}` })
+        // this.setState({ secondId: option.id, pageIndex: 1 })
+        // this.getProductList({ categoryId: option.id }).then(res => {
+        //     this.productListHandle(res)
+        // })
     }
 
     render() {

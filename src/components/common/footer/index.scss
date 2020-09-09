@@ -43,9 +43,14 @@
 .footer-qcode {
     display: flex;
     padding: 2.5rem 0;
-
-    /deep/ .crad-image {
-        padding: 6px;
+    justify-content: space-around;
+    li {
+        flex:1;
+        padding   : 6px;
+        text-align: center;
+        &>label{
+            font-size: $font-size__xs;
+        }
     }
 }
 

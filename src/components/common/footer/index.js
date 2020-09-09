@@ -23,19 +23,19 @@ const NAV_LIST = [
                 eventKey: 0,
                 label: '生产实力',
                 pathname: '/advantage',
-                headerNavIndex: 3,
+                headernavindex: 3,
             },
             {
                 eventKey: 1,
                 label: '金烨动态',
                 pathname: '/newList',
-                headerNavIndex: 4,
+                headernavindex: 4,
             },
             {
                 eventKey: 2,
                 label: '联系我们',
                 pathname: '/contact',
-                headerNavIndex: 5,
+                headernavindex: 5,
             },
         ]
     }
@@ -72,11 +72,11 @@ class Footer extends Component {
                     pathname: '/productList',
                     search: `?${option.id}`
                 })
-                sessionStorage.setItem('headerNavIndex', 2)
+                sessionStorage.setItem('headernavindex', 2)
                 break;
             case 1:
                 this.props.history.push({ pathname: option.pathname, search: `?categoryId=0` })
-                sessionStorage.setItem('headerNavIndex', option.headerNavIndex)
+                sessionStorage.setItem('headernavindex', option.headernavindex)
                 break;
         }
     }
@@ -111,10 +111,16 @@ class Footer extends Component {
                                     <div className="footer-logo">
                                         <CardImage src={logo} />
                                     </div>
-                                    <div className="footer-qcode">
-                                        <CardImage src={QCode} />
-                                        <CardImage src={QCode1} />
-                                    </div>
+                                    <ul className="footer-qcode">
+                                        <li>
+                                            <CardImage fit="contain" src={QCode} />
+                                            <label>企业公众号</label>
+                                        </li>
+                                        <li>
+                                            <CardImage fit="contain" src={QCode1} />
+                                            <label>个人业务微信</label>
+                                        </li>
+                                    </ul>
                                 </Col>
                                 <Col xs={12} sm={8}>
                                     <p className="footer-contact__item ">全国服务热线</p>

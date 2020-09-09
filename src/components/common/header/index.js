@@ -103,14 +103,14 @@ class Header extends Component {
             .catch(err => {
                 console.log('请求分类出错', err)
             })
-        let index = sessionStorage.getItem('headerNavIndex')
+        let index = sessionStorage.getItem('headernavindex')
         if (!index) {
             let { pathname } = this.props.location
             let result = navList.filter(item => {
                 return pathname.indexOf(item.href.replace('#', '')) != -1
             })
             index = result.length > 0 ? result.eventKey : 0
-            sessionStorage.setItem('headerNavIndex', index)
+            sessionStorage.setItem('headernavindex', index)
         }
         this.setState({ navIndex: index })
 
@@ -128,7 +128,7 @@ class Header extends Component {
     }
 
     handleSelect = (index) => {
-        sessionStorage.setItem('headerNavIndex', index)
+        sessionStorage.setItem('headernavindex', index)
         this.setState({ navIndex: index })
         Storage.remove('pageIndex')
     }
