@@ -7,6 +7,7 @@ import textFill from 'constants/textFill'
 import './index.scss'
 import logo from 'assets/images/logo-normal.png'
 import QCode from 'assets/images/WechatIMG4.jpeg'
+import QCode1 from 'assets/images/personal-qcode.png'
 import CardImage from 'components/common/cardImage'
 
 
@@ -22,19 +23,19 @@ const NAV_LIST = [
                 eventKey: 0,
                 label: '生产实力',
                 pathname: '/advantage',
-                headerNavIndex:3,
+                headerNavIndex: 3,
             },
             {
                 eventKey: 1,
                 label: '金烨动态',
                 pathname: '/newList',
-                headerNavIndex:4,
+                headerNavIndex: 4,
             },
             {
                 eventKey: 2,
                 label: '联系我们',
                 pathname: '/contact',
-                headerNavIndex:5,
+                headerNavIndex: 5,
             },
         ]
     }
@@ -112,7 +113,7 @@ class Footer extends Component {
                                     </div>
                                     <div className="footer-qcode">
                                         <CardImage src={QCode} />
-                                        <CardImage src={QCode} />
+                                        <CardImage src={QCode1} />
                                     </div>
                                 </Col>
                                 <Col xs={12} sm={8}>
@@ -123,7 +124,16 @@ class Footer extends Component {
                                             return (<ul className="footer-contact__list" key={index} >
                                                 {
                                                     item.map((option, i) => {
-                                                        return (<li key={i} className="footer-contact__item">{option}</li>)
+                                                        return (<li
+                                                            key={i}
+                                                            className="footer-contact__item"
+                                                            style={{
+                                                                color: index == 0 && i == 2 ? 'red' : '#363636',
+                                                                fontWeight: index == 0 && i == 2 ? '600' : '400'
+                                                            }}
+                                                        >
+                                                            {option}
+                                                        </li>)
                                                     })
                                                 }
                                             </ul>)
@@ -136,7 +146,7 @@ class Footer extends Component {
                     <Row>
                         <Col>
                             <p className="copyright">
-                                <label>广东金烨电热有限公司版权所有 COPYRIGHT @2020</label>
+                                <label>东莞市金烨电热材料有限公司版权所有 COPYRIGHT @2020</label>
                                 <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/recordQuery">
                                     <span className="copyright-icon"></span>
                                     <label>粤ICP备17053613号</label>

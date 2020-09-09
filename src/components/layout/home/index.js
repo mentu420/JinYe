@@ -166,7 +166,7 @@ export default class Home extends Component {
                                     <h3 >畅销榜单</h3>
 
                                     <ul className="item-image__list">
-                                        <li onClick={() => this.goProudctList(57)}>
+                                        <li onClick={() => this.goProudctList(71)}>
                                             <CarImage fit={"contain"} src={productImg0} />
                                         </li>
                                         <li onClick={() => this.goProudctList(63)}>
@@ -193,9 +193,9 @@ export default class Home extends Component {
                                         <div className="produt-right__title">
                                             <h3>电炉丝</h3>
                                         </div>
-                                        <Button variant="light" onClick={() => this.goProudctList(56)}>了解详情</Button>
+                                        <Button variant="light" onClick={() => this.goProudctList(57)}>了解详情</Button>
                                     </div>
-                                    <div className="item-product__bg" onClick={() => this.goProudctList(56)}>
+                                    <div className="item-product__bg" onClick={() => this.goProudctList(57)}>
                                         <CarImage src={productImg2} />
                                     </div>
                                 </Col>

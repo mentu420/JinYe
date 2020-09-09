@@ -13,23 +13,26 @@
 .footer-nav__link {
     padding: .5rem 1rem !important;
     color  : #363636;
+
     &.active {
         color: green;
     }
 }
 
-.footer-contact__list{
-    margin:1rem 0;
+.footer-contact__list {
+    margin: 1rem 0;
 }
 
 .footer-contact__item {
-    height: 20px;
+    height     : 20px;
     line-height: 1.6;
+
     &.tel {
         height     : 3rem;
         line-height: 3rem;
         font-size  : 24px;
         font-weight: 600;
+        color      : red;
     }
 
     a {
@@ -38,17 +41,18 @@
 }
 
 .footer-qcode {
-    display:flex;
-    padding  : 2.5rem 0;
-    /deep/ .crad-image{
-        padding:6px;
+    display: flex;
+    padding: 2.5rem 0;
+
+    /deep/ .crad-image {
+        padding: 6px;
     }
 }
 
 .footer-nav__title {
-    padding: .5rem 1rem ;
+    padding    : .5rem 1rem;
     font-weight: 600;
-    color:$color-text__secondary
+    color      : $color-text__secondary
 }
 
 @media screen and (max-width: 768px) {
@@ -57,31 +61,36 @@
     }
 
 }
-.copyright{
-    display:flex;
-    flex-wrap: wrap;
-    height: 20px;
+
+.copyright {
+    display    : flex;
+    flex-wrap  : wrap;
+    height     : 20px;
     align-items: center;
-    &>label{
-        margin-right:10px;
-        margin-bottom:0;
+
+    &>label {
+        margin-right : 10px;
+        margin-bottom: 0;
     }
-    &>a{
-        display: flex;
-        height: 20px;
+
+    &>a {
+        display    : flex;
+        height     : 20px;
         align-items: center;
-        &>label{
-            margin-bottom:0;
-            margin-left:5px;
+
+        &>label {
+            margin-bottom: 0;
+            margin-left  : 5px;
         }
     }
 }
-.copyright-icon{
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    background-image: url('../../../assets/images/copyright-icon.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position:center;
+
+.copyright-icon {
+    display            : inline-block;
+    width              : 16px;
+    height             : 16px;
+    background-image   : url('../../../assets/images/copyright-icon.png');
+    background-repeat  : no-repeat;
+    background-size    : contain;
+    background-position: center;
 }

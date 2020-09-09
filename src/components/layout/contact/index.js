@@ -112,8 +112,16 @@ export default class index extends Component {
                                         {/* <li className="contact-item__icon"><span className="iconfont icon-address"></span></li> */}
                                         <li className="contact-item__text">
                                             {
-                                                item.map(option => {
-                                                    return <p key={option}>{option}</p>
+                                                item.map((option,i) => {
+                                                    return <p
+                                                        key={option}
+                                                        style={{
+                                                            color: index == 0 && i == 2  ? 'red' : '#363636',
+                                                            fontWeight: index == 0 && i == 2  ? '600' : '400'
+                                                        }}
+                                                    >
+                                                        {option}
+                                                    </p>
                                                 })
                                             }
                                         </li>
