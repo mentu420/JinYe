@@ -33,22 +33,26 @@
         font-size  : 24px;
         font-weight: 600;
         color      : red;
+
+        a {
+            color: red;
+        }
     }
 
-    a {
-        color: #363636;
-    }
+
 }
 
 .footer-qcode {
-    display: flex;
-    padding: 2.5rem 0;
+    display        : flex;
+    padding        : 2.5rem 0;
     justify-content: space-around;
+
     li {
-        flex:1;
+        flex      : 1;
         padding   : 6px;
         text-align: center;
-        &>label{
+
+        &>label {
             font-size: $font-size__xs;
         }
     }
