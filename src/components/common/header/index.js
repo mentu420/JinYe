@@ -103,6 +103,28 @@ class Header extends Component {
             .catch(err => {
                 console.log('请求分类出错', err)
             })
+
+        Api.getCategory({ type: 1 })
+            .then(data => {
+                let newNav = data.map((item, index) => {
+                    return {
+                        eventKey: index,
+                        id: item.id,
+                        label: item.title,
+                        href: `#/newList/?id=${item.id}`,
+                        state: { id: item.id }
+                    }
+                })
+                console.log('newNav',newNav)
+                this.setState({
+                    navList: navList.map(item => {
+                        if (item.eventKey == 4) return { ...item, list: newNav }
+                        return item
+                    })
+                })
+            })
+
+
         let index = sessionStorage.getItem('headernavindex')
         if (!index) {
             let { pathname } = this.props.location
@@ -143,7 +165,7 @@ class Header extends Component {
     }
 
     render() {
-        let { navList ,navIndex} = this.state
+        let { navList, navIndex } = this.state
         return (
             <div className="header">
                 <Container>

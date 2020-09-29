@@ -24,12 +24,10 @@ export default class index extends Component {
             newNavbar: [
                 {
                     id: 0,
-                    categoryId: 0,
                     title: '行业动态',
                 },
                 {
-                    id: 56,
-                    categoryId: 56,
+                    id: 59,
                     title: '金烨动态',
                 }
             ],
@@ -43,27 +41,37 @@ export default class index extends Component {
         let { location } = nextProps
         let query = location.search.split('?')[1]
         let params = QS.parse(query)
-        let [{ categoryId }] = newNavbar.filter(item => item.categoryId == params.categoryId)
-        if (activeKey == categoryId) return
-        this.setState({ activeKey: categoryId })
-        this.getNewList({ categoryId, pageSize, pageIndex })
+        let [{ id }] = newNavbar.filter(item => item.id == params.id)
+        if (activeKey == id) return
+        this.setState({ activeKey: id })
+        this.getNewList({ id, pageSize, pageIndex })
     }
 
     componentDidMount() {
+        Api.getCategory({ type: 1 })
+            .then(data => {
+                this.setState({ newNavbar: data })
+            })
+        console.log('componentDidMount')
+        console.log(this.props.location)
+        const { search } = this.props.location  //地址栏截取
+        console.log(search)
+        const query = search.split('?')[1]
+        console.log('query', query)
         let { pageSize, newNavbar } = this.state
-        let data = this.props.location.search  //地址栏截取
-        let query = data.split('?')[1]
+        // let data = this.props.location.search  //地址栏截取
+        // let query = data.split('?')[1]
         let params = QS.parse(query)
         let { pageIndex = null } = Storage.fetch('pageIndex')
         let index = pageIndex ? pageIndex : this.state.pageIndex
         this.getNewList({ ...params, pageSize, pageIndex: index })
-        let [{ id }] = newNavbar.filter(item => item.categoryId == params.categoryId)
-        console.log('id', id)
-        this.setState({ activeKey: id, pageIndex: index })
+        // let [{ id }] = newNavbar.filter(item => item.id == params.id)
+        // console.log('id', id)
+        this.setState({ activeKey: params.id, pageIndex: index })
     }
 
-    getNewList({ categoryId = 0, pageSize, pageIndex }) {
-        return Api.getNewList({ categoryId, pageSize, pageIndex })
+    getNewList({ id = 62, pageSize, pageIndex }) {
+        return Api.getNewList({ categoryId: id, pageSize, pageIndex })
             .then(res => {
                 console.log('getNewList', res)
                 this.newListHandle(res)
@@ -102,13 +110,15 @@ export default class index extends Component {
         let { activeKey } = this.state
         let { pageSize } = this.state
         this.setState({ pageIndex: pageIndex })
-        this.getNewList({ categoryId: activeKey, pageSize, pageIndex })
+        this.getNewList({ id: activeKey, pageSize, pageIndex })
     }
     navbarSelect = (eventKey) => {
+        Storage.save('pageIndex', { pageIndex: 1 })
+
         console.log('eventKey', eventKey)
-        let { pageSize, pageIndex } = this.state
-        this.setState({ activeKey: eventKey })
-        this.getNewList({ categoryId: eventKey, pageSize, pageIndex })
+        let { pageSize } = this.state
+        this.setState({ activeKey: eventKey, pageIndex: 1 })
+        this.getNewList({ id: eventKey, pageSize, pageIndex: 1 })
     }
     render() {
         let { newList, totalPage, pageIndex, newNavbar, activeKey } = this.state
@@ -125,7 +135,7 @@ export default class index extends Component {
                                 {
                                     newNavbar.map((item, index) => {
                                         return (<Nav.Item key={index}>
-                                            <Nav.Link href={`#/newList?categoryId=${item.categoryId}`} eventKey={item.categoryId}>{item.title}</Nav.Link>
+                                            <Nav.Link href={`#/newList?id=${item.id}`} eventKey={item.id}>{item.title}</Nav.Link>
                                         </Nav.Item>)
                                     })
                                 }
@@ -149,7 +159,7 @@ export default class index extends Component {
                     <VerticalSpace />
                     <Row>
                         <Col id="pageination">
-                            <PageinationBar currPage={pageIndex} totalPage={totalPage} onPageClick={this.onPageClick} />
+                            {totalPage > 1 && <PageinationBar currPage={pageIndex} totalPage={totalPage} onPageClick={this.onPageClick} />}
                         </Col>
                     </Row>
                 </Container>
