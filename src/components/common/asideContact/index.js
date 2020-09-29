@@ -12,13 +12,13 @@ export default class AsideContact extends Component {
                     id: 0,
                     title: '电话咨询',
                     icon: 'icon-tel01',
-                    href: 'tel:13711995800'
+                    href: 'tel:13527947493'
                 },
                 {
                     id: 1,
                     title: '短信咨询',
                     icon: 'icon-youjian',
-                    href: 'sms:13711995800'
+                    href: 'sms:13527947493'
                 },
                 {
                     id: 2,

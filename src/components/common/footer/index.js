@@ -7,7 +7,7 @@ import textFill from 'constants/textFill'
 import './index.scss'
 import logo from 'assets/images/logo-normal.png'
 import QCode from 'assets/images/WechatIMG4.jpeg'
-import QCode1 from 'assets/images/personal-qcode.png'
+import QCode1 from 'assets/images/personal-qcode.jpg'
 import CardImage from 'components/common/cardImage'
 
 
