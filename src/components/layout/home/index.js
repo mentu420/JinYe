@@ -147,7 +147,7 @@ export default class Home extends Component {
                             bannerList[n].map(item => {
                                 return (<Carousel.Item key={item.image}>
                                     <div className="banner" style={{ height: clientHeight }} onClick={() => this.goBannerDetail(item)}>
-                                        <CarImage src={item.image} />
+                                        <CarImage fit={'cover'} src={item.image} />
                                     </div>
                                 </Carousel.Item>)
                             })

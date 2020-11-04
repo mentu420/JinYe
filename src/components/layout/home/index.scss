@@ -140,6 +140,8 @@
 .home-slide__item {
     &>.slide-item__img {
         height: 480px;
+        border:1px solid #fff;
+        background-color: rgba($color: #fff, $alpha: .6);
     }
 }
 

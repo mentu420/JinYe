@@ -79,52 +79,8 @@ class Header extends Component {
         }
     }
     componentDidMount() {
+        this.getSubtNav()
         let { navList } = this.state
-        Api.getCategory({ type: 2 })
-            .then(data => {
-                console.log('data', data)
-                let productNav = data.map((item, index) => {
-                    return {
-                        eventKey: index,
-                        id: item.id,
-                        label: item.title,
-                        href: `#/productList/?${item.id}`,
-                        state: { id: item.id }
-                    }
-                })
-
-                this.setState({
-                    navList: navList.map(item => {
-                        if (item.eventKey == 2) return { ...item, list: productNav }
-                        return item
-                    })
-                })
-            })
-            .catch(err => {
-                console.log('请求分类出错', err)
-            })
-
-        Api.getCategory({ type: 1 })
-            .then(data => {
-                let newNav = data.map((item, index) => {
-                    return {
-                        eventKey: index,
-                        id: item.id,
-                        label: item.title,
-                        href: `#/newList/?id=${item.id}`,
-                        state: { id: item.id }
-                    }
-                })
-                console.log('newNav',newNav)
-                this.setState({
-                    navList: navList.map(item => {
-                        if (item.eventKey == 4) return { ...item, list: newNav }
-                        return item
-                    })
-                })
-            })
-
-
         let index = sessionStorage.getItem('headernavindex')
         if (!index) {
             let { pathname } = this.props.location
@@ -147,6 +103,39 @@ class Header extends Component {
             if (!result) return
             this.setState({ navIndex: result.eventKey })
         }
+    }
+
+    getSubtNav = async () => {
+        let [pdata, ndata] = await Promise.all([Api.getCategory({ type: 2 }), Api.getCategory({ type: 1 })])
+        let { navList } = this.state
+        console.log('---------二级导航--------')
+        console.log(pdata, ndata)
+        let productNav = pdata.map((item, index) => {
+            return {
+                eventKey: index,
+                id: item.id,
+                label: item.title,
+                href: `#/productList/?${item.id}`,
+                state: { id: item.id }
+            }
+        })
+        let newNav = ndata.map((item, index) => {
+            return {
+                eventKey: index,
+                id: item.id,
+                label: item.title,
+                href: `#/newList/?id=${item.id}`,
+                state: { id: item.id }
+            }
+        })
+
+        this.setState({
+            navList: navList.map(item => {
+                if (item.eventKey == 2) return { ...item, list: productNav }
+                if (item.eventKey == 4) return { ...item, list: newNav }
+                return item
+            })
+        })
     }
 
     handleSelect = (index) => {

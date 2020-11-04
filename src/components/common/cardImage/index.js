@@ -30,7 +30,7 @@ export default class CardImage extends Component {
 
 CardImage.defaultProps = {
     src: defaultImage,
-    fit: 'cover'
+    fit: 'contain'
 }
 CardImage.propTypes = {
     src: PropTypes.string,

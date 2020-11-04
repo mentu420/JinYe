@@ -20,7 +20,7 @@ export default class ProductList extends Component {
             pageIndex: 1,
             navId: 0,
             secondId: 0,
-            pageSize: 12,
+            pageSize: 6,
         }
 
     }
@@ -70,6 +70,7 @@ export default class ProductList extends Component {
         let { pageSize } = this.state
         let totalPage = Math.ceil(totalCount / pageSize)
         console.log('totalCount', totalCount)
+        console.log(pageSize)
         console.log('totalPage', totalPage)
         this.setState({ totalPage, productList: items })
     }
